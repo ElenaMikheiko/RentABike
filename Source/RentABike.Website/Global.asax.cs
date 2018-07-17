@@ -2,8 +2,6 @@
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using Ninject;
-using Ninject.Web.Mvc;
 
 namespace RentABike.Website
 {
@@ -16,10 +14,10 @@ namespace RentABike.Website
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            // DI
-            NinjectRegistrationsModule registrations = new NinjectRegistrationsModule();
-            StandardKernel kernel = new StandardKernel(registrations);
-            DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
+            ////// DI
+            //NinjectRegistrationsModule registrations = new NinjectRegistrationsModule();
+            //StandardKernel kernel = new StandardKernel(registrations);
+            //DependencyResolver.SetResolver(new NInjectDependencyResolver(kernel));
         }
     }
 }
