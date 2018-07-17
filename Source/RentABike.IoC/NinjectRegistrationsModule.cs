@@ -1,6 +1,6 @@
 ﻿using Ninject.Modules;
 
-namespace RentABike.Website
+namespace RentABike.IoC
 {
     public class NinjectRegistrationsModule : NinjectModule
     {
