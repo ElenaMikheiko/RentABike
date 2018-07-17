@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace RentABike.Website.Models
+namespace RentABike.ViewModels
 {
     public class ForgotViewModel
     {

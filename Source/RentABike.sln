@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentABike.Common", "RentABi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentABike.Models", "RentABike.Models\RentABike.Models.csproj", "{04B6F4A7-E50B-438F-BABE-DE885CF1D467}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentABike.ViewModels", "RentABike.ViewModels\RentABike.ViewModels.csproj", "{8A5ACA0C-779C-411F-9FAB-0CB4B9192310}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentABike.ViewModels", "RentABike.ViewModels\RentABike.ViewModels.csproj", "{BC42DD23-3657-4F9B-A94E-3FEEB33C819F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +41,10 @@ Global
 		{04B6F4A7-E50B-438F-BABE-DE885CF1D467}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04B6F4A7-E50B-438F-BABE-DE885CF1D467}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{04B6F4A7-E50B-438F-BABE-DE885CF1D467}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8A5ACA0C-779C-411F-9FAB-0CB4B9192310}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8A5ACA0C-779C-411F-9FAB-0CB4B9192310}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8A5ACA0C-779C-411F-9FAB-0CB4B9192310}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8A5ACA0C-779C-411F-9FAB-0CB4B9192310}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC42DD23-3657-4F9B-A94E-3FEEB33C819F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC42DD23-3657-4F9B-A94E-3FEEB33C819F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC42DD23-3657-4F9B-A94E-3FEEB33C819F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC42DD23-3657-4F9B-A94E-3FEEB33C819F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
