@@ -10,7 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using RentABike.Logic;
 using RentABike.Models;
-using RentABike.Website.Models;
+using RentABike.ViewModels;
 
 namespace RentABike.Website.Controllers
 {
