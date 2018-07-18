@@ -40,6 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Initializers\BikesInitializer.cs" />
+    <Compile Include="Initializers\BikeTypesInitializer.cs" />
+    <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Migrations\201807142155450_Initial.cs" />
     <Compile Include="Migrations\201807142155450_Initial.Designer.cs">
       <DependentUpon>201807142155450_Initial.cs</DependentUpon>
@@ -48,9 +51,14 @@
     <Compile Include="Migrations\201807181725010_AddRelatedTablesForRentABike.Designer.cs">
       <DependentUpon>201807181725010_AddRelatedTablesForRentABike.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807181919302_ChangeMaxLengthInColumnDescriptionBikeTable.cs" />
+    <Compile Include="Migrations\201807181919302_ChangeMaxLengthInColumnDescriptionBikeTable.Designer.cs">
+      <DependentUpon>201807181919302_ChangeMaxLengthInColumnDescriptionBikeTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RentABikeDbContext.cs" />
+    <Compile Include="Repositories\GenericRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201807142155450_Initial.resx">
@@ -59,10 +67,11 @@
     <EmbeddedResource Include="Migrations\201807181725010_AddRelatedTablesForRentABike.resx">
       <DependentUpon>201807181725010_AddRelatedTablesForRentABike.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807181919302_ChangeMaxLengthInColumnDescriptionBikeTable.resx">
+      <DependentUpon>201807181919302_ChangeMaxLengthInColumnDescriptionBikeTable.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Interfaces\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\RentABike.Models\RentABike.Models.csproj">
       <Project>{04B6F4A7-E50B-438F-BABE-DE885CF1D467}</Project>

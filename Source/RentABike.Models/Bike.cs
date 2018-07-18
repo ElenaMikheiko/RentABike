@@ -9,7 +9,7 @@ namespace RentABike.Models
         [MaxLength(100)]
         public string Model { get; set; }
 
-        [MaxLength(250)]
+        [MaxLength(1000)]
         public string Description { get; set; }
 
         public byte[] Image { get; set; }

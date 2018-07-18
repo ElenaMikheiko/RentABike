@@ -1,3 +1,5 @@
+using RentABike.DataProvider.Initializers;
+
 namespace RentABike.DataProvider.Migrations
 {
     using System.Data.Entity.Migrations;
@@ -15,6 +17,10 @@ namespace RentABike.DataProvider.Migrations
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
+
+            BikeTypesInitializer.Initialize(context);
+            BikesInitializer.Initialize(context);
+            context.SaveChanges();
         }
     }
 }

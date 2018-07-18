@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.Entity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using RentABike.DataProvider.Migrations;
 using RentABike.Models;
@@ -17,11 +12,6 @@ namespace RentABike.DataProvider
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<RentABikeDbContext, Configuration>());
         }
 
-        public static RentABikeDbContext Create()
-        {
-            return new RentABikeDbContext();
-        }
-
         public DbSet<BikeType> BikeTypes { get; set; }
 
         public DbSet<RentPoint> RentPoints { get; set; }
@@ -32,11 +22,14 @@ namespace RentABike.DataProvider
 
         public DbSet<Order> Orders { get; set; }
 
+        public static RentABikeDbContext Create()
+        {
+            return new RentABikeDbContext();
+        }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-            //modelBuilder.Configurations.Add(/*new OrderConfig()*/);
 
             modelBuilder.Entity<ApplicationUser>()
                 .ToTable("Users");
