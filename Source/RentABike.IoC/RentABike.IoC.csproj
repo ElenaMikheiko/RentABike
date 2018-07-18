@@ -41,13 +41,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="NInjectDependencyResolver.cs" />
-    <Compile Include="NinjectRegistrationsModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Ninject.MVC5">
       <Version>3.3.0</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RentABike.DataProvider\RentABike.DataProvider.csproj">
+      <Project>{E663FC42-ADD7-43CB-B155-73B2C543AF5D}</Project>
+      <Name>RentABike.DataProvider</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RentABike.Logic\RentABike.Logic.csproj">
+      <Project>{83F8D72E-11B2-4332-ABF6-D719F6427E09}</Project>
+      <Name>RentABike.Logic</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

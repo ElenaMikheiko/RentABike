@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Mvc;
 using Ninject;
+using Ninject.Web.Common;
+using RentABike.DataProvider.Interfaces;
+using RentABike.DataProvider.Repositories;
+using RentABike.Logic;
+using RentABike.Logic.Interfaces;
 
 namespace RentABike.IoC
 {
@@ -30,7 +32,8 @@ namespace RentABike.IoC
 
         private void AddBindings()
         {
-            //_kernel.Bind<ICalculator>().To<Calculator>();
+            _kernel.Bind(typeof(IRepository<>)).To(typeof(GenericRepository<>)).InRequestScope();
+            _kernel.Bind<IBikeService>().To<BikeService>();
         }
     }
 }
