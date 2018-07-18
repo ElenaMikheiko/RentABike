@@ -44,9 +44,9 @@
     <Compile Include="Migrations\201807142155450_Initial.Designer.cs">
       <DependentUpon>201807142155450_Initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201807172211523_AddRelatedTablesForRentABike.cs" />
-    <Compile Include="Migrations\201807172211523_AddRelatedTablesForRentABike.Designer.cs">
-      <DependentUpon>201807172211523_AddRelatedTablesForRentABike.cs</DependentUpon>
+    <Compile Include="Migrations\201807181725010_AddRelatedTablesForRentABike.cs" />
+    <Compile Include="Migrations\201807181725010_AddRelatedTablesForRentABike.Designer.cs">
+      <DependentUpon>201807181725010_AddRelatedTablesForRentABike.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -56,8 +56,8 @@
     <EmbeddedResource Include="Migrations\201807142155450_Initial.resx">
       <DependentUpon>201807142155450_Initial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807172211523_AddRelatedTablesForRentABike.resx">
-      <DependentUpon>201807172211523_AddRelatedTablesForRentABike.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201807181725010_AddRelatedTablesForRentABike.resx">
+      <DependentUpon>201807181725010_AddRelatedTablesForRentABike.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
