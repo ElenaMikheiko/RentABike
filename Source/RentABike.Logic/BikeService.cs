@@ -16,7 +16,7 @@ namespace RentABike.Logic
 
         public IEnumerable<Bike> Bikes()
         {
-            return _bikeRepository.GetAll();
+            return _bikeRepository.GetWithInclude(bike => bike.BikeType);
         }
     }
 }

@@ -32,16 +32,11 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Initializers\BikesInitializer.cs" />
     <Compile Include="Initializers\BikeTypesInitializer.cs" />
+    <Compile Include="Initializers\DefaultAdminInitializer.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Migrations\201807142155450_Initial.cs" />
     <Compile Include="Migrations\201807142155450_Initial.Designer.cs">

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using RentABike.Logic.Interfaces;
 
 namespace RentABike.Website.Controllers
@@ -21,7 +17,7 @@ namespace RentABike.Website.Controllers
         {
             var bikes = _bikeService.Bikes();
 
-            return View();
+            return View(bikes);
         }
 
         public ActionResult About()

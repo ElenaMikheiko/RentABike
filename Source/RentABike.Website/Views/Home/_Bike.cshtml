@@ -1,9 +1,12 @@
-﻿<div class="col-md-4">
-    <h2>Getting started</h2>
+﻿@model RentABike.Models.Bike
+
+<div class="col-md-4">
+    <h4>@Html.DisplayTextFor(m => m.Model)</h4>
     <p>
-        ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-        enables a clean separation of concerns and gives you full control over markup
-        for enjoyable, agile development.
+        @Html.DisplayTextFor(m=>m.Description)
     </p>
-    <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+    <p>
+        @Html.DisplayTextFor(m=>m.BikeType.Type)
+    </p>
+    <p><a class="btn btn-success" href="">More...</a></p>
 </div>
