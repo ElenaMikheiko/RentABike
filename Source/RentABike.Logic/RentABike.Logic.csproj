@@ -43,9 +43,13 @@
     <Compile Include="ApplicationSignInManager.cs" />
     <Compile Include="ApplicationUserManager.cs" />
     <Compile Include="BikeService.cs" />
+    <Compile Include="BikeTypeService.cs" />
     <Compile Include="EmailService.cs" />
     <Compile Include="Interfaces\IBikeService.cs" />
+    <Compile Include="Interfaces\IBikeTypeService.cs" />
+    <Compile Include="Interfaces\IRentPointService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RentPointService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RentABike.DataProvider\RentABike.DataProvider.csproj">

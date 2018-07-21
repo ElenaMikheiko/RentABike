@@ -3,9 +3,16 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="row">
-    @foreach(var bike in Model)
-    {
-        Html.RenderPartial("_Bike", bike);
-    }
+<div class="container">
+    <div class="col-lg-11">
+        <p>
+            <button class="btn btn-sm btn-info" onclick='window.location = "@Url.Action("CreateNewBike","Bike") ";'>Add new bike</button>
+        </p>
+    </div>
+    <div class="row">
+        @foreach (var bike in Model)
+        {
+            Html.RenderPartial("_Bike", bike);
+        }
+    </div>
 </div>

@@ -9,9 +9,9 @@ namespace RentABike.Logic
     {
         private readonly IRepository<Bike> _bikeRepository;
 
-        public BikeService(IRepository<Bike> userRepository)
+        public BikeService(IRepository<Bike> bikeRepository)
         {
-            _bikeRepository = userRepository;
+            _bikeRepository = bikeRepository;
         }
 
         public IEnumerable<Bike> Bikes()

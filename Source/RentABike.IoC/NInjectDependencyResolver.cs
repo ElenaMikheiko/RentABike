@@ -34,6 +34,8 @@ namespace RentABike.IoC
         {
             _kernel.Bind(typeof(IRepository<>)).To(typeof(GenericRepository<>)).InRequestScope();
             _kernel.Bind<IBikeService>().To<BikeService>();
+            _kernel.Bind<IRentPointService>().To<RentPointService>();
+            _kernel.Bind<IBikeTypeService>().To<BikeTypeService>();
         }
     }
 }
