@@ -1,5 +1,7 @@
-﻿using System.Web.Mvc;
+﻿using System.Web;
+using System.Web.Mvc;
 using RentABike.Logic.Interfaces;
+using RentABike.Models;
 using RentABike.ViewModels;
 
 namespace RentABike.Website.Controllers
@@ -8,11 +10,13 @@ namespace RentABike.Website.Controllers
     {
         private readonly IBikeTypeService _bikeTypeService;
         private readonly IRentPointService _rentPointService;
+        private readonly IBikeService _bikeService;
 
-        public BikeController(IRentPointService rentPointService, IBikeTypeService bikeTypeService)
+        public BikeController(IRentPointService rentPointService, IBikeTypeService bikeTypeService, IBikeService bikeService)
         {
             _rentPointService = rentPointService;
             _bikeTypeService = bikeTypeService;
+            _bikeService = bikeService;
         }
 
 
@@ -28,10 +32,10 @@ namespace RentABike.Website.Controllers
             return View();
         }
 
-        // GET: Bike/Create
+        [HttpGet]
         public ActionResult CreateNewBike()
         {
-            var bike = new CreateBikeViewModel
+            var bike = new CreationBikeViewModel
             {
                 BikeTypes = _bikeTypeService.AllBikeTypes(),
                 RentPoints = _rentPointService.AllRentPoint()
@@ -42,7 +46,7 @@ namespace RentABike.Website.Controllers
 
         // POST: Bike/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult CreateNewBike(CreationBikeViewModel vm, HttpPostedFileBase img = null)
         {
             try
             {

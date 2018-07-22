@@ -1,14 +1,14 @@
 ﻿using RentABike.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace RentABike.ViewModels
 {
-    public class CreateBikeViewModel
+    public class CreationBikeViewModel
     {
+        public int BikeId { get; set; }
+
+        [Display(Name = "Model of Bike")]
         public string BikeModel { get; set; }
 
         public byte[] Image { get; set; }
@@ -17,12 +17,12 @@ namespace RentABike.ViewModels
 
         public IEnumerable<BikeType> BikeTypes { get; set; }
 
+        [Display(Name = "Type of Bike")]
         public int BikeTypeId { get; set; }
 
         public IEnumerable<RentPoint> RentPoints { get; set; }
 
+        [Display(Name = "Rent Point")]
         public int RentPointId { get; set; }
-
-
     }
 }

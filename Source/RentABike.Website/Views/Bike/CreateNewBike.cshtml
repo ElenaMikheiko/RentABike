@@ -1,4 +1,4 @@
-﻿@model RentABike.ViewModels.CreateBikeViewModel
+﻿@model RentABike.ViewModels.CreationBikeViewModel
 
 @{
     ViewBag.Title = "Create New Bike";
@@ -6,8 +6,7 @@
 
 <h2>Create New Bike</h2>
 
-
-@using (Html.BeginForm())
+@using (Html.BeginForm("CreateNewBike", "Bike", FormMethod.Post, new {enctype = "multipart/form-data"}))
 {
     @Html.AntiForgeryToken()
 
@@ -17,23 +16,23 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.Image, new {@class = "control-label col-md-2"})
-            <div class="col-md-10">
-                @if (Model.Image != null)
-                {
-                    <img alt="bike" src="data:image/jpeg;base64,@(Convert.ToBase64String(Model.Image))"/>
-                }
-                else
-                {
-                    <img src="~/Content/Images/default-bike.jpg" alt="bike">
-                }
-            </div>
+            <a class='btn' href='javascript:;'>
+                Выберите файл...
+                <input type="file" name="img" size="40"
+                       style="background-color: transparent; color: transparent; filter: alpha(opacity=0); left: 0; opacity: 0; position: absolute; top: 0; z-index: 2;"
+                       onchange='$("#upload-file-info").html($(this).val());'>
+            </a>
+            <span class='label label-info' id="upload-file-info"></span>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.BikeTypeId, new {@class = "control-label col-md-2"})
-            <div class="col-md-10">
+            <div class="col-md-4">
                 @Html.DropDownListFor(m => m.BikeTypeId, Model.BikeTypes.Select(c => new SelectListItem {Text = c.Type, Value = c.Id.ToString()}), new {@class = "form-control input-sm"})
             </div>
+            <a href="#" id="compItem" title="Add new Bike Type">
+                <i class="fa fa-plus-square fa-2x" style="color: #8ae2a2;"></i>
+            </a>
         </div>
 
         <div class="form-group">
@@ -53,12 +52,14 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.RentPoints, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(m => m.RentPointId, Model.RentPoints.Select(c => new SelectListItem { Text = c.Name + "," + c.Address, Value = c.Id.ToString() }), new { @class = "form-control input-sm" })
+            @Html.LabelFor(model => model.RentPoints, new {@class = "control-label col-md-2"})
+            <div class="col-md-4">
+                @Html.DropDownListFor(m => m.RentPointId, Model.RentPoints.Select(c => new SelectListItem {Text = c.Name + ',' + c.Address, Value = c.Id.ToString()}), new {@class = "form-control input-sm"})
             </div>
+            <a href="#createRentPointFormModal" data-toggle="modal" id="item" title="Add new Rent Point">
+                <i class="fa fa-plus-square fa-2x" style="color: #8ae2a2;"></i>
+            </a>
         </div>
-
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -67,3 +68,43 @@
         </div>
     </div>
 }
+
+<div id="createRentPointFormModal" class="modal fade">
+    <div class="modal-dialog">
+        @*<div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Create new Rent Point</h4>
+            </div>
+            <div class="modal-body">*@
+                @{ Html.RenderAction("CreateNewRentPoint", "RentPoint");}
+            @*</div>*@
+            @*<div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                <button type="button" class="btn btn-primary">Сохранить изменения</button>
+            </div>*@
+        </div>
+    </div>
+
+@*$('#dialogContent').on('submit', 'form', function(e){
+e.preventDefault();
+// тут необходимо обработать форму аяксом
+});*@
+
+@*@section scripts
+{
+    <script type="text/javascript">
+
+        $(function () {
+            $.ajaxSetup({ cache: false });
+            $("#item").click(function (e) {
+
+                e.preventDefault();
+                $.get(this.href, function (data) {
+                    $('#dialogContent').html(data);
+                    $('#modDialog').modal('show');
+                });
+            });
+        })
+    </script>*@
+@*}*@

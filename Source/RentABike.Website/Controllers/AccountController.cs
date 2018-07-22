@@ -52,6 +52,15 @@ namespace RentABike.Website.Controllers
             return View();
         }
 
+        [ChildActionOnly]
+        [AllowAnonymous]
+        public ActionResult NavbarLogin()
+        {
+            var vm = new LoginViewModel();
+
+            return this.PartialView("_NavbarLogin", vm);
+        }
+
         //
         // POST: /Account/Login
         [HttpPost]

@@ -18,5 +18,10 @@ namespace RentABike.Logic
         {
             return _bikeRepository.GetWithInclude(bike => bike.BikeType);
         }
+
+        public Bike GetBikById(int id)
+        {
+            return _bikeRepository.FindById(id);
+        }
     }
 }

@@ -60,6 +60,10 @@
       <Project>{04B6F4A7-E50B-438F-BABE-DE885CF1D467}</Project>
       <Name>RentABike.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\RentABike.ViewModels\RentABike.ViewModels.csproj">
+      <Project>{BC42DD23-3657-4F9B-A94E-3FEEB33C819F}</Project>
+      <Name>RentABike.ViewModels</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using RentABike.DataProvider.Interfaces;
 using RentABike.Logic.Interfaces;
 using RentABike.Models;
+using RentABike.ViewModels;
 
 namespace RentABike.Logic
 {
@@ -21,6 +18,18 @@ namespace RentABike.Logic
         public IEnumerable<RentPoint> AllRentPoint()
         {
             return _rentPointRepository.GetAll();
+        }
+
+        public void AddRentPoint(RentPointViewModel viewModel)
+        {
+            var rentPoint = new RentPoint
+            {
+                Name = viewModel.Name,
+                Address = viewModel.Address,
+                Phone = viewModel.Phone
+            };
+
+            _rentPointRepository.Create(rentPoint);
         }
     }
 }

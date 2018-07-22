@@ -50,7 +50,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountViewModels.cs" />
-    <Compile Include="CreateBikeViewModel.cs" />
+    <Compile Include="CreationBikeViewModel.cs" />
+    <Compile Include="RentPointViewModel.cs" />
     <Compile Include="ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -211,6 +211,7 @@
     <Compile Include="Controllers\BikeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\RentPointController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -220,14 +221,10 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\Images\default-bike.jpg" />
-    <Content Include="Content\imgAreaSelect\border-anim-h.gif" />
-    <Content Include="Content\imgAreaSelect\border-anim-v.gif" />
-    <Content Include="Content\imgAreaSelect\border-h.gif" />
-    <Content Include="Content\imgAreaSelect\border-v.gif" />
-    <Content Include="Content\imgAreaSelect\imgareaselect-animated.css" />
-    <Content Include="Content\imgAreaSelect\imgareaselect-default.css" />
-    <Content Include="Content\imgAreaSelect\imgareaselect-deprecated.css" />
+    <Content Include="Content\CustomStyle.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\Images\Indefinite.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -288,6 +285,9 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\_Bike.cshtml" />
     <Content Include="Views\Bike\CreateNewBike.cshtml" />
+    <Content Include="Views\Shared\_NavbarLogin.cshtml" />
+    <Content Include="Views\Shared\_NavbarUserInfo.cshtml" />
+    <Content Include="Views\RentPoint\_CreateRentPoint.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
