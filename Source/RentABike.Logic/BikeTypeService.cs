@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using RentABike.DataProvider;
 using RentABike.DataProvider.Interfaces;
 using RentABike.Logic.Interfaces;
 using RentABike.Models;
@@ -11,16 +8,26 @@ namespace RentABike.Logic
 {
     public class BikeTypeService : IBikeTypeService
     {
-        private readonly IRepository<BikeType> _bikeTypeRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public BikeTypeService(IRepository<BikeType> bikeTypeRepository)
+        public BikeTypeService(IUnitOfWork unitOfWork)
         {
-            _bikeTypeRepository = bikeTypeRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public IEnumerable<BikeType> AllBikeTypes()
         {
-            return _bikeTypeRepository.GetAll();
+            return _unitOfWork.BikeTypeRepository.GetAll();
+        }
+
+        public BikeType GetBikeTypeById(int id)
+        {
+            return _unitOfWork.BikeTypeRepository.FindById(id);
+        }
+
+        public void SaveBikeType(BikeType bikeType)
+        {
+            _unitOfWork.BikeTypeRepository.Create(bikeType);
         }
     }
 }

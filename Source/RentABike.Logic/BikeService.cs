@@ -7,21 +7,26 @@ namespace RentABike.Logic
 {
     public class BikeService : IBikeService
     {
-        private readonly IRepository<Bike> _bikeRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public BikeService(IRepository<Bike> bikeRepository)
+        public BikeService(IUnitOfWork unitOfWork)
         {
-            _bikeRepository = bikeRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public IEnumerable<Bike> Bikes()
         {
-            return _bikeRepository.GetWithInclude(bike => bike.BikeType);
+            return _unitOfWork.BikeRepository.GetWithInclude(bike => bike.BikeType);
         }
 
-        public Bike GetBikById(int id)
+        public Bike GetBikeById(int id)
         {
-            return _bikeRepository.FindById(id);
+            return _unitOfWork.BikeRepository.FindById(id);
+        }
+
+        public void SaveBike(Bike bike)
+        {
+            _unitOfWork.BikeRepository.Create(bike);
         }
     }
 }

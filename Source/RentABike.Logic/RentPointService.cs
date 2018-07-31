@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using RentABike.DataProvider;
 using RentABike.DataProvider.Interfaces;
 using RentABike.Logic.Interfaces;
 using RentABike.Models;
@@ -8,16 +9,16 @@ namespace RentABike.Logic
 {
     public class RentPointService : IRentPointService
     {
-        private readonly IRepository<RentPoint> _rentPointRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public RentPointService(IRepository<RentPoint> rentPointRepository)
+        public RentPointService(IUnitOfWork uof)
         {
-            _rentPointRepository = rentPointRepository;
+            _unitOfWork = uof;
         }
 
         public IEnumerable<RentPoint> AllRentPoint()
         {
-            return _rentPointRepository.GetAll();
+            return _unitOfWork.RentPointRepository.GetAll();
         }
 
         public void AddRentPoint(RentPointViewModel viewModel)
@@ -29,7 +30,18 @@ namespace RentABike.Logic
                 Phone = viewModel.Phone
             };
 
-            _rentPointRepository.Create(rentPoint);
+            _unitOfWork.RentPointRepository.Create(rentPoint);
+            _unitOfWork.Save();
+        }
+
+        public RentPoint GetRentPointById(int id)
+        {
+            return _unitOfWork.RentPointRepository.FindById(id);
+        }
+
+        public void UpdateRentPoint(RentPoint rentPoint)
+        {
+            _unitOfWork.RentPointRepository.Update(rentPoint);
         }
     }
 }

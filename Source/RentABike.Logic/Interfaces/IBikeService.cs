@@ -7,6 +7,8 @@ namespace RentABike.Logic.Interfaces
     {
         IEnumerable<Bike> Bikes();
 
-        Bike GetBikById(int id);
+        Bike GetBikeById(int id);
+
+        void SaveBike(Bike bike);
     }
 }

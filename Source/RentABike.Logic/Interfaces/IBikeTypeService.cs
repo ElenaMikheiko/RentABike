@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using RentABike.Models;
 
 namespace RentABike.Logic.Interfaces
@@ -10,5 +6,9 @@ namespace RentABike.Logic.Interfaces
     public interface IBikeTypeService
     {
         IEnumerable<BikeType> AllBikeTypes();
+
+        void SaveBikeType(BikeType bikeType);
+
+        BikeType GetBikeTypeById(int id);
     }
 }

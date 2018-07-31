@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using RentABike.Models;
 using RentABike.ViewModels;
 
@@ -13,5 +9,9 @@ namespace RentABike.Logic.Interfaces
         IEnumerable<RentPoint> AllRentPoint();
 
         void AddRentPoint(RentPointViewModel vm);
+
+        RentPoint GetRentPointById(int id);
+
+        void UpdateRentPoint(RentPoint rentPoint);
     }
 }

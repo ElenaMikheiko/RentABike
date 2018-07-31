@@ -76,9 +76,11 @@
   <ItemGroup>
     <Compile Include="ApplicationSignInManager.cs" />
     <Compile Include="ApplicationUserManager.cs" />
+    <Compile Include="BikeRentPointService.cs" />
     <Compile Include="BikeService.cs" />
     <Compile Include="BikeTypeService.cs" />
     <Compile Include="EmailService.cs" />
+    <Compile Include="Interfaces\IBikeRentPointService.cs" />
     <Compile Include="Interfaces\IBikeService.cs" />
     <Compile Include="Interfaces\IBikeTypeService.cs" />
     <Compile Include="Interfaces\IRentPointService.cs" />
