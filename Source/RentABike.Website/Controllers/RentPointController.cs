@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using RentABike.Logic.Interfaces;
 using RentABike.ViewModels;
 
@@ -20,10 +21,21 @@ namespace RentABike.Website.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateNewRentPoint(RentPointViewModel vm)
+        public JsonResult CreateNewRentPoint(RentPointViewModel vm)
         {
             _rentPointService.AddRentPoint(vm);
-            return Json(vm, JsonRequestBehavior.AllowGet);
+            JsonResult result = new JsonResult();
+            //Попытка сохранить данные в БД
+            try
+            {
+                //......................
+                result.Data = new { Succes = "true", Message = "Данные сохранены." };
+            }
+            catch (Exception e)
+            {
+                result.Data = new { Succes = "false", Message = "Данные не сохранены." };
+            }
+            return result;
         }
 
     }

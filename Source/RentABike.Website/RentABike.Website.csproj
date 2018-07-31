@@ -46,6 +46,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Cropper, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Cropper.0.1.1\lib\net40\Cropper.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.2\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
@@ -209,6 +212,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RentPointController.cs" />
+    <Compile Include="Controllers\TypeOfBikeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -218,10 +222,19 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\cropper.min.css" />
     <Content Include="Content\CustomStyle.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
-    <Content Include="Content\Images\Indefinite.jpg" />
+    <Content Include="Content\Images\image.png" />
+    <Content Include="Content\imgAreaSelect\border-anim-h.gif" />
+    <Content Include="Content\imgAreaSelect\border-anim-v.gif" />
+    <Content Include="Content\imgAreaSelect\border-h.gif" />
+    <Content Include="Content\imgAreaSelect\border-v.gif" />
+    <Content Include="Content\imgAreaSelect\imgareaselect-animated.css" />
+    <Content Include="Content\imgAreaSelect\imgareaselect-default.css" />
+    <Content Include="Content\imgAreaSelect\imgareaselect-deprecated.css" />
+    <Content Include="Content\import.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -238,12 +251,17 @@
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\button.js" />
+    <Content Include="Scripts\cropper.js" />
+    <Content Include="Scripts\fadeIn.js" />
     <Content Include="Scripts\imgAreaSelect\jquery.imgareaselect.js" />
     <Content Include="Scripts\imgAreaSelect\jquery.imgareaselect.min.js" />
     <Content Include="Scripts\imgAreaSelect\jquery.imgareaselect.pack.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -285,6 +303,7 @@
     <Content Include="Views\Shared\_NavbarLogin.cshtml" />
     <Content Include="Views\Shared\_NavbarUserInfo.cshtml" />
     <Content Include="Views\RentPoint\_CreateRentPoint.cshtml" />
+    <Content Include="Views\TypeOfBike\_CreateTypeOfBike.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -303,10 +322,6 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RentABike.DataProvider\RentABike.DataProvider.csproj">
-      <Project>{E663FC42-ADD7-43CB-B155-73B2C543AF5D}</Project>
-      <Name>RentABike.DataProvider</Name>
-    </ProjectReference>
     <ProjectReference Include="..\RentABike.IoC\RentABike.IoC.csproj">
       <Project>{37440DE9-71FF-4E66-A891-21486B5A5811}</Project>
       <Name>RentABike.IoC</Name>

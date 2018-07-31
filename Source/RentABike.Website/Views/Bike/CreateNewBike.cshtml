@@ -4,8 +4,8 @@
     ViewBag.Title = "Create New Bike";
 }
 
+<div class="content">
 <h2>Create New Bike</h2>
-
 @using (Html.BeginForm("CreateNewBike", "Bike", FormMethod.Post, new {enctype = "multipart/form-data"}))
 {
     @Html.AntiForgeryToken()
@@ -15,14 +15,14 @@
         @Html.ValidationSummary(true, "", new {@class = "text-danger"})
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Image, new {@class = "control-label col-md-2"})
-            <a class='btn' href='javascript:;'>
-                Выберите файл...
-                <input type="file" name="img" size="40"
-                       style="background-color: transparent; color: transparent; filter: alpha(opacity=0); left: 0; opacity: 0; position: absolute; top: 0; z-index: 2;"
-                       onchange='$("#upload-file-info").html($(this).val());'>
-            </a>
-            <span class='label label-info' id="upload-file-info"></span>
+            <div class="col-md-2" align="right">
+                <label>Image </label>
+                <label style="color: darkgrey">(Click on the image to load your picture)</label>
+            </div>
+            <div class="content__image_block clearfix">
+                <img class="content__main_image" alt="bikePhoto" src="~/Content/Images/image.png"/>
+                <input hidden name="Base64Image" id="Base65Image"/>
+            </div>
         </div>
 
         <div class="form-group">
@@ -30,7 +30,7 @@
             <div class="col-md-4">
                 @Html.DropDownListFor(m => m.BikeTypeId, Model.BikeTypes.Select(c => new SelectListItem {Text = c.Type, Value = c.Id.ToString()}), new {@class = "form-control input-sm"})
             </div>
-            <a href="#" id="compItem" title="Add new Bike Type">
+            <a href="#createTypeOfBikeFormModal" data-toggle="modal" id="typeItem" title="Add new Bike Type">
                 <i class="fa fa-plus-square fa-2x" style="color: #8ae2a2;"></i>
             </a>
         </div>
@@ -54,7 +54,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.RentPoints, new {@class = "control-label col-md-2"})
             <div class="col-md-4">
-                @Html.DropDownListFor(m => m.RentPointId, Model.RentPoints.Select(c => new SelectListItem {Text = c.Name + ',' + c.Address, Value = c.Id.ToString()}), new {@class = "form-control input-sm"})
+                @Html.DropDownListFor(m => m.RentPointId, Model.RentPoints.Select(c => new SelectListItem {Text = c.Name + ',' + c.Address, Value = c.Id.ToString()}), new {@class = "form-control input-sm", id="ValueListId"})
             </div>
             <a href="#createRentPointFormModal" data-toggle="modal" id="item" title="Add new Rent Point">
                 <i class="fa fa-plus-square fa-2x" style="color: #8ae2a2;"></i>
@@ -67,44 +67,48 @@
             </div>
         </div>
     </div>
-}
 
-<div id="createRentPointFormModal" class="modal fade">
-    <div class="modal-dialog">
-        @*<div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title">Create new Rent Point</h4>
+    <div id="overlay"></div>
+    <div class="content__pop-up">
+        <div class="content__pop-up_main">
+            <div class="clearfix">
+                <h3>Download a picture of the bike</h3>
+                <span class="content__pop-up_close">
+                    <i class="fa fa-times fa-3x content__pop-up_close" aria-hidden="true"></i>
+                </span>
             </div>
-            <div class="modal-body">*@
-                @{ Html.RenderAction("CreateNewRentPoint", "RentPoint");}
-            @*</div>*@
-            @*<div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
-                <button type="button" class="btn btn-primary">Сохранить изменения</button>
-            </div>*@
+            <div class="content__pop-up_text">
+                You can download the image in JPG, JPEG, PNG, BMP format. The file size must not exceed 3 Mbyte.
+            </div>
+            <label for="fileInput" class="content__upload_label text-center">
+                <div class="content__pop-up_button btn btn-primary" id="choose_image_button">
+                    Choose image
+                </div>
+            </label>
+            <input type="file" class="content__pop-up_upload" id="fileInput" name="fileInput" accept="image/jpg,image/jpeg,image/png,image/bpm" />
+            <div class="content__pop-up_image text-center" >
+                <div class="content__image_wrapper">
+                </div>
+                <button class="content__pop-up_button btn btn-primary" id="upload_photo_button" type="button">Upload photo</button>
+            </div>
         </div>
     </div>
+}
 
-@*$('#dialogContent').on('submit', 'form', function(e){
-e.preventDefault();
-// тут необходимо обработать форму аяксом
-});*@
+@*Modal dialog for creation Type of Bike*@
+<div id="createTypeOfBikeFormModal" class="modal fade">
+    <div class="modal-dialog">
+        @{ Html.RenderAction("CreateNewTypeOfBike", "TypeOfBike");}
+    </div>
+</div>
 
-@*@section scripts
-{
-    <script type="text/javascript">
+@*Modal dialog for creation Rent Point*@
+<div id="createRentPointFormModal" class="modal fade">
+    <div class="modal-dialog">
+        @{ Html.RenderAction("CreateNewRentPoint", "RentPoint");}
+    </div>
+</div>
 
-        $(function () {
-            $.ajaxSetup({ cache: false });
-            $("#item").click(function (e) {
+</div>
 
-                e.preventDefault();
-                $.get(this.href, function (data) {
-                    $('#dialogContent').html(data);
-                    $('#modDialog').modal('show');
-                });
-            });
-        })
-    </script>*@
-@*}*@
+<script src="~/Scripts/fadeIn.js"></script>

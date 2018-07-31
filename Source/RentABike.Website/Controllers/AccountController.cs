@@ -20,27 +20,36 @@ namespace RentABike.Website.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
-        public ApplicationSignInManager SignInManager
+
+        public AccountController(ApplicationUserManager userManager,
+            ApplicationSignInManager signInManager)
         {
-            get => _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
-            private set => _signInManager = value;
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
 
-        public ApplicationUserManager UserManager
-        {
-            get => _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            private set => _userManager = value;
-        }
 
-        public AccountController()
-        {
-        }
+        //public ApplicationSignInManager SignInManager
+        //{
+        //    get => _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+        //    private set => _signInManager = value;
+        //}
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
-        {
-            UserManager = userManager;
-            SignInManager = signInManager;
-        }
+        //public ApplicationUserManager UserManager
+        //{
+        //    get => _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+        //    private set => _userManager = value;
+        //}
+
+        //public AccountController()
+        //{
+        //}
+
+        //public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        //{
+        //    UserManager = userManager;
+        //    SignInManager = signInManager;
+        //}
 
 
         //
@@ -75,7 +84,7 @@ namespace RentABike.Website.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -109,10 +118,10 @@ namespace RentABike.Website.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, model.Password);
+                var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    await _signInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
@@ -138,7 +147,7 @@ namespace RentABike.Website.Controllers
             {
                 return View("Error");
             }
-            var result = await UserManager.ConfirmEmailAsync(userId, code);
+            var result = await _userManager.ConfirmEmailAsync(userId, code);
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
 
@@ -159,8 +168,8 @@ namespace RentABike.Website.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindByNameAsync(model.Email);
-                if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
+                var user = await _userManager.FindByNameAsync(model.Email);
+                if (user == null || !(await _userManager.IsEmailConfirmedAsync(user.Id)))
                 {
                     // Don't reveal that the user does not exist or is not confirmed
                     return View("ForgotPasswordConfirmation");
@@ -205,13 +214,13 @@ namespace RentABike.Website.Controllers
             {
                 return View(model);
             }
-            var user = await UserManager.FindByNameAsync(model.Email);
+            var user = await _userManager.FindByNameAsync(model.Email);
             if (user == null)
             {
                 // Don't reveal that the user does not exist
                 return RedirectToAction("ResetPasswordConfirmation", "Account");
             }
-            var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
+            var result = await _userManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
             if (result.Succeeded)
             {
                 return RedirectToAction("ResetPasswordConfirmation", "Account");

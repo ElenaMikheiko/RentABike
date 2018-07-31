@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using System;
+using System.Web;
 using System.Web.Mvc;
 using RentABike.Logic.Interfaces;
 using RentABike.Models;
@@ -9,14 +10,16 @@ namespace RentABike.Website.Controllers
     public class BikeController : Controller
     {
         private readonly IBikeTypeService _bikeTypeService;
-        private readonly IRentPointService _rentPointService;
-        private readonly IBikeService _bikeService;
 
-        public BikeController(IRentPointService rentPointService, IBikeTypeService bikeTypeService, IBikeService bikeService)
+        private readonly IRentPointService _rentPointService;
+
+        private readonly IBikeRentPointService _bikeRentPointService;
+
+        public BikeController(IRentPointService rentPointService, IBikeTypeService bikeTypeService, IBikeRentPointService bikeRentPointServiceService)
         {
             _rentPointService = rentPointService;
             _bikeTypeService = bikeTypeService;
-            _bikeService = bikeService;
+            _bikeRentPointService = bikeRentPointServiceService;
         }
 
 
@@ -46,18 +49,25 @@ namespace RentABike.Website.Controllers
 
         // POST: Bike/Create
         [HttpPost]
-        public ActionResult CreateNewBike(CreationBikeViewModel vm, HttpPostedFileBase img = null)
+        public ActionResult CreateNewBike(CreationBikeViewModel vm)
         {
-            try
-            {
+            //try
+            //{
                 // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
+            if (ModelState.IsValid)
             {
-                return View();
+                _bikeRentPointService.SaveBikeAndRentPoint(vm);
+
             }
+
+            return RedirectToAction(nameof(Index), "Home");
+            //}
+            //catch
+            //{
+            //vm.BikeTypes = _bikeTypeService.AllBikeTypes();
+            //    vm.RentPoints = _rentPointService.AllRentPoint();
+            //    return View(vm);
+            //}
         }
 
         // GET: Bike/Edit/5
