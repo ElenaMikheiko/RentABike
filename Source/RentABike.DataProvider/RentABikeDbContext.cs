@@ -22,14 +22,11 @@ namespace RentABike.DataProvider
 
         public DbSet<Order> Orders { get; set; }
 
-        public static RentABikeDbContext Create()
-        {
-            return new RentABikeDbContext();
-        }
-
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            #region Identity
 
             modelBuilder.Entity<ApplicationUser>()
                 .ToTable("Users");
@@ -45,6 +42,8 @@ namespace RentABike.DataProvider
 
             modelBuilder.Entity<IdentityUserLogin>()
                 .ToTable("UserLogins");
+
+            #endregion
         }
     }
 }
