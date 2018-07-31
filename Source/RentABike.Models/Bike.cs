@@ -17,5 +17,10 @@ namespace RentABike.Models
         public virtual BikeType BikeType { get; set; }
 
         public virtual IList<RentPoint> RentPoints { get; set; }
+
+        public Bike()
+        {
+            RentPoints = new List<RentPoint>();
+        }
     }
 }

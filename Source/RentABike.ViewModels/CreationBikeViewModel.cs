@@ -11,7 +11,7 @@ namespace RentABike.ViewModels
         [Display(Name = "Model of Bike")]
         public string BikeModel { get; set; }
 
-        public byte[] Image { get; set; }
+        public  string Base64Image { get; set; }
 
         public string Description { get; set; }
 

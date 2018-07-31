@@ -17,5 +17,13 @@ namespace RentABike.Models
         public virtual IList<ApplicationUser> Sellers { get; set; }
 
         public virtual IList<Bike> Bikes { get; set; }
+
+        public RentPoint()
+        {
+            Sellers = new List<ApplicationUser>();
+
+            Bikes = new List<Bike>();
+        }
+
     }
 }
