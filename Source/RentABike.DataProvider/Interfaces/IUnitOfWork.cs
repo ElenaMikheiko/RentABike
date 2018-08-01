@@ -12,6 +12,10 @@ namespace RentABike.DataProvider.Interfaces
 
         GenericRepository<BikeType> BikeTypeRepository { get; }
 
+        GenericRepository<UserInfo> UserInfoRepository { get; }
+
+        GenericRepository<ApplicationUser> ApplicationUserRepository { get; }
+
         void Save();
     }
 }

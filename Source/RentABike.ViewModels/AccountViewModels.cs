@@ -28,6 +28,21 @@ namespace RentABike.ViewModels
     public class RegisterViewModel
     {
         [Required]
+        [MaxLength(30)]
+        public string Name { get; set; }
+
+        [MaxLength(50)]
+        public string Patronymic { get; set; }
+
+        [Required]
+        [MaxLength(50)]
+        public string Surname { get; set; }
+
+        [Required]
+        [MaxLength(20)]
+        public string Phone { get; set; }
+
+        [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }

@@ -58,6 +58,7 @@ namespace RentABike.IoC
             _kernel.Bind<IRentPointService>().To<RentPointService>();
             _kernel.Bind<IBikeTypeService>().To<BikeTypeService>();
             _kernel.Bind<IBikeRentPointService>().To<BikeRentPointService>();
+            _kernel.Bind<IUserInfoService>().To<UserInfoService>();
         }
     }
 }

@@ -22,6 +22,8 @@ namespace RentABike.DataProvider
 
         public DbSet<Order> Orders { get; set; }
 
+        public DbSet<UserInfo> UserInfos { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -44,6 +46,17 @@ namespace RentABike.DataProvider
                 .ToTable("UserLogins");
 
             #endregion
+
+            modelBuilder.Entity<ApplicationUser>()
+                .HasOptional(p => p.UserInfo)
+                .WithOptionalDependent()
+                .Map(p => p.MapKey("UserId"));
+
+            // Аналогичная настройка
+            modelBuilder.Entity<UserInfo>()
+                .HasOptional(c => c.User)
+                .WithOptionalPrincipal()
+                .Map(c => c.MapKey("UserInfoId"));
         }
     }
 }

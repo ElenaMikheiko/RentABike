@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -43,7 +44,7 @@
                     <li class="dropdown">
                         @if (Request.IsAuthenticated)
                         {
-                            @Html.Partial("_NavbarUserInfo")
+                            @Html.Action("UserInfo", "Account", new { userEmail = User.Identity.Name})
                         }
                         else
                         {

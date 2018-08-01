@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
+using System.Runtime.CompilerServices;
 using System.Security.Claims;
 using System.Web;
 using Microsoft.AspNet.Identity;
@@ -13,6 +14,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using RentABike.DataProvider;
+using RentABike.DataProvider.Interfaces;
 
 namespace RentABike.Logic
 {
@@ -69,5 +71,6 @@ namespace RentABike.Logic
             }
             return manager;
         }
+
     }
 }

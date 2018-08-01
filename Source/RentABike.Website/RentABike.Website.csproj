@@ -227,6 +227,7 @@
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\Images\image.png" />
+    <Content Include="Content\Images\no_avatar.png" />
     <Content Include="Content\imgAreaSelect\border-anim-h.gif" />
     <Content Include="Content\imgAreaSelect\border-anim-v.gif" />
     <Content Include="Content\imgAreaSelect\border-h.gif" />
@@ -304,6 +305,7 @@
     <Content Include="Views\Shared\_NavbarUserInfo.cshtml" />
     <Content Include="Views\RentPoint\_CreateRentPoint.cshtml" />
     <Content Include="Views\TypeOfBike\_CreateTypeOfBike.cshtml" />
+    <Content Include="Views\Account\PersonalAccount.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

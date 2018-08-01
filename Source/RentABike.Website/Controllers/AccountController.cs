@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -9,6 +10,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using RentABike.Logic;
+using RentABike.Logic.Interfaces;
 using RentABike.Models;
 using RentABike.ViewModels;
 
@@ -20,11 +22,14 @@ namespace RentABike.Website.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
+        private IUserInfoService _userInfoService;
+
         public AccountController(ApplicationUserManager userManager,
-            ApplicationSignInManager signInManager)
+            ApplicationSignInManager signInManager, IUserInfoService userInfoService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _userInfoService = userInfoService;
         }
 
 
@@ -117,7 +122,18 @@ namespace RentABike.Website.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var userInfo = new UserInfo
+                {
+                    UserId = user.Id,
+                    Surname = model.Surname,
+                    Phone = model.Phone,
+                    Patronymic = model.Patronymic,
+                    Name = model.Name,
+                    Email = model.Email
+                };
                 var result = await _userManager.CreateAsync(user, model.Password);
+                _userInfoService.CreateUserInfo(userInfo);
+
                 if (result.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
@@ -325,5 +341,39 @@ namespace RentABike.Website.Controllers
             }
         }
         #endregion
+
+        [Authorize]
+        [HttpGet]
+        public ActionResult PersonalAccount(string userId)
+        {
+            var vm = new UserInfoViewModel();
+            var user = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(User.Identity.GetUserId());
+            var userInfo = _userInfoService.GetUserInfoByUserId(user.Id);
+
+            vm.UserEmail = user.Email.ToLower();
+            StringBuilder sb = new StringBuilder(String.Concat(userInfo.Name, " ", userInfo.Surname));
+            vm.UserFullName = sb.ToString();
+            vm.UserPhone = userInfo.Phone;
+            vm.ImageData = userInfo.Photo;
+            //vm.UserRole = User.Identity.
+
+            return View(vm);
+        }
+
+        [ChildActionOnly]
+        public ActionResult UserInfo(string userEmail)
+        {
+            var vm = new UserInfoViewModel();
+            var user = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(User.Identity.GetUserId());
+            var userInfo = _userInfoService.GetUserInfoByUserId(user.Id);
+            vm.UserEmail = user.Email.ToLower();
+            StringBuilder sb = new StringBuilder(String.Concat(userInfo.Name," ", userInfo.Surname));
+            vm.UserFullName = sb.ToString();
+            vm.UserPhone = userInfo.Phone;
+            vm.ImageData = userInfo.Photo;
+            //vm.
+
+            return this.PartialView("_NavbarUserInfo", vm);
+        }
     }
 }
