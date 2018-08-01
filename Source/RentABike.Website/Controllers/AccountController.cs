@@ -20,7 +20,6 @@ namespace RentABike.Website.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
-
         public AccountController(ApplicationUserManager userManager,
             ApplicationSignInManager signInManager)
         {

@@ -9,10 +9,14 @@ namespace RentABike.ViewModels
         public int BikeId { get; set; }
 
         [Display(Name = "Model of Bike")]
+        [MaxLength(100)]
         public string BikeModel { get; set; }
 
-        public  string Base64Image { get; set; }
+        [Required]
+        public string Base64Image { get; set; }
 
+        [Required]
+        [MaxLength(1000)]
         public string Description { get; set; }
 
         public IEnumerable<BikeType> BikeTypes { get; set; }

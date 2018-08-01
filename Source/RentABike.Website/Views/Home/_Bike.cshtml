@@ -1,12 +1,25 @@
 ﻿@model RentABike.Models.Bike
 
-<div class="col-md-4">
-    <h4>@Html.DisplayTextFor(m => m.Model)</h4>
-    <p>
-        @Html.DisplayTextFor(m=>m.Description)
-    </p>
-    <p>
-        @Html.DisplayTextFor(m=>m.BikeType.Type)
-    </p>
-    <p><a class="btn btn-success" href="">More...</a></p>
-</div>
+<li class="product-wrapper">
+    <a href="" class="product">
+        <div class="product-main">
+            <div class="product-photo">
+                @if (Model.Image == null)
+                {
+                    <img src="~/Content/Images/image.png" alt="">
+                }
+                else
+                {
+                    <img src = "data:image/jpeg;base64,@(Convert.ToBase64String(Model.Image))">
+                }
+                <div class="product-preview"><span class="button">More details...</span></div>
+            </div>
+            <div class="product-text">
+                <h2>@Model.Model</h2>
+                <h5>@Html.DisplayTextFor(m => m.BikeType.Type)</h5>
+                <hr/>
+                <p>@Model.Description</p>
+            </div>
+        </div>
+    </a>
+</li>
