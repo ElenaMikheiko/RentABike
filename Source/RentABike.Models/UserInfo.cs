@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RentABike.Models
 {
     public class UserInfo :BaseModel
     {
-        public  string UserId { get; set; }
+        [ForeignKey("User")]
+        public string Id { get; set; }
 
         public virtual ApplicationUser User { get; set; }
 

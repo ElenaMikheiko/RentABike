@@ -47,16 +47,6 @@ namespace RentABike.DataProvider
 
             #endregion
 
-            modelBuilder.Entity<ApplicationUser>()
-                .HasOptional(p => p.UserInfo)
-                .WithOptionalDependent()
-                .Map(p => p.MapKey("UserId"));
-
-            // Аналогичная настройка
-            modelBuilder.Entity<UserInfo>()
-                .HasOptional(c => c.User)
-                .WithOptionalPrincipal()
-                .Map(c => c.MapKey("UserInfoId"));
         }
     }
 }

@@ -124,7 +124,7 @@ namespace RentABike.Website.Controllers
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var userInfo = new UserInfo
                 {
-                    UserId = user.Id,
+                    Id = user.Id,
                     Surname = model.Surname,
                     Phone = model.Phone,
                     Patronymic = model.Patronymic,

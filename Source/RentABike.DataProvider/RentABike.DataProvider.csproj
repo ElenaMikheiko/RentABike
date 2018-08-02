@@ -51,9 +51,9 @@
     <Compile Include="Migrations\201807181919302_ChangeMaxLengthInColumnDescriptionBikeTable.Designer.cs">
       <DependentUpon>201807181919302_ChangeMaxLengthInColumnDescriptionBikeTable.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201808012135249_AddUserInfoForUser.cs" />
-    <Compile Include="Migrations\201808012135249_AddUserInfoForUser.Designer.cs">
-      <DependentUpon>201808012135249_AddUserInfoForUser.cs</DependentUpon>
+    <Compile Include="Migrations\201808021937381_AddUserInfoForUser.cs" />
+    <Compile Include="Migrations\201808021937381_AddUserInfoForUser.Designer.cs">
+      <DependentUpon>201808021937381_AddUserInfoForUser.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -71,8 +71,8 @@
     <EmbeddedResource Include="Migrations\201807181919302_ChangeMaxLengthInColumnDescriptionBikeTable.resx">
       <DependentUpon>201807181919302_ChangeMaxLengthInColumnDescriptionBikeTable.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808012135249_AddUserInfoForUser.resx">
-      <DependentUpon>201808012135249_AddUserInfoForUser.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201808021937381_AddUserInfoForUser.resx">
+      <DependentUpon>201808021937381_AddUserInfoForUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

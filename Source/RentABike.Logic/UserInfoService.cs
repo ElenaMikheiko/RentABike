@@ -23,7 +23,7 @@ namespace RentABike.Logic
 
         public UserInfo GetUserInfoByUserId(string userId)
         {
-            return _unitOfWork.UserInfoRepository.GetAllWhere(u=>u.UserId == userId).FirstOrDefault();
+            return _unitOfWork.UserInfoRepository.GetAllWhere(u=>u.Id == userId).FirstOrDefault();
         }
     }
 }

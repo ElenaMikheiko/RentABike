@@ -13,7 +13,7 @@ namespace RentABike.DataProvider.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201808012135249_AddUserInfoForUser"; }
+            get { return "201808021937381_AddUserInfoForUser"; }
         }
         
         string IMigrationMetadata.Source
