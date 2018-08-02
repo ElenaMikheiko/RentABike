@@ -16,6 +16,7 @@ namespace RentABike.DataProvider.Initializers
 
                 var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
 
+                //TODO:
                 // create default roles
                 var roles = new List<IdentityRole>
                 {
@@ -33,6 +34,15 @@ namespace RentABike.DataProvider.Initializers
                 // create default admin
                 var admin = new ApplicationUser { Email = "defaultadmin@gmail.com", UserName = "defaultadmin@gmail.com" };
                 string password = "ad46D_";
+                var userInfoAdmin = new UserInfo
+                {
+                    User = admin,
+                    Email = admin.Email,
+                    Name = "Admin",
+                    Surname = "Admin",
+                    Phone = "+375 (29) 123-45-67",
+                };
+                context.UserInfos.Add(userInfoAdmin);
                 var result = userManager.Create(admin, password);
 
                 // if the user creation was successful
