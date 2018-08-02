@@ -209,6 +209,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BikeController.cs" />
+    <Compile Include="Controllers\BikeTypeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RentPointController.cs" />
@@ -254,6 +255,7 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\button.js" />
     <Content Include="Scripts\cropper.js" />
+    <Content Include="Scripts\CustomScript.js" />
     <Content Include="Scripts\fadeIn.js" />
     <Content Include="Scripts\imgAreaSelect\jquery.imgareaselect.js" />
     <Content Include="Scripts\imgAreaSelect\jquery.imgareaselect.min.js" />
@@ -306,6 +308,9 @@
     <Content Include="Views\RentPoint\_CreateRentPoint.cshtml" />
     <Content Include="Views\TypeOfBike\_CreateTypeOfBike.cshtml" />
     <Content Include="Views\Account\PersonalAccount.cshtml" />
+    <Content Include="Views\BikeType\AllTypeOfBikes.cshtml" />
+    <Content Include="Views\RentPoint\AllRentPoint.cshtml" />
+    <Content Include="Views\Bike\AllBikes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -38,5 +38,11 @@ namespace RentABike.Website.Controllers
             return result;
         }
 
+        [HttpGet]
+        public ActionResult AllRentPoint()
+        {
+            var rentPoints = _rentPointService.AllRentPoint();
+            return View(rentPoints);
+        }
     }
 }

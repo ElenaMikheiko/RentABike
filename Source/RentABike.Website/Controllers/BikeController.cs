@@ -15,18 +15,23 @@ namespace RentABike.Website.Controllers
 
         private readonly IBikeRentPointService _bikeRentPointService;
 
-        public BikeController(IRentPointService rentPointService, IBikeTypeService bikeTypeService, IBikeRentPointService bikeRentPointServiceService)
+        private readonly IBikeService _bikeService;
+
+        public BikeController(IRentPointService rentPointService, IBikeTypeService bikeTypeService, 
+                              IBikeRentPointService bikeRentPointServiceService, IBikeService bikeService)
         {
             _rentPointService = rentPointService;
             _bikeTypeService = bikeTypeService;
             _bikeRentPointService = bikeRentPointServiceService;
+            _bikeService = bikeService;
         }
 
-
-        // GET: Bike
-        public ActionResult Index()
+        [HttpGet]
+        public ActionResult AllBikes()
         {
-            return View();
+            var bikes = _bikeService.Bikes();
+
+            return View(bikes);
         }
 
         // GET: Bike/Details/5
@@ -60,7 +65,7 @@ namespace RentABike.Website.Controllers
 
             }
 
-            return RedirectToAction(nameof(Index), "Home");
+            return RedirectToAction("Index", "Home");
             //}
             //catch
             //{

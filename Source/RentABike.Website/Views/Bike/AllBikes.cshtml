@@ -1,0 +1,58 @@
+﻿@model IEnumerable<RentABike.Models.Bike>
+
+<!DOCTYPE html>
+
+<!DOCTYPE html>
+
+@{
+    ViewBag.Title = "All bikes";
+}
+
+<div>
+    <div class="btn-group">
+        @Html.ActionLink("Add new bike", "CreateNewBike", "Bike", null, new { @class = "btn btn-primary" })
+    </div>
+    <table class="table table-striped">
+        <tr>
+            <th>Image</th>
+            <th>Model</th>
+            <th>Type of bike</th>
+            <th>@Html.Label("Actions")</th>
+        </tr>
+        @{
+            foreach (var bike in Model)
+            {
+                <tr>
+                    <td>
+                        @{
+                            var image = bike.Image != null ? "data : image / jpeg; base64,@(Convert.ToBase64String(bike.Image))" : "/Content/Images/image.png";
+                        }
+                        <img class="img" src="@image" alt="" width="150" style="padding-top: 10px" /><br />
+                    </td>
+                    <td>
+                        @bike.Model
+                    </td>
+                    <td>
+                        @*@bike.BikeType.Type*@
+                    </td>
+
+                    <td>
+                        <div class="dropdown">
+                            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+                                <span class="glyphicon glyphicon-edit"></span>
+                                Actions
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                <li>@Html.ActionLink("Details", "", "", null, null)</li>
+                                <li>@Html.ActionLink("Edit", "", "", null, null)</li>
+                                <li>@Html.ActionLink("Delete", "", "", null, null)</li>
+                                <li>@Html.ActionLink("Show rent points", "", "", null, null)</li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+</div>

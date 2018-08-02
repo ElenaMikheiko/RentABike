@@ -136,6 +136,8 @@ namespace RentABike.Website.Controllers
 
                 if (result.Succeeded)
                 {
+//TODO:
+                    await _userManager.AddToRoleAsync(user.Id, "User");
                     await _signInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
@@ -262,27 +264,6 @@ namespace RentABike.Website.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                if (_userManager != null)
-                {
-                    _userManager.Dispose();
-                    _userManager = null;
-                }
-
-                if (_signInManager != null)
-                {
-                    _signInManager.Dispose();
-                    _signInManager = null;
-                }
-            }
-
-            base.Dispose(disposing);
-        }
-
         #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
@@ -342,9 +323,9 @@ namespace RentABike.Website.Controllers
         }
         #endregion
 
-        [Authorize]
         [HttpGet]
-        public ActionResult PersonalAccount(string userId)
+        [Authorize]
+        public ActionResult PersonalAccount()
         {
             var vm = new UserInfoViewModel();
             var user = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(User.Identity.GetUserId());
@@ -355,7 +336,7 @@ namespace RentABike.Website.Controllers
             vm.UserFullName = sb.ToString();
             vm.UserPhone = userInfo.Phone;
             vm.ImageData = userInfo.Photo;
-            //vm.UserRole = User.Identity.
+            vm.UserRole = _userManager.GetRoles(user.Id).FirstOrDefault();
 
             return View(vm);
         }
@@ -371,7 +352,6 @@ namespace RentABike.Website.Controllers
             vm.UserFullName = sb.ToString();
             vm.UserPhone = userInfo.Phone;
             vm.ImageData = userInfo.Photo;
-            //vm.
 
             return this.PartialView("_NavbarUserInfo", vm);
         }

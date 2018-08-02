@@ -1,0 +1,53 @@
+﻿@model IEnumerable<RentABike.Models.RentPoint>
+
+<!DOCTYPE html>
+
+@{
+    ViewBag.Title = "All rent points";
+}
+
+<div>
+    <div class="btn-group">
+        @Html.ActionLink("Add new rent point", "", "", null, new {@class = "btn btn-primary"})
+    </div>
+    <table class="table table-striped">
+        <tr>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Address</th>
+            <th>@Html.Label("Actions")</th>
+        </tr>
+        @{
+            foreach (var rentPoint in Model)
+            {
+                <tr>
+                    <td>
+                        @rentPoint.Name
+                    </td>
+                    <td>
+                        @rentPoint.Phone
+                    </td>
+                    <td>
+                        @rentPoint.Address
+                    </td>
+
+                    <td>
+                        <div class="dropdown">
+                            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+                                <span class="glyphicon glyphicon-edit"></span>
+                                Actions
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                <li>@Html.ActionLink("Show all sellers", "", "", null, null)</li>
+                                <li>@Html.ActionLink("Show all bike in this point", "", "", null, null)</li>
+                                <li>@Html.ActionLink("Edit", "", "", null, null)</li>
+                                <li>@Html.ActionLink("Delete", "", "", null, null)</li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+</div>
