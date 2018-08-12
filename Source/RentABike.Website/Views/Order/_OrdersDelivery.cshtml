@@ -1,0 +1,11 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<RentABike.ViewModels.OrderViewModel>
+
+@Html.PagedListPager(Model, page => Url.Action("AllOrdersForDelivery",
+    new {page, currentFilter = ViewBag.CurrentFilter}),
+    PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions {HttpMethod = "GET", UpdateTargetId = "results"}))
+
+@foreach (var item in Model)
+{
+    Html.RenderPartial("_OrderForSeller", item);
+}

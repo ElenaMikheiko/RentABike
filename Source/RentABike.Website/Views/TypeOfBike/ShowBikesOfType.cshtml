@@ -1,0 +1,33 @@
+﻿@model System.Collections.Generic.IEnumerable<RentABike.Models.Bike>
+
+@{
+    Layout = "../Shared/_Layout.cshtml";
+}
+<div class="container">
+    <table class="table table-striped">
+        <tr>
+            <th>Image</th>
+            <th>Model</th>
+            <th>Type of bike</th>
+        </tr>
+        @{
+            foreach (var bike in Model)
+            {
+                <tr>
+                    <td>
+                        @{
+                            var image = bike.Image != null ? "data:image/jpeg; base64," + (Convert.ToBase64String(bike.Image)) : "/Content/Images/image.png";
+                        }
+                        <img class="img" src="@image" alt="" width="150" style="padding-top: 10px" /><br />
+                    </td>
+                    <td>
+                        @bike.Model
+                    </td>
+                    <td>
+                        @bike.BikeType.Type
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+</div>

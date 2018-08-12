@@ -11,7 +11,7 @@ namespace RentABike.Models
         [MaxLength(250)]
         public string Address { get; set; }
 
-        [MaxLength(13)]
+        [MaxLength(20)]
         public string Phone { get; set; }
 
         public virtual IList<ApplicationUser> Sellers { get; set; }

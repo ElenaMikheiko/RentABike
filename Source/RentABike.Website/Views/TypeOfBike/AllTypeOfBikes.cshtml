@@ -1,0 +1,44 @@
+﻿@model IEnumerable<RentABike.Models.BikeType>
+
+@{
+    ViewBag.Title = "All type of bikes";
+    Layout = null;
+}
+
+<div>
+    <div class="btn-group">
+        @Html.ActionLink("Add new type", "", "", null, new { @class = "btn btn-primary" })
+    </div>
+    <table class="table table-striped">
+        <tr>
+            <th>Name</th>
+            <th>@Html.Label("Actions")</th>
+        </tr>
+        @{
+            foreach (var bikeType in Model)
+            {
+                <tr>
+                    <td>
+                        @bikeType.Type
+                    </td>
+                    <td>
+                        <div class="dropdown">
+                            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" id="droplist" aria-haspopup="true" aria-expanded="false">
+                                <span class="glyphicon glyphicon-edit"></span>
+                                Actions
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                <li>@Html.ActionLink("Show bikes of this type", "ShowBikesOfType", "TypeOfBike", new {bikeTypeId = bikeType.Id}, new {@id="bikeTypeModal"})</li>
+                               
+                                <li>@Html.ActionLink("Edit", "", "", null, null)</li>
+                                <li>@Html.ActionLink("Delete", "", "", null, null)</li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+</div>
+

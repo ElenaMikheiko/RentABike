@@ -28,6 +28,7 @@ namespace RentABike.Logic
         public void SaveBikeType(BikeType bikeType)
         {
             _unitOfWork.BikeTypeRepository.Create(bikeType);
+            _unitOfWork.Save();
         }
     }
 }

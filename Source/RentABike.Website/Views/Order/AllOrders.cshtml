@@ -1,0 +1,26 @@
+﻿@model IEnumerable<RentABike.Models.Order>
+
+@{
+    ViewBag.Title = "All orders";
+}
+
+@if (ViewBag.ErrorCancelingMessage)
+{
+    <div class="alert alert-danger" style="color: #b94a48">
+        <strong> You can not cancel the order № @ViewBag.NOrder less than 10 minutes before the rental! </strong>
+    </div>
+}
+
+
+<h2>Your orders</h2>
+@foreach (var item in Model)
+    {
+        Html.RenderPartial("_OrderForUser", item);
+
+}
+<script>
+        $('.spoiler-explore').click(function () {
+            $(this).parent().children('div.spoiler-content').toggle('fast');
+            return false;
+        });
+</script>

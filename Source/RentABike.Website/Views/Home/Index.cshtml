@@ -1,18 +1,58 @@
-﻿@model IEnumerable<RentABike.Models.Bike>
+﻿@using System.Collections
+@using PagedList.Mvc
+@using Roles = RentABike.Models.Constants.Roles
+@model PagedList.IPagedList<RentABike.Models.Bike>
+
 @{
     ViewBag.Title = "Home Page";
 }
 
 <div class="container">
-    <div class="col-lg-11">
-        <p>
-            <button class="btn btn-lg btn-warning" onclick='window.location = "@Url.Action("CreateNewBike","Bike") ";'>Add new bike</button>
-        </p>
-    </div>
-    <div class="row">
-        @foreach (var bike in Model)
-        {
-            Html.RenderPartial("_Bike", bike);
-        }
+    <div>
+
+        <br/>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="col-xs-12">
+                    @using (Ajax.BeginForm("Index", "Home", new AjaxOptions {HttpMethod = "GET", UpdateTargetId = "results"}))
+                    {
+                        <div class="input-group">
+                            <span class="input-group-btn">
+                                @Html.TextBox("searchString", ViewBag.CurrentFilter as string, new {@class = "form-control", placeholder = "Search..."})
+                                <button class="btn btn-default" type="submit">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </span>
+                        </div>
+                        <br/>
+                        <div class="form-inline">
+                            <label class="control-label">Rent points: </label>
+                            @Html.DropDownList("rentPointFilter", new SelectList((IEnumerable) ViewData["rentPoint"], "Id", "Address",
+                                               ViewBag.RentPointFilter), "-- Select rent point --", new {@class = "form-control"})
+
+                            <label class="control-label">Byke types: </label>
+                            @Html.DropDownList("bikeTypeFilter", new SelectList((IEnumerable) ViewData["bikeType"], "Id", "Type",
+                                                ViewBag.BikeTypeFilter), "-- Select bike type --", new {@class = "form-control"})
+
+                            <input type="submit" value="Filter" class="btn btn-default" />
+                            <input type="button" value="Clear all" class="btn btn-default" onclick='window.location = "@Url.Action("Index", "Home", new {searchString="", rentPointFilter="null", bikeTypeFilter="null"}) ";' />
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <br/>
+        <div class="col-lg-11">
+            @if (User.Identity.IsAuthenticated && User.IsInRole(Roles.Admin))
+            {
+                <p>
+                    <button class="btn btn-lg btn-warning" onclick='window.location = "@Url.Action("CreateNewBike", "Bike") ";'>Add new bike</button>
+                </p>
+            }
+        </div>
+        <div class="row" id="results">
+            @Html.Partial("_Bikes", @Model)
+        </div>
+
     </div>
 </div>

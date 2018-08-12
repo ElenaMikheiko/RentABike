@@ -26,6 +26,13 @@ namespace RentABike.DataProvider
 
         public GenericRepository<ApplicationUser> ApplicationUserRepository => new GenericRepository<ApplicationUser>(_dbContext);
 
+        public GenericRepository<Order> OrderRepository => new GenericRepository<Order>(_dbContext);
+
+        public GenericRepository<Status> StatusRepository => new GenericRepository<Status>(_dbContext);
+
+        public GenericRepository<Tarriff> TarriffRepository => new GenericRepository<Tarriff>(_dbContext);
+
+
         public void Dispose()
         {
             Dispose(true);

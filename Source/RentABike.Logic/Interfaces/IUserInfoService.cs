@@ -1,4 +1,6 @@
-﻿using RentABike.Models;
+﻿using System.Collections.Generic;
+using RentABike.Models;
+using RentABike.ViewModels;
 
 namespace RentABike.Logic.Interfaces
 {
@@ -7,5 +9,9 @@ namespace RentABike.Logic.Interfaces
         void CreateUserInfo(UserInfo userInfo);
 
         UserInfo GetUserInfoByUserId(string userId);
+
+        void UpdateUserInfo(EditPersonalUserInfoViewModel vm);
+
+        IEnumerable<UserInfo> AllUserInfos();
     }
 }

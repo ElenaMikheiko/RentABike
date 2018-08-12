@@ -1,0 +1,87 @@
+﻿@model IEnumerable<RentABike.ViewModels.TarriffsForBikeTypesViewModel>
+
+<div class="container">
+    <h3>Rent price by hour BYN</h3>
+    <hr/>
+    <table class="table table-hover table-striped">
+        @{
+            bool flag = false;
+
+            foreach (var bikeTypes in Model)
+            {
+                if (!flag)
+                {
+                    <tr>
+                        <td></td>
+                        @foreach (var bikeTypeTarriff in bikeTypes.TarriffsForHours.OrderBy(b=>b.Quantity))
+                        {
+
+                            <th>@bikeTypeTarriff.Quantity @bikeTypeTarriff.KindOfRent.Kind</th>
+                        }
+                    </tr>
+                    flag = true;
+                    <tr>
+                        <th>@bikeTypes.BikeType.Type</th>
+                        @foreach (var tarriff in bikeTypes.TarriffsForHours.OrderBy(b => b.Quantity))
+                        {
+                            <th>@tarriff.Amount</th>
+                        }
+                    </tr>  
+                }
+                else
+                {
+                    <tr>
+                        <th>@bikeTypes.BikeType.Type</th>
+                        @foreach (var tarriff in bikeTypes.TarriffsForHours.OrderBy(b=> b.Quantity))
+                        {
+                            <th>@tarriff.Amount</th>
+                        }
+                    </tr>  
+ 
+                }
+             }
+        }
+    </table>
+    <br/>
+    <h3>Rent price by day BYN</h3>
+    <table class="table table-hover table-striped">
+        @{
+            bool flag1 = false;
+
+            foreach (var bikeTypes in Model)
+            {
+                if (!flag1)
+                {
+                    <tr>
+                        <td></td>
+                        @foreach (var bikeTypeTarriff in bikeTypes.TarriffsForDays.OrderBy(b=> b.Quantity))
+                        {
+
+                            <th>@bikeTypeTarriff.Quantity @bikeTypeTarriff.KindOfRent.Kind</th>
+                        }
+                    </tr>
+                    flag1 = true;
+                    <tr>
+                        <th>@bikeTypes.BikeType.Type</th>
+                        @foreach (var tarriff in bikeTypes.TarriffsForDays.OrderBy(b=> b.Quantity))
+                        {
+                            <th>@tarriff.Amount</th>
+                        }
+                    </tr>  
+                }
+                else
+                {
+                    <tr>
+                        <th>@bikeTypes.BikeType.Type</th>
+                        @foreach (var tarriff in bikeTypes.TarriffsForDays.OrderBy(b => b.Quantity))
+                        {
+                            <th>@tarriff.Amount</th>
+                        }
+                    </tr>  
+                }
+            }
+        }
+    </table>
+
+</div>
+

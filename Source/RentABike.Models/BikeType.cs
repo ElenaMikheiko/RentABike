@@ -1,10 +1,20 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace RentABike.Models
 {
     public class BikeType : BaseModel
     {
+        [Required]
         [MaxLength(30)]
         public string Type { get; set; }
+
+        public virtual IList<Tarriff> Tarriffs { get; set; }
+
+        public BikeType()
+        {
+            Tarriffs = new List<Tarriff>();
+        }
+
     }
 }

@@ -5,34 +5,36 @@
 }
 
 <div class="content">
-<h2>Create New Bike</h2>
+    <h2>Create New Bike</h2>
+    @{Html.EnableClientValidation();}
+    @{Html.EnableUnobtrusiveJavaScript();}
 @using (Html.BeginForm("CreateNewBike", "Bike", FormMethod.Post, new {enctype = "multipart/form-data"}))
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
         <hr/>
-        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
-
         <div class="form-group">
             <div class="col-md-2" align="right">
                 <label>Image </label>
                 <label style="color: darkgrey">(Click on the image to load your picture)</label>
             </div>
+
             <div class="content__image_block clearfix">
                 <img class="content__main_image" alt="bikePhoto" src="~/Content/Images/image.png"/>
-                <input hidden name="Base64Image" id="Base65Image"/>
+                @Html.HiddenFor(m => m.Base64Image)
             </div>
+                @Html.ValidationMessageFor(model => model.Base64Image, "", new {@class = "text-danger"})
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.BikeTypeId, new {@class = "control-label col-md-2"})
-            <div class="col-md-4">
-                @Html.DropDownListFor(m => m.BikeTypeId, Model.BikeTypes.Select(c => new SelectListItem {Text = c.Type, Value = c.Id.ToString()}), new {@class = "form-control input-sm"})
+            @Html.LabelFor(model => model.BikeTypeId, new { @class = "control-label col-md-2" })
+            <div class="col-sm-4">
+                @Html.DropDownListFor(m => m.BikeTypeId, Model.BikeTypes.Select(c => new SelectListItem { Text = c.Type, Value = c.Id.ToString() }), new { @class = "form-control input-md col-sm-4" })
+                <a href="@Url.Action("CreateNewTypeOfBike", "TypeOfBike")" id="typeItem" title="Add new Bike Type" class="col-sm-1">
+                    <i class="fa fa-plus-square fa-2x" style="color: #8ae2a2;"></i>
+                </a>
             </div>
-            <a href="#createTypeOfBikeFormModal" data-toggle="modal" id="typeItem" title="Add new Bike Type">
-                <i class="fa fa-plus-square fa-2x" style="color: #8ae2a2;"></i>
-            </a>
         </div>
 
         <div class="form-group">
@@ -53,12 +55,12 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.RentPoints, new {@class = "control-label col-md-2"})
-            <div class="col-md-4">
-                @Html.DropDownListFor(m => m.RentPointId, Model.RentPoints.Select(c => new SelectListItem {Text = c.Name + ',' + c.Address, Value = c.Id.ToString()}), new {@class = "form-control input-sm", id="ValueListId"})
+            <div class="col-sm-4">
+                @Html.DropDownListFor(m => m.RentPointId, Model.RentPoints.Select(c => new SelectListItem {Text = c.Name + ',' + c.Address, Value = c.Id.ToString()}), new {@class = "form-control input-md col-sm-4"})
+                <a href="@Url.Action("CreateNewRentPoint", "RentPoint")" id="item" title="Add new Rent Point" class="col-sm-1">
+                    <i class="fa fa-plus-square fa-2x" style="color: #8ae2a2;"></i>
+                </a>
             </div>
-            <a href="#createRentPointFormModal" data-toggle="modal" id="item" title="Add new Rent Point">
-                <i class="fa fa-plus-square fa-2x" style="color: #8ae2a2;"></i>
-            </a>
         </div>
 
         <div class="form-group">
@@ -97,18 +99,38 @@
 
 @*Modal dialog for creation Type of Bike*@
 <div id="createTypeOfBikeFormModal" class="modal fade">
-    <div class="modal-dialog">
-        @{ Html.RenderAction("CreateNewTypeOfBike", "TypeOfBike");}
+    <div class="modal-dialog" id="modDialog">
     </div>
 </div>
 
 @*Modal dialog for creation Rent Point*@
 <div id="createRentPointFormModal" class="modal fade">
-    <div class="modal-dialog">
-        @{ Html.RenderAction("CreateNewRentPoint", "RentPoint");}
+    <div class="modal-dialog" id="modDialog1">
     </div>
 </div>
 
 </div>
 
 <script src="~/Scripts/fadeIn.js"></script>
+<script type="text/javascript">
+ 
+        $("#typeItem").click(function (e) {
+ 
+            e.preventDefault();
+            $.get(this.href, function (data) {
+                $('#modDialog').html(data);
+                $('#createTypeOfBikeFormModal').modal('show');
+                $.validator.unobtrusive.parse("#createTypeOfBikeFormModal");
+            });
+    });
+    $("#item").click(function (e) {
+ 
+            e.preventDefault();
+            $.get(this.href, function (data) {
+                $('#modDialog1').html(data);
+                $('#createRentPointFormModal').modal('show');
+                $.validator.unobtrusive.parse("#createRentPointFormModal");
+            });
+        });
+
+</script>

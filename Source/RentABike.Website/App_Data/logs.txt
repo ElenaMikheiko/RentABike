@@ -1,0 +1,7 @@
+                   --------------------- Error(2018-08-09 01:48:51.6267)DESKTOP-AKOEQQE-------------------- 
+                   
+                   Exception Type:System.DivideByZeroException
+                   Exception Message:Attempted to divide by zero.
+                   Stack Trace:   at RentABike.Website.Controllers.HomeController.Index(String currentFilter, String searchString, Nullable`1 page, Nullable`1 rentPointFilter, Nullable`1 bikeTypeFilter) in F:\Project_RentABike\Source\RentABike.Website\Controllers\HomeController.cs:line 89
+                   Additional Info:Error occured in Home controller Index Action
+                   

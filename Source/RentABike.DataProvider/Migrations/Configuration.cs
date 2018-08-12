@@ -20,7 +20,9 @@ namespace RentABike.DataProvider.Migrations
 
             DefaultAdminInitializer.Initialize(context);
             BikeTypesInitializer.Initialize(context);
-            BikesInitializer.Initialize(context);
+            StatusInitializer.Initialize(context);
+            KindOfRentInitializer.Initialize(context);
+            TarriffInitializer.Initialize(context);
             context.SaveChanges();
         }
     }

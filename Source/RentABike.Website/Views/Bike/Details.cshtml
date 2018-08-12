@@ -1,0 +1,42 @@
+﻿@model RentABike.ViewModels.DetailsBikeViewModel
+@{
+    ViewBag.Title = "More details";
+}
+<br/>
+
+<h2>More details about @Model.Model bike</h2>
+<br/>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-9">
+            @{
+                var bikeImage = @Model.Image != null ? "data:image/jpeg; base64,"+(Convert.ToBase64String(Model.Image)) : "/Content/Images/image.png";
+            }
+            <img src="@bikeImage" class="product-img"/>
+        </div>
+
+        @* Tarriffs *@
+        <div class="container-price col-xs-3">
+            <div class="inside-price">
+                <span class="price-title">Bike rent</span>
+                <span class="price-subtitle">Rent price:</span>
+                <div class="price-text">
+                    <p><span class="price-label">for an hour</span> <span><span class="price-value">@Model.TarrifForOneHour</span> <span>BYN</span></span></p>
+                    <p><span class="price-label">for a day</span> <span><span class="price-value">@Model.TarrifForOneDay</span> <span>BYN</span></span></p>
+
+                </div>
+                <div class="center">
+                    @Html.ActionLink("ORDER", "CreateOrder", "Order", new{bikeId = Model.BikeId}, new {@class = "btn btn-info btn-md", style = "width: 83%; margin-bottom: 10px"})
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <br/>
+    <div class="container">
+        <p>@Model.Description</p>
+    </div>
+    <div class="center">
+        @Html.ActionLink("Back to rent", "Index", "Home", null, new {@class = "btn btn-default"})
+    </div>
+</div>

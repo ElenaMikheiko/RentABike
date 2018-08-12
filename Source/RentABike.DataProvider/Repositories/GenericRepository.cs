@@ -20,7 +20,7 @@ namespace RentABike.DataProvider.Repositories
 
         public IEnumerable<TEntity> GetAll()
         {
-            return _dbSet.AsNoTracking().ToList();
+            return _dbSet./*AsNoTracking().*/ToList();
         }
 
         public IEnumerable<TEntity> GetWithInclude(params Expression<Func<TEntity, object>>[] includeProperties)
@@ -47,7 +47,7 @@ namespace RentABike.DataProvider.Repositories
 
         public void Update(TEntity item)
         {
-            _dbSet.Attach(item);
+            //_dbSet.Attach(item);
             _context.Entry(item).State = EntityState.Modified;
         }
 
@@ -58,14 +58,15 @@ namespace RentABike.DataProvider.Repositories
 
         public IEnumerable<TEntity> GetAllWhere(Func<TEntity, bool> predicate)
         {
-            return _dbSet.AsNoTracking().Where(predicate).ToList();
+            return _dbSet./*AsNoTracking().*/Where(predicate).ToList();
         }
 
         private IQueryable<TEntity> Include(params Expression<Func<TEntity, object>>[] includeProperties)
         {
-            IQueryable<TEntity> query = _dbSet.AsNoTracking();
+            IQueryable<TEntity> query = _dbSet/*.AsNoTracking()*/;
             return includeProperties
                 .Aggregate(query, (current, includeProperty) => current.Include(includeProperty));
         }
+
     }
 }

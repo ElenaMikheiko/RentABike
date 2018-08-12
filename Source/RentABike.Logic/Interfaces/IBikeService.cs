@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using RentABike.Models;
+using RentABike.ViewModels;
 
 namespace RentABike.Logic.Interfaces
 {
@@ -9,6 +10,12 @@ namespace RentABike.Logic.Interfaces
 
         Bike GetBikeById(int id);
 
-        void SaveBike(Bike bike);
+        Bike GetBikeByIdIncludingBikeType(int id);
+
+        void AddNewBike(Bike bike);
+
+        void UpdateBike(EditBikeViewModel vm);
+
+        IEnumerable<Bike> GetBikesByBikeTypeId(int bikeTypeId);
     }
 }

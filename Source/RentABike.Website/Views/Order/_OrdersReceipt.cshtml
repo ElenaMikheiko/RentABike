@@ -1,0 +1,32 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<RentABike.ViewModels.OrderViewModel>
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="col-xs-12">
+            @using (Ajax.BeginForm("AllOrdersForReceipt", "Order", new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "results1" }))
+            {
+                <div class="input-group">
+                    <span class="input-group-btn">
+                        @Html.TextBox("searchString", ViewBag.CurrentFilter as string, new { @class = "form-control", placeholder = "Search..." })
+                        <button class="btn btn-default" type="submit">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                        <button class="btn btn-default" type="submit">Clear</button>
+                    </span>
+                </div>
+                <br />
+            }
+        </div>
+    </div>
+</div>
+
+
+@Html.PagedListPager(Model, page => Url.Action("AllOrdersForReceipt",
+    new {page, currentFilter = ViewBag.CurrentFilter}),
+    PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions {HttpMethod = "GET", UpdateTargetId = "results"}))
+
+@foreach (var item in Model)
+{
+    Html.RenderPartial("_OrderForSeller", item);
+}

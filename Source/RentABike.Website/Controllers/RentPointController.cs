@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Text;
 using System.Web.Mvc;
 using RentABike.Logic.Interfaces;
 using RentABike.ViewModels;
@@ -21,21 +23,35 @@ namespace RentABike.Website.Controllers
         }
 
         [HttpPost]
-        public JsonResult CreateNewRentPoint(RentPointViewModel vm)
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateNewRentPoint(RentPointViewModel vm)
         {
-            _rentPointService.AddRentPoint(vm);
-            JsonResult result = new JsonResult();
-            //Попытка сохранить данные в БД
-            try
+            if (ModelState.IsValid)
             {
-                //......................
-                result.Data = new { Succes = "true", Message = "Данные сохранены." };
+                bool isNew = vm.RentPointId == 0;
+                _rentPointService.AddRentPoint(vm);
+                int id=0;
+                var rentpoint = _rentPointService.AllRentPoint().FirstOrDefault(r => r.Address == vm.Address);
+                if (rentpoint != null)
+                {
+                    id = rentpoint.Id;
+                }
+
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine(vm.Name + ", " + vm.Address);
+                return Json(new
+                {
+                    isValid = true,
+                    id = id,
+                    name = sb.ToString() ,
+                    isNew = isNew
+                });
             }
-            catch (Exception e)
+
+            return Json(new
             {
-                result.Data = new { Succes = "false", Message = "Данные не сохранены." };
-            }
-            return result;
+                isValid = false
+            });
         }
 
         [HttpGet]
@@ -44,5 +60,6 @@ namespace RentABike.Website.Controllers
             var rentPoints = _rentPointService.AllRentPoint();
             return View(rentPoints);
         }
+
     }
 }

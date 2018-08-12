@@ -40,13 +40,15 @@ namespace RentABike.Logic
                 Model = vm.BikeModel,
                 
             };
+            
+            bike.RentPoints = new List<RentPoint>();
             bike.RentPoints.Add(rp);
 
             //var existingRentPoint = _rentPointService.GetRentPointById(vm.RentPointId);
             //existingRentPoint.Bikes = new List<Bike>(){bike};
 
             //_rentPointService.UpdateRentPoint(existingRentPoint);
-            _bikeService.SaveBike(bike);
+            _bikeService.AddNewBike(bike);
             _uof.Save();
         }
     }

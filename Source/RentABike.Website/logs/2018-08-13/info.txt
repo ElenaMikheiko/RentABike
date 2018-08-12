@@ -1,0 +1,5 @@
+2018-08-13 00:15:03.5573|INFO|RentABike.Website.MvcApplication|Application Start
+2018-08-13 00:22:12.2687|INFO|RentABike.Website.MvcApplication|Application Start
+2018-08-13 00:22:38.3666|INFO|RentABike.Website.MvcApplication|Application Start
+2018-08-13 00:22:54.3198|INFO|RentABike.Website.MvcApplication|Application Start
+2018-08-13 00:25:05.1521|INFO|RentABike.Website.MvcApplication|Application Start

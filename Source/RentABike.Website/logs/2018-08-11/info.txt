@@ -1,0 +1,12 @@
+2018-08-11 00:26:20.3468|INFO|RentABike.Website.MvcApplication|Application Start
+2018-08-11 00:29:08.0651|INFO|RentABike.Website.MvcApplication|Application Start
+2018-08-11 00:29:32.6468|INFO|RentABike.Website.MvcApplication|Application Start
+2018-08-11 00:30:56.1233|INFO|RentABike.Website.MvcApplication|Application Start
+2018-08-11 00:38:14.0221|INFO|RentABike.Website.MvcApplication|Application Start
+2018-08-11 00:41:04.5262|INFO|RentABike.Website.MvcApplication|Application Start
+2018-08-11 00:42:30.4172|INFO|RentABike.Website.MvcApplication|Application Start
+2018-08-11 00:44:24.0429|INFO|RentABike.Website.MvcApplication|Application Start
+2018-08-11 00:51:49.2808|INFO|RentABike.Website.MvcApplication|Application Start
+2018-08-11 01:03:15.9478|INFO|RentABike.Website.MvcApplication|Application Start
+2018-08-11 01:08:12.4300|INFO|RentABike.Website.MvcApplication|Application Start
+2018-08-11 01:12:51.4196|INFO|RentABike.Website.MvcApplication|Application Start

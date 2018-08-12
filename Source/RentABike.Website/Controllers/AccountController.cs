@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
@@ -7,11 +8,13 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using RentABike.Logic;
 using RentABike.Logic.Interfaces;
 using RentABike.Models;
+using RentABike.Models.Constants;
 using RentABike.ViewModels;
 
 namespace RentABike.Website.Controllers
@@ -20,41 +23,28 @@ namespace RentABike.Website.Controllers
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
+
         private ApplicationUserManager _userManager;
 
         private IUserInfoService _userInfoService;
 
+        private RoleManager<IdentityRole> _roleManager;
+
+        private IRentPointService _rentPointService;
+
+        private IUserInfoAndRentPointService _userInfondRentPointService;
+
         public AccountController(ApplicationUserManager userManager,
-            ApplicationSignInManager signInManager, IUserInfoService userInfoService)
+            ApplicationSignInManager signInManager, IUserInfoService userInfoService, RoleManager<IdentityRole> roleManager,
+            IRentPointService rentPointService, IUserInfoAndRentPointService userInfoAndRentPointService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _userInfoService = userInfoService;
+            _roleManager = roleManager;
+            _rentPointService = rentPointService;
+            _userInfondRentPointService = userInfoAndRentPointService;
         }
-
-
-        //public ApplicationSignInManager SignInManager
-        //{
-        //    get => _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
-        //    private set => _signInManager = value;
-        //}
-
-        //public ApplicationUserManager UserManager
-        //{
-        //    get => _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-        //    private set => _userManager = value;
-        //}
-
-        //public AccountController()
-        //{
-        //}
-
-        //public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
-        //{
-        //    UserManager = userManager;
-        //    SignInManager = signInManager;
-        //}
-
 
         //
         // GET: /Account/Login
@@ -109,11 +99,11 @@ namespace RentABike.Website.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            var vm = new RegisterViewModel();
+            vm.Roles = _roleManager.Roles.ToList();
+            return View(vm);
         }
 
-        //
-        // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -136,17 +126,29 @@ namespace RentABike.Website.Controllers
 
                 if (result.Succeeded)
                 {
-//TODO:
-                    await _userManager.AddToRoleAsync(user.Id, "User");
-                    await _signInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    if (model.RoleId == null)
+                    {
+                        await _userManager.AddToRoleAsync(user.Id, "User");
+                        await _signInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
-                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                        // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+                        // Send an email with this link
+                        // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                        // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                        // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                        var role = _roleManager.Roles.FirstOrDefault(r => r.Id == model.RoleId);
+                        if (role != null)
+                        {
+                            await _userManager.AddToRoleAsync(user.Id, role.Name);
+                        }
+                        
+                        return RedirectToAction("PersonalAccount", "Account");
+                    }
                 }
                 AddErrors(result);
             }
@@ -341,6 +343,7 @@ namespace RentABike.Website.Controllers
             return View(vm);
         }
 
+        [Authorize]
         [ChildActionOnly]
         public ActionResult UserInfo(string userEmail)
         {
@@ -355,5 +358,56 @@ namespace RentABike.Website.Controllers
 
             return this.PartialView("_NavbarUserInfo", vm);
         }
+
+        [HttpGet]
+        [Authorize]
+        public ActionResult ChangePersonalInfo()
+        {
+            var userId = User.Identity.GetUserId();
+            var viewModel = new EditPersonalUserInfoViewModel();
+            viewModel.UserId = userId;
+            var userInfo = _userInfoService.GetUserInfoByUserId(userId);
+            if (userInfo != null)
+            {
+                viewModel.Name = userInfo.Name;
+                viewModel.Surname = userInfo.Surname;
+                viewModel.Patronymic = userInfo.Patronymic;
+                viewModel.Email = userInfo.Email;
+                viewModel.Phone = userInfo.Phone;
+                if (userInfo.Photo != null)
+                {
+                    viewModel.Base64Image = Convert.ToBase64String(userInfo.Photo);
+                }
+            }
+
+            viewModel.RentPoints = _rentPointService.AllRentPoint();
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangePersonalInfo(EditPersonalUserInfoViewModel vm)
+        {
+            if (User.IsInRole(Roles.Seller))
+            {
+                if (vm.RentPointId==0)
+                {
+                    ModelState.AddModelError("Rent point", "You must to fill in field Rent Point");
+                }
+            }
+
+            if (ModelState.IsValid)
+            {
+                vm.UserId = User.Identity.GetUserId();
+
+                _userInfondRentPointService.SaveUserInfoAndRentPoint(vm);
+                return RedirectToAction("PersonalAccount", "Account");
+            }
+
+            return View(vm);
+        }
+
     }
 }

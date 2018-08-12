@@ -44,6 +44,15 @@ namespace RentABike.IoC
 
             _kernel.Bind<RentABikeDbContext>().ToSelf().InRequestScope();
 
+
+
+            //_kernel.Bind<IRoleStore<IdentityRole, string>>().To<RoleStore<IdentityRole, string, IdentityUserRole>>();
+
+            _kernel.Bind<IRoleStore<IdentityRole, string>>()
+                .ToMethod(x => new RoleStore<IdentityRole, string, IdentityUserRole>(x.Kernel.Get<RentABikeDbContext>()))
+                .InRequestScope();
+
+            _kernel.Bind<RoleManager<IdentityRole>>().ToSelf();
             _kernel.Bind<IUserStore<ApplicationUser>>()
                 .ToMethod(x => new UserStore<ApplicationUser>(x.Kernel.Get<RentABikeDbContext>()))
                 .InRequestScope();
@@ -59,6 +68,12 @@ namespace RentABike.IoC
             _kernel.Bind<IBikeTypeService>().To<BikeTypeService>();
             _kernel.Bind<IBikeRentPointService>().To<BikeRentPointService>();
             _kernel.Bind<IUserInfoService>().To<UserInfoService>();
+            _kernel.Bind<IOrderService>().To<OrderService>();
+            _kernel.Bind<IStatusService>().To<StatusService>();
+            _kernel.Bind<ITarriffService>().To<TarriffService>();
+            _kernel.Bind<IUserInfoAndRentPointService>().To<UserInfoRentPointService>();
+
+
         }
     }
 }

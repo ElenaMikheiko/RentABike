@@ -1,0 +1,88 @@
+﻿@model RentABike.ViewModels.PreviewNewOrderViewModel
+
+@{
+    ViewBag.Title = "Confirmation your order";
+}
+
+@using (Html.BeginForm("ConfirmationOrder", "Order", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <h4>Check and confirm your order, please.</h4>
+    <hr />
+    @Html.HiddenFor(m => m.BikeId)
+    <div class="form-group">
+        @Html.LabelFor(m => m.BikeModel, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            <p class="form-control-static">
+                @Html.DisplayFor(m => m.BikeModel, new {@class = "form-control"})
+            </p>
+        </div>
+    </div>
+    @Html.HiddenFor(m => m.RentPointId)
+    <div class="form-group">
+        <label class = "col-md-2 control-label">Rent point, where you will get bike</label>
+        <div class="col-md-10">
+            <p class="form-control-static">
+                @Html.DisplayFor(m => m.RentPoint.Name),
+                @Html.DisplayFor(m => m.RentPoint.Address),
+                @Html.DisplayFor(m => m.RentPoint.Phone)
+            </p>
+        </div>
+    </div>
+    @Html.HiddenFor(m => m.StartDateTime)
+    <div class="form-group">
+        <label class = "col-md-2 control-label">Date and time, when you will get bike</label>
+        <div class="col-md-10">
+            <p class="form-control-static">
+                @Html.DisplayFor(m => m.StartDateTime)
+            </p>
+        </div>
+    </div>
+    @Html.HiddenFor(m => m.ReturnPointId)
+    <div class="form-group">
+        <label class = "col-md-2 control-label">Return rent point, where you will return bike</label>
+        <div class="col-md-10">
+            <p class="form-control-static">
+                @Html.DisplayFor(m => m.ReturnPoint.Name),
+                @Html.DisplayFor(m => m.ReturnPoint.Address),
+                @Html.DisplayFor(m => m.ReturnPoint.Phone)
+            </p>
+        </div>
+    </div>
+    @Html.HiddenFor(m => m.TarriffId)
+    <div class="form-group">
+        <label class = "col-md-2 control-label">Your rental time</label>
+        <div class="col-md-10">
+            <p class="form-control-static">
+                @Html.DisplayFor(m => m.Tarriff.Quantity) @Html.DisplayFor(m => m.Tarriff.KindOfRent.Kind)
+            </p>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class = "col-md-2 control-label">Your end rental time</label>
+        <div class="col-md-10">
+            <p class="form-control-static">
+                @Html.DisplayFor(m => m.EndDateTime)
+            </p>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Rental payment according to the tariff</label>
+        <div class="col-md-10">
+            <p class="form-control-static">
+                @Html.DisplayFor(m => m.Amount) BYN
+            </p>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-3">
+            @Html.ActionLink("RETURN TO EDIT ORDER", "CreateOrder", "Order", new { bikeId = Model.BikeId}, new {@class = "btn btn-default"})
+        </div>
+        <div class="col-md-2">
+            <input type="submit" class="btn btn-success" value="CONFIRM"/>
+        </div>
+        <div class="col-md-2">
+            <input type="button" class="btn btn-default" value="GO TO HOME PAGE"/>
+        </div>
+    </div>
+}

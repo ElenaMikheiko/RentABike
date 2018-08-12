@@ -6,5 +6,8 @@ namespace RentABike.Models
     {
         [MaxLength(20)]
         public string StatusName { get; set; }
+
+        [MaxLength(500)]
+        public string Description { get; set; }
     }
 }

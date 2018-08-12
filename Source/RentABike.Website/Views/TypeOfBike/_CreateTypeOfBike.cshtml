@@ -1,7 +1,9 @@
 ﻿@model RentABike.Models.BikeType
 
+@{Html.EnableClientValidation();}
+@{Html.EnableUnobtrusiveJavaScript();}
 
-@using (Html.BeginForm()) 
+@using (Ajax.BeginForm("CreateNewTypeOfBike","TypeOfBike", new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnSuccess"})) 
 {
     @Html.AntiForgeryToken()
     
@@ -13,7 +15,6 @@
         
         <div class="modal-body">
             <div class="form-horizontal">
-
                 @Html.ValidationSummary(true, "", new {@class = "text-danger"})
                 <div class="form-group">
                     @Html.LabelFor(model => model.Type, htmlAttributes: new {@class = "control-label col-md-2"})
@@ -31,3 +32,30 @@
 
     </div>
 }
+<script type="text/javascript">
+    function OnSuccess(data) {
+        if (data.isValid) {
+            $('#createTypeOfBikeFormModal').modal('hide');
+            if (data.isNew) {
+                AppendToDropDownList(data.name, data.id, 'BikeTypeId');
+            } else {
+                EditDropDownListItem(data.name, data.id, 'BikeTypeId');
+            }
+        } else {
+            $('#createTypeOfBikeFormModal').html(data.partialView);
+        }
+    }
+
+    function AppendToDropDownList(text, value, ddlId) {
+        var newItem = $('<option/>', {
+            value: value,
+            text: text
+        });
+
+        $('#' + ddlId).append(newItem);
+    }
+
+    function EditDropDownListItem(text, value, ddlId) {
+        $('#' + ddlId + ' option[value="' + value + '"]').text(text).val(value);
+    }
+</script>

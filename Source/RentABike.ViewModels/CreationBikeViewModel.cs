@@ -8,11 +8,13 @@ namespace RentABike.ViewModels
     {
         public int BikeId { get; set; }
 
+        [Required]
         [Display(Name = "Model of Bike")]
         [MaxLength(100)]
         public string BikeModel { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "You must upload the image.")]
+        [Display(Name = "Image")]
         public string Base64Image { get; set; }
 
         [Required]
@@ -22,10 +24,12 @@ namespace RentABike.ViewModels
         public IEnumerable<BikeType> BikeTypes { get; set; }
 
         [Display(Name = "Type of Bike")]
+        [Required]
         public int BikeTypeId { get; set; }
 
         public IEnumerable<RentPoint> RentPoints { get; set; }
 
+        [Required]
         [Display(Name = "Rent Point")]
         public int RentPointId { get; set; }
     }

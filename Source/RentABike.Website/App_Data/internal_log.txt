@@ -1,0 +1,174 @@
+2018-08-09 01:48:32.0200 Info Message Template Auto Format enabled
+2018-08-09 01:48:32.0399 Info Loading assembly: NLog.Extended
+2018-08-09 01:48:32.0868 Error Error loading extensions. Exception: System.IO.FileNotFoundException: Could not load file or assembly 'NLog.Extended' or one of its dependencies. Не удается найти указанный файл.
+File name: 'NLog.Extended'
+   at System.Reflection.RuntimeAssembly._nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   at System.Reflection.RuntimeAssembly.nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   at System.Reflection.RuntimeAssembly.InternalLoadAssemblyName(AssemblyName assemblyRef, Evidence assemblySecurity, RuntimeAssembly reqAssembly, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   at System.Reflection.RuntimeAssembly.InternalLoad(String assemblyString, Evidence assemblySecurity, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean forIntrospection)
+   at System.Reflection.RuntimeAssembly.InternalLoad(String assemblyString, Evidence assemblySecurity, StackCrawlMark& stackMark, Boolean forIntrospection)
+   at System.Reflection.Assembly.Load(String assemblyString)
+   at NLog.Internal.AssemblyHelpers.LoadFromName(String assemblyName)
+   at NLog.Config.XmlLoggingConfiguration.ParseExtensionWithAssembly(String assemblyName, String prefix)
+
+=== Pre-bind state information ===
+LOG: DisplayName = NLog.Extended
+ (Partial)
+WRN: Partial binding information was supplied for an assembly:
+WRN: Assembly Name: NLog.Extended | Domain ID: 2
+WRN: A partial bind occurs when only part of the assembly display name is provided.
+WRN: This might result in the binder loading an incorrect assembly.
+WRN: It is recommended to provide a fully specified textual identity for the assembly,
+WRN: that consists of the simple name, version, culture, and public key token.
+WRN: See whitepaper http://go.microsoft.com/fwlink/?LinkId=109270 for more information and common solutions to this issue.
+LOG: Appbase = file:///F:/Project_RentABike/Source/RentABike.Website/
+LOG: Initial PrivatePath = F:\Project_RentABike\Source\RentABike.Website\bin
+Calling assembly : NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c.
+===
+LOG: This bind starts in default load context.
+LOG: Using application configuration file: F:\Project_RentABike\Source\RentABike.Website\web.config
+LOG: Using host configuration file: C:\Users\Elena\Documents\IISExpress\config\aspnet.config
+LOG: Using machine configuration file from C:\Windows\Microsoft.NET\Framework\v4.0.30319\config\machine.config.
+LOG: Policy not being applied to reference at this time (private, custom, partial, or location-based assembly bind).
+LOG: Attempting download of new URL file:///C:/Users/Elena/AppData/Local/Temp/Temporary ASP.NET Files/vs/20672a40/b2a316b0/NLog.Extended.DLL.
+LOG: Attempting download of new URL file:///C:/Users/Elena/AppData/Local/Temp/Temporary ASP.NET Files/vs/20672a40/b2a316b0/NLog.Extended/NLog.Extended.DLL.
+LOG: Attempting download of new URL file:///F:/Project_RentABike/Source/RentABike.Website/bin/NLog.Extended.DLL.
+LOG: Attempting download of new URL file:///F:/Project_RentABike/Source/RentABike.Website/bin/NLog.Extended/NLog.Extended.DLL.
+LOG: Attempting download of new URL file:///C:/Users/Elena/AppData/Local/Temp/Temporary ASP.NET Files/vs/20672a40/b2a316b0/NLog.Extended.EXE.
+LOG: Attempting download of new URL file:///C:/Users/Elena/AppData/Local/Temp/Temporary ASP.NET Files/vs/20672a40/b2a316b0/NLog.Extended/NLog.Extended.EXE.
+LOG: Attempting download of new URL file:///F:/Project_RentABike/Source/RentABike.Website/bin/NLog.Extended.EXE.
+LOG: Attempting download of new URL file:///F:/Project_RentABike/Source/RentABike.Website/bin/NLog.Extended/NLog.Extended.EXE.
+
+2018-08-09 01:48:32.0987 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Error loading extensions: NLog.Extended ---> System.IO.FileNotFoundException: Could not load file or assembly 'NLog.Extended' or one of its dependencies. Не удается найти указанный файл.
+   at System.Reflection.RuntimeAssembly._nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   at System.Reflection.RuntimeAssembly.nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   at System.Reflection.RuntimeAssembly.InternalLoadAssemblyName(AssemblyName assemblyRef, Evidence assemblySecurity, RuntimeAssembly reqAssembly, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   at System.Reflection.RuntimeAssembly.InternalLoad(String assemblyString, Evidence assemblySecurity, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean forIntrospection)
+   at System.Reflection.RuntimeAssembly.InternalLoad(String assemblyString, Evidence assemblySecurity, StackCrawlMark& stackMark, Boolean forIntrospection)
+   at System.Reflection.Assembly.Load(String assemblyString)
+   at NLog.Internal.AssemblyHelpers.LoadFromName(String assemblyName)
+   at NLog.Config.XmlLoggingConfiguration.ParseExtensionWithAssembly(String assemblyName, String prefix)
+   --- End of inner exception stack trace ---
+2018-08-09 01:48:32.1476 Info Adding target ColoredConsole Target[console]
+2018-08-09 01:48:32.1785 Info Adding target File Target[file]
+2018-08-09 01:48:32.1885 Info Configured from an XML element in F:\Project_RentABike\Source\RentABike.Website\NLog.config...
+2018-08-09 01:48:32.1885 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: console
+2018-08-09 01:48:32.2184 Info Found 21 configuration items
+2018-08-09 01:48:32.2533 Info Configuration initialized.
+2018-08-09 01:48:32.2533 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.5.8.8046. Product version: 4.5.8.
+2018-08-09 02:09:03.9812 Info Message Template Auto Format enabled
+2018-08-09 02:09:03.9962 Info Loading assembly: NLog.Extended
+2018-08-09 02:09:04.0361 Error Error loading extensions. Exception: System.IO.FileNotFoundException: Не удалось загрузить файл или сборку "NLog.Extended" либо одну из их зависимостей. Не удается найти указанный файл.
+Имя файла: 'NLog.Extended'
+   в System.Reflection.RuntimeAssembly._nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   в System.Reflection.RuntimeAssembly.nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   в System.Reflection.RuntimeAssembly.InternalLoadAssemblyName(AssemblyName assemblyRef, Evidence assemblySecurity, RuntimeAssembly reqAssembly, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   в System.Reflection.RuntimeAssembly.InternalLoad(String assemblyString, Evidence assemblySecurity, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean forIntrospection)
+   в System.Reflection.RuntimeAssembly.InternalLoad(String assemblyString, Evidence assemblySecurity, StackCrawlMark& stackMark, Boolean forIntrospection)
+   в System.Reflection.Assembly.Load(String assemblyString)
+   в NLog.Internal.AssemblyHelpers.LoadFromName(String assemblyName)
+   в NLog.Config.XmlLoggingConfiguration.ParseExtensionWithAssembly(String assemblyName, String prefix)
+
+=== Информация о состоянии предварительной привязки ===
+Журнал: DisplayName = NLog.Extended
+ (Partial)
+WRN: Для сборки была указана информация о частичной привязке:
+WRN: Имя сборки: NLog.Extended | Идентификатор домена: 2
+WRN: Частичная привязка осуществляется в том случае, если предоставлена только часть отображаемого имени сборки.
+WRN: Это может привести к загрузке редактором связей неверной сборки.
+WRN: Рекомендуется предоставить полное текстовое удостоверение для сборки,
+WRN: состоящей из простого имени, версии, культуры и токена открытого ключа.
+WRN: Дополнительные сведения и типичные решения для данной неполадки см. в техническом описании по ссылке http://go.microsoft.com/fwlink/?LinkId=109270.
+Журнал: Appbase = file:///F:/Project_RentABike/Source/RentABike.Website/
+Журнал: Initial PrivatePath = F:\Project_RentABike\Source\RentABike.Website\bin
+Вызов сборки: NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c.
+===
+Журнал: данная привязка начинается в контексте загрузки default.
+Журнал: используется файл конфигурации приложения: F:\Project_RentABike\Source\RentABike.Website\web.config.
+Журнал: используется файл конфигурации главного узла: C:\Users\Elena\Documents\IISExpress\config\aspnet.config
+Журнал: используется файл конфигурации компьютера из C:\Windows\Microsoft.NET\Framework\v4.0.30319\config\machine.config.
+Журнал: политика в данный момент не применяется к ссылке (личная, пользовательская, частичная привязка сборки или привязка по местоположению).
+Журнал: попытка скачивания нового URL file:///C:/Users/Elena/AppData/Local/Temp/Temporary ASP.NET Files/vs/20672a40/b2a316b0/NLog.Extended.DLL.
+Журнал: попытка скачивания нового URL file:///C:/Users/Elena/AppData/Local/Temp/Temporary ASP.NET Files/vs/20672a40/b2a316b0/NLog.Extended/NLog.Extended.DLL.
+Журнал: попытка скачивания нового URL file:///F:/Project_RentABike/Source/RentABike.Website/bin/NLog.Extended.DLL.
+Журнал: попытка скачивания нового URL file:///F:/Project_RentABike/Source/RentABike.Website/bin/NLog.Extended/NLog.Extended.DLL.
+Журнал: попытка скачивания нового URL file:///C:/Users/Elena/AppData/Local/Temp/Temporary ASP.NET Files/vs/20672a40/b2a316b0/NLog.Extended.EXE.
+Журнал: попытка скачивания нового URL file:///C:/Users/Elena/AppData/Local/Temp/Temporary ASP.NET Files/vs/20672a40/b2a316b0/NLog.Extended/NLog.Extended.EXE.
+Журнал: попытка скачивания нового URL file:///F:/Project_RentABike/Source/RentABike.Website/bin/NLog.Extended.EXE.
+Журнал: попытка скачивания нового URL file:///F:/Project_RentABike/Source/RentABike.Website/bin/NLog.Extended/NLog.Extended.EXE.
+
+2018-08-09 02:09:04.0361 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Error loading extensions: NLog.Extended ---> System.IO.FileNotFoundException: Не удалось загрузить файл или сборку "NLog.Extended" либо одну из их зависимостей. Не удается найти указанный файл.
+   в System.Reflection.RuntimeAssembly._nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   в System.Reflection.RuntimeAssembly.nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   в System.Reflection.RuntimeAssembly.InternalLoadAssemblyName(AssemblyName assemblyRef, Evidence assemblySecurity, RuntimeAssembly reqAssembly, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   в System.Reflection.RuntimeAssembly.InternalLoad(String assemblyString, Evidence assemblySecurity, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean forIntrospection)
+   в System.Reflection.RuntimeAssembly.InternalLoad(String assemblyString, Evidence assemblySecurity, StackCrawlMark& stackMark, Boolean forIntrospection)
+   в System.Reflection.Assembly.Load(String assemblyString)
+   в NLog.Internal.AssemblyHelpers.LoadFromName(String assemblyName)
+   в NLog.Config.XmlLoggingConfiguration.ParseExtensionWithAssembly(String assemblyName, String prefix)
+   --- Конец трассировки внутреннего стека исключений ---
+2018-08-09 02:09:04.1607 Info Adding target ColoredConsole Target[console]
+2018-08-09 02:09:04.1887 Info Adding target File Target[file]
+2018-08-09 02:09:04.2136 Info Configured from an XML element in F:\Project_RentABike\Source\RentABike.Website\NLog.config...
+2018-08-09 02:09:04.2305 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: console
+2018-08-09 02:09:04.2435 Info Found 23 configuration items
+2018-08-09 02:09:04.2744 Info Configuration initialized.
+2018-08-09 02:09:04.2824 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.5.8.8046. Product version: 4.5.8.
+2018-08-09 02:18:08.4400 Info Message Template Auto Format enabled
+2018-08-09 02:18:08.4400 Info Loading assembly: NLog.Extended
+2018-08-09 02:18:08.4908 Error Error loading extensions. Exception: System.IO.FileNotFoundException: Не удалось загрузить файл или сборку "NLog.Extended" либо одну из их зависимостей. Не удается найти указанный файл.
+Имя файла: 'NLog.Extended'
+   в System.Reflection.RuntimeAssembly._nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   в System.Reflection.RuntimeAssembly.nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   в System.Reflection.RuntimeAssembly.InternalLoadAssemblyName(AssemblyName assemblyRef, Evidence assemblySecurity, RuntimeAssembly reqAssembly, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   в System.Reflection.RuntimeAssembly.InternalLoad(String assemblyString, Evidence assemblySecurity, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean forIntrospection)
+   в System.Reflection.RuntimeAssembly.InternalLoad(String assemblyString, Evidence assemblySecurity, StackCrawlMark& stackMark, Boolean forIntrospection)
+   в System.Reflection.Assembly.Load(String assemblyString)
+   в NLog.Internal.AssemblyHelpers.LoadFromName(String assemblyName)
+   в NLog.Config.XmlLoggingConfiguration.ParseExtensionWithAssembly(String assemblyName, String prefix)
+
+=== Информация о состоянии предварительной привязки ===
+Журнал: DisplayName = NLog.Extended
+ (Partial)
+WRN: Для сборки была указана информация о частичной привязке:
+WRN: Имя сборки: NLog.Extended | Идентификатор домена: 2
+WRN: Частичная привязка осуществляется в том случае, если предоставлена только часть отображаемого имени сборки.
+WRN: Это может привести к загрузке редактором связей неверной сборки.
+WRN: Рекомендуется предоставить полное текстовое удостоверение для сборки,
+WRN: состоящей из простого имени, версии, культуры и токена открытого ключа.
+WRN: Дополнительные сведения и типичные решения для данной неполадки см. в техническом описании по ссылке http://go.microsoft.com/fwlink/?LinkId=109270.
+Журнал: Appbase = file:///F:/Project_RentABike/Source/RentABike.Website/
+Журнал: Initial PrivatePath = F:\Project_RentABike\Source\RentABike.Website\bin
+Вызов сборки: NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c.
+===
+Журнал: данная привязка начинается в контексте загрузки default.
+Журнал: используется файл конфигурации приложения: F:\Project_RentABike\Source\RentABike.Website\web.config.
+Журнал: используется файл конфигурации главного узла: C:\Users\Elena\Documents\IISExpress\config\aspnet.config
+Журнал: используется файл конфигурации компьютера из C:\Windows\Microsoft.NET\Framework\v4.0.30319\config\machine.config.
+Журнал: политика в данный момент не применяется к ссылке (личная, пользовательская, частичная привязка сборки или привязка по местоположению).
+Журнал: попытка скачивания нового URL file:///C:/Users/Elena/AppData/Local/Temp/Temporary ASP.NET Files/vs/20672a40/b2a316b0/NLog.Extended.DLL.
+Журнал: попытка скачивания нового URL file:///C:/Users/Elena/AppData/Local/Temp/Temporary ASP.NET Files/vs/20672a40/b2a316b0/NLog.Extended/NLog.Extended.DLL.
+Журнал: попытка скачивания нового URL file:///F:/Project_RentABike/Source/RentABike.Website/bin/NLog.Extended.DLL.
+Журнал: попытка скачивания нового URL file:///F:/Project_RentABike/Source/RentABike.Website/bin/NLog.Extended/NLog.Extended.DLL.
+Журнал: попытка скачивания нового URL file:///C:/Users/Elena/AppData/Local/Temp/Temporary ASP.NET Files/vs/20672a40/b2a316b0/NLog.Extended.EXE.
+Журнал: попытка скачивания нового URL file:///C:/Users/Elena/AppData/Local/Temp/Temporary ASP.NET Files/vs/20672a40/b2a316b0/NLog.Extended/NLog.Extended.EXE.
+Журнал: попытка скачивания нового URL file:///F:/Project_RentABike/Source/RentABike.Website/bin/NLog.Extended.EXE.
+Журнал: попытка скачивания нового URL file:///F:/Project_RentABike/Source/RentABike.Website/bin/NLog.Extended/NLog.Extended.EXE.
+
+2018-08-09 02:18:08.5028 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Error loading extensions: NLog.Extended ---> System.IO.FileNotFoundException: Не удалось загрузить файл или сборку "NLog.Extended" либо одну из их зависимостей. Не удается найти указанный файл.
+   в System.Reflection.RuntimeAssembly._nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   в System.Reflection.RuntimeAssembly.nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   в System.Reflection.RuntimeAssembly.InternalLoadAssemblyName(AssemblyName assemblyRef, Evidence assemblySecurity, RuntimeAssembly reqAssembly, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   в System.Reflection.RuntimeAssembly.InternalLoad(String assemblyString, Evidence assemblySecurity, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean forIntrospection)
+   в System.Reflection.RuntimeAssembly.InternalLoad(String assemblyString, Evidence assemblySecurity, StackCrawlMark& stackMark, Boolean forIntrospection)
+   в System.Reflection.Assembly.Load(String assemblyString)
+   в NLog.Internal.AssemblyHelpers.LoadFromName(String assemblyName)
+   в NLog.Config.XmlLoggingConfiguration.ParseExtensionWithAssembly(String assemblyName, String prefix)
+   --- Конец трассировки внутреннего стека исключений ---
+2018-08-09 02:18:08.5517 Info Adding target ColoredConsole Target[console]
+2018-08-09 02:18:08.5826 Info Adding target File Target[file]
+2018-08-09 02:18:08.5826 Info Configured from an XML element in F:\Project_RentABike\Source\RentABike.Website\NLog.config...
+2018-08-09 02:18:08.6105 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: console
+2018-08-09 02:18:08.6105 Info Found 23 configuration items
+2018-08-09 02:18:08.6564 Info Configuration initialized.
+2018-08-09 02:18:08.6683 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.5.8.8046. Product version: 4.5.8.

@@ -1,0 +1,75 @@
+﻿@using RentABike.Models.Constants
+@model RentABike.Models.Order
+
+<div class="col-md-10">
+
+    <div class="spoiler-block">
+        <div class="spoiler-title">
+            <table style="width: 100%; text-align: center">
+                <tr>
+                    <b>Status:</b> @Model.Status.StatusName
+                </tr>
+                <tr>
+                    <td><b>Order № @Model.Id </b></td>
+                    <td><b>Bike model</b></td>
+                    <td><b>Start date and time of rent</b></td>
+                    <td><b>Time of rent</b></td>
+                    <td><b>Total cost</b></td>
+                    <td rowspan="2" valign="middle">
+                        <div class="btn btn-default">
+                            @if (Model.Status.Equals(OrderStatus.Booked))
+                            {
+                                @Html.ActionLink("Cancel", "CancelOrder", "Order", new {orderId = Model.Id}, null)
+                            }
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Model.DateTimeCreationOrder</td>
+                    <td>@Model.Bike.Model</td>
+                    <td>@Model.StartDateTimeRent</td>
+                    <td>@Model.Tarriff.Quantity @Model.Tarriff.KindOfRent.Kind</td>
+                    <td>@Model.Amount BYN</td>
+                </tr>
+            </table>
+        </div>
+        <a href="#" class="spoiler-explore">+</a>
+
+        <div class="spoiler-content" style="white-space: nowrap">
+            <div style="display:inline-block">
+                <b>Detailed order content:</b>
+                <hr />
+                <table>
+                    <tr>
+                        <td><b>Date of order creation</b></td>
+                        <td>@Model.DateTimeCreationOrder</td>
+                    </tr>
+                    <tr>
+                        <td><b>Rent point, where you will get bike</b></td>
+                        <td>@Model.RentPoint.Name, @Model.RentPoint.Address, phone: @Model.RentPoint.Phone</td>
+                    </tr>
+                    <tr>
+                        <td><b>Date and time, when you will get bike</b></td>
+                        <td>@Model.StartDateTimeRent</td>
+                    </tr>
+                    <tr>
+                        <td><b>Your rental time</b></td>
+                        <td>@Model.Tarriff.Quantity  @Model.Tarriff.KindOfRent.Kind</td>
+                    </tr>
+                    <tr>
+                        <td><b>Your end rental time</b></td>
+                        <td>@Model.EndDateTimeRent</td>
+                    </tr>
+                    <tr>
+                        <td><b>Return rent point, where you will return bike   </b></td>
+                        <td>@Model.ReturnPoint.Name, @Model.ReturnPoint.Address, phone: @Model.ReturnPoint.Phone</td>
+                    </tr>
+                    <tr style="border: grey solid">
+                        <td><b style="padding-right: 5px; padding-left: 5px;">Amount: </b></td>
+                        <td><b>@Model.Amount BYN</b></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

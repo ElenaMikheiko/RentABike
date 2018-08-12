@@ -1,0 +1,67 @@
+﻿@model RentABike.ViewModels.CreationOrderViewModel
+
+@{
+    ViewBag.Title = "Create your order";
+}
+
+@using (Html.BeginForm("CreateOrder", "Order", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <h4>Your order</h4>
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    @Html.HiddenFor(m => m.BikeId)
+    @Html.HiddenFor(m => m.BikeTypeId)
+    <div class="form-group">
+        @Html.LabelFor(m => m.RentPoints, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.RentPointId, Model.RentPoints.Select(c => new SelectListItem { Text = c.Name + "," + c.Address, Value = c.Id.ToString() }), new { @class = "form-control input-sm" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.BikeModel, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.DisplayFor(m => m.BikeModel, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ReturnPoints, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.ReturnPointId, Model.ReturnPoints.Select(c => new SelectListItem { Text = c.Name + "," + c.Address, Value = c.Id.ToString() }), new { @class = "form-control input-sm" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.StartDate, new { @class = "col-md-2 control-label" })
+        <div class="input-group date col-md-3" id="datetimepicker" style="padding-left: 15px">
+            @Html.TextBoxFor(m => m.StartDate, DateTime.UtcNow.Date.ToString("dd.MM.yyyy"), new { @class = "form-control input-sm" })
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.StartTime, new { @class = "col-md-2 control-label" })
+        <div class="input-group date col-md-3" id="timepicker" style="padding-left: 15px">
+            @Html.TextBoxFor(m => m.StartTime, null, new { @class = "form-control input-sm" })
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-time"></span>
+            </span>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Tarriffs, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.TarriffId, Model.Tarriffs.Select(c => new SelectListItem { Text = c.Quantity +" " + c.KindOfRent.Kind +" / " + c.Amount + "BYN", Value = c.Id.ToString() }), new { @class = "form-control input-sm" })
+        </div>
+
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            @*<a >*@
+                <input type="submit" class="btn btn-default" value="Show full order"/>
+            @*</a>*@
+        </div>
+    </div>
+}

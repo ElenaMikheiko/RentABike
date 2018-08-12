@@ -1,4 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNet.Identity.EntityFramework;
+using RentABike.Models;
 
 namespace RentABike.ViewModels
 {
@@ -57,6 +60,19 @@ namespace RentABike.ViewModels
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        public List<IdentityRole> Roles { get; set; }
+
+        [Display(Name = "Role")]
+        public string RoleId { get; set; }
+
+        [Display(Name = "Rent point")]
+        public int RentPointId { get; set; }
+
+        public IEnumerable<RentPoint> RentPoints { get; set; }
+
+
+
     }
 
     public class ResetPasswordViewModel

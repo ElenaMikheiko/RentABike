@@ -4,23 +4,23 @@ $(document).ready(function () {
     const DELAY_TIME = 300,
         MAX_FILE_SIZE = 3000000;
 
-    ///////////Hint
-    let hintText = 'To create your resume, please click Resume button',
-        hintBlock = '<div class="hint clearfix"><span class="hint_text">' + hintText + '</span><div class="hint_arrow"></div></div>';
+    /////////////Hint
+    //let hintText = 'To create your resume, please click Resume button',
+    //    hintBlock = '<div class="hint clearfix"><span class="hint_text">' + hintText + '</span><div class="hint_arrow"></div></div>';
 
-    if ($('.current__page').val() === "False") {
-        $('#overlay').fadeIn(DELAY_TIME);
-        $('.container__header_user').addClass('hint__visual')
-            .append(hintBlock);
-        $('.hint_arrow').append('<img id="arrow" src="/images/arrow.png" alt="arrow" />');
-    }
+    //if ($('.current__page').val() === "False") {
+    //    $('#overlay').fadeIn(DELAY_TIME);
+    //    $('.container__header_user').addClass('hint__visual')
+    //        .append(hintBlock);
+    //    $('.hint_arrow').append('<img id="arrow" src="/images/arrow.png" alt="arrow" />');
+    //}
 
-    $(document).click(function () {
-        $('.container__header_user').removeClass('hint__visual');
-        $('.hint').remove();
-        $('#overlay').fadeOut(DELAY_TIME, function () {
-        });
-    });
+    //$(document).click(function () {
+    //    $('.container__header_user').removeClass('hint__visual');
+    //    $('.hint').remove();
+    //    $('#overlay').fadeOut(DELAY_TIME, function () {
+    //    });
+    //});
 
     ///////Show or hide "upload image" block
     $('.content__image_block').on('click', function () {
@@ -65,7 +65,7 @@ $(document).ready(function () {
                         context.drawImage(img, 0, 0);
 
                         let cropper = canvas.cropper({
-                            aspectRatio: 1 / 1,
+                            aspectRatio: 3 / 1.8,
                             ready: function (e) {
                                 let $clone = $(this).clone().removeClass('cropper-hidden');
 
@@ -87,7 +87,7 @@ $(document).ready(function () {
 
                                 formData.append("fileInput", croppedImageDataURL);
                                 $result.append($('.content__main_image').attr('src', croppedImageDataURL));
-                                $result.append($('#Base65Image').attr('value', croppedImageDataURL));
+                                $result.append($('#Base64Image').attr('value', croppedImageDataURL));
                                 $('.content__pop-up').hide();
                                 //$.ajax({
                                 //    url: "/Home/SavePhoto",

@@ -214,11 +214,11 @@ namespace RentABike.Website.Controllers
             return RedirectToAction("Index", new { Message = ManageMessageId.RemovePhoneSuccess });
         }
 
-        //
-        // GET: /Manage/ChangePassword
+        [HttpGet]
         public ActionResult ChangePassword()
         {
-            return View();
+
+            return View(new ChangePasswordViewModel());
         }
 
         //

@@ -1,77 +1,112 @@
-﻿@using Microsoft.AspNet.Identity
+﻿@using Roles = RentABike.Models.Constants.Roles
 @model  RentABike.ViewModels.UserInfoViewModel
 @{
     ViewBag.Title = "Personal Account";
 }
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Your personal account</title>
-</head>
-<body>
+<div class="container-fluid">
+    <br/>
+    <br/>
+    <div class="row">
+        <div class="container-info col-sm-3" >
 
-    <div class="container">
-        <br />
-        <br />
-        <div class="row">
-            <div class="col-sm-3" style="text-align: center; border: 1px solid #B0B0B0; border-radius: 15px; padding: 15px; box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)">
+            @{
+                var userAvatar = Model.ImageData != null ? "data:image/jpeg; base64,"+ Convert.ToBase64String(Model.ImageData)  : "/Content/Images/no_avatar.png";
+            }
 
-                @{
-                    var userAvatar = Model.ImageData != null ? "data : image / jpeg; base64,@(Convert.ToBase64String(Model.Image))" : "/Content/Images/no_avatar.png";
-                }
+            <img class="img" src="@userAvatar" alt="" width="150" style="padding-top: 10px"/><br/>
 
-                <img class="img" src="@userAvatar" alt="" width="150" style="padding-top: 10px" /><br />
+            <h4>
+                <b> @Model.UserFullName </b>
+            </h4>
 
-                <h4><b> @Model.UserFullName </b></h4>
+            <span class="label label-info user_custom_label"> @Model.UserRole</span><br/>
 
-                <span class="label label-info user_custom_label"> @Model.UserRole</span><br />
+            <i class="fa fa-envelope-o" aria-hidden="true"></i><a href="mailto:"> @Model.UserEmail</a><br/>
+            <i class="fa fa-phone" aria-hidden="true"></i> @Model.UserPhone<br/>
+            <br/>
+            @Html.ActionLink("Change password", "ChangePassword", "Manage", null, new {@class = "btn btn-info btn-md", style = "width: 83%; margin-bottom: 10px"})
+            @Html.ActionLink("Change personal information", "ChangePersonalInfo", "Account", null, new {@class = "btn btn-info btn-md", style = "width: 83%; margin-bottom: 10px"})
+        </div>
 
+        <div id="rezult" class="col-sm-8">
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $("#myTab2 li:eq(0) a").tab('show');
+                });
+            </script>
 
-                <i class="fa fa-envelope-o" aria-hidden="true"></i><a href="mailto:"> @Model.UserEmail</a><br />
-                <i class="fa fa-phone" aria-hidden="true"></i> @Model.UserPhone<br />
-                @*@if (User.Identity.IsAuthenticated @*&& User.IsInRole(Role.Admin.ToString())*@
-                @*{
-                    @Html.ActionLink("Изменить данные", "ForgotPassword", "Account", new { id = (User as ApplicationUser)?.Id }, new { @class = "btn btn-primary btn-md", @style = "width: 83%; margin: 10px" })
-                }*@
-                <br/>
-                @Html.ActionLink("Change password", "ChangePassword", "Manage", null @*, new { id = User.Identity.Id }*@, new { @class = "btn btn-info btn-md", @style = "width: 83%; margin-bottom: 10px" })
-                @Html.ActionLink("Change personal information", "", "", new { id = User.Identity.GetUserId() }, new { @class = "btn btn-info btn-md", @style = "width: 83%; margin-bottom: 10px" })
-            </div>
+            @if (User.Identity.IsAuthenticated && User.IsInRole(Roles.Admin))
+            {
+                <ul id="myTab2" class="nav nav-tabs nav-pills">
+                    <li>
+                        <a data-toggle="tab" href="#panely1">Types of bikes</a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" href="#panely2">Rent points</a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" href="#panely3">Bikes</a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" href="#panely4">Users</a>
+                    </li>
+                </ul>
 
-            <div id="rezult" class="col-sm-8">
-                <script type="text/javascript">
-                    $(document).ready(function () {
-                        $("#myTab2 li:eq(0) a").tab('show');
-                    });
-                </script>
-
-                @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
-                {
-                    <ul id="myTab2" class="nav nav-tabs nav-pills">
-                        <li><a data-toggle="tab" href="#panely1">Types of bikes</a></li>
-                        <li><a data-toggle="tab" href="#panely2">Rent points</a></li>
-                        <li><a data-toggle="tab" href="#panely3">Bikes</a></li>
-                    </ul>
-
-                    <div class="tab-content">
-                        <div id="panely1" class="tab-pane fade in active">
-                            <p>@{Html.RenderAction("AllTypeOfBikes","BikeType");}</p>
-                        </div>
-                        <div id="panely2" class="tab-pane fade">
-                            <p>@{Html.RenderAction("AllRentPoint", "RentPoint");}</p>
-                        </div>
-                        <div id="panely3" class="tab-pane fade">
-                            <p>@{Html.RenderAction("AllBikes", "Bike");}</p>
-                        </div>
+                <div class="tab-content col-xs-11">
+                    <div id="panely1" class="tab-pane fade in active">
+                        <p>
+                            @{ Html.RenderAction("AllTypeOfBikes", "TypeOfBike"); }
+                        </p>
                     </div>
-                }
+                    <div id="panely2" class="tab-pane fade">
+                        <p>
+                            @{ Html.RenderAction("AllRentPoint", "RentPoint"); }
+                        </p>
+                    </div>
+                    <div id="panely3" class="tab-pane fade">
+                        <p>
+                            @{ Html.RenderAction("AllBikes", "Bike"); }
+                        </p>
+                    </div>
+                    <div id="panely4" class="tab-pane fade">
+                        <p>
+                            @{ Html.RenderAction("AllUsers", "User"); }
+                        </p>
+                    </div>
+                </div>
+            }
+            @if (User.Identity.IsAuthenticated && User.IsInRole(Roles.User))
+            {
+                <p>
+                    @{ Html.RenderAction("AllOrders", "Order"); }
+                </p>
+            }
+            @if (User.Identity.IsAuthenticated && User.IsInRole(Roles.Seller))
+            {
+                <ul id="myTab2" class="nav nav-tabs nav-pills">
+                    <li>
+                        <a data-toggle="tab" href="#panely1">Заказы для выдачи</a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" href="#panely2">Заказы для приема</a>
+                    </li>
+                </ul>
 
-            </div>
-
+                <div class="tab-content col-xs-11">
+                    <div id="panely1" class="tab-pane fade in active">
+                        <p>
+                            @{ Html.RenderAction("AllOrdersForDelivery", "Order"); }
+                        </p>
+                    </div>
+                    <div id="panely2" class="tab-pane fade">
+                        <p>
+                            @{ Html.RenderAction("AllOrdersForReceipt", "Order"); }
+                        </p>
+                    </div>
+                </div>
+            }
         </div>
     </div>
-</body>
-</html>
+</div>

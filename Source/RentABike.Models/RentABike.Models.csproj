@@ -39,10 +39,14 @@
     <Compile Include="BaseModel.cs" />
     <Compile Include="Bike.cs" />
     <Compile Include="BikeType.cs" />
+    <Compile Include="Constants\Roles.cs" />
+    <Compile Include="Constants\OrderStatus.cs" />
+    <Compile Include="KindOfRent.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RentPoint.cs" />
     <Compile Include="Status.cs" />
+    <Compile Include="Tarriff.cs" />
     <Compile Include="UserInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -50,5 +54,6 @@
       <Version>2.2.2</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

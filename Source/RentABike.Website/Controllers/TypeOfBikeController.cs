@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Linq;
 using System.Web.Mvc;
 using RentABike.Logic.Interfaces;
 using RentABike.Models;
@@ -9,9 +11,12 @@ namespace RentABike.Website.Controllers
     {
         private readonly IBikeTypeService _bikeTypeService;
 
-        public TypeOfBikeController(IBikeTypeService bikeTypeService)
+        private readonly IBikeService _bikeService;
+
+        public TypeOfBikeController(IBikeTypeService bikeTypeService, IBikeService bikeService)
         {
             _bikeTypeService = bikeTypeService;
+            _bikeService = bikeService;
         }
 
         [HttpGet]
@@ -21,22 +26,47 @@ namespace RentABike.Website.Controllers
         }
 
         [HttpPost]
-        public JsonResult CreateNewTypeOfBike(BikeType bikeType)
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateNewTypeOfBike(BikeType bikeType)
         {
-            _bikeTypeService.SaveBikeType(bikeType);
-            var result = new JsonResult();
-            //Попытка сохранить данные в БД
-            try
+            if (ModelState.IsValid)
             {
-                //......................
-                result.Data = new {Succes = "true", Message = "Данные сохранены."};
-            }
-            catch (Exception e)
-            {
-                result.Data = new {Succes = "false", Message = "Данные не сохранены."};
+                bool isNew = bikeType.Id == 0;
+                _bikeTypeService.SaveBikeType(bikeType);
+                int id = 0;
+                var biketype = _bikeTypeService.AllBikeTypes().FirstOrDefault(x => x.Type == bikeType.Type);
+                if (biketype != null)
+                {
+                    id = biketype.Id;
+                }
+                return Json(new
+                {
+                    isValid = true,
+                    id = id,
+                    name = bikeType.Type,
+                    isNew = isNew
+                });
             }
 
-            return result;
+            return Json(new
+            {
+                isValid = false
+            });
+        }
+
+        [HttpGet]
+        public ActionResult AllTypeOfBikes()
+        {
+            var bikeTypes = _bikeTypeService.AllBikeTypes();
+
+            return View(bikeTypes);
+        }
+
+        public ActionResult ShowBikesOfType(int biketypeid)
+        {
+            var bikes = _bikeService.GetBikesByBikeTypeId(biketypeid);
+
+            return View(bikes);
         }
     }
 }

@@ -34,9 +34,11 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Initializers\BikesInitializer.cs" />
     <Compile Include="Initializers\BikeTypesInitializer.cs" />
     <Compile Include="Initializers\DefaultAdminInitializer.cs" />
+    <Compile Include="Initializers\KindOfRentInitializer.cs" />
+    <Compile Include="Initializers\StatusInitializer.cs" />
+    <Compile Include="Initializers\TarriffInitializer.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="Migrations\201807142155450_Initial.cs" />
@@ -54,6 +56,38 @@
     <Compile Include="Migrations\201808021937381_AddUserInfoForUser.cs" />
     <Compile Include="Migrations\201808021937381_AddUserInfoForUser.Designer.cs">
       <DependentUpon>201808021937381_AddUserInfoForUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808040007258_ChangeRelationsInOrderTable.cs" />
+    <Compile Include="Migrations\201808040007258_ChangeRelationsInOrderTable.Designer.cs">
+      <DependentUpon>201808040007258_ChangeRelationsInOrderTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808040016147_AddCreationDateTimeIntoOrderTable.cs" />
+    <Compile Include="Migrations\201808040016147_AddCreationDateTimeIntoOrderTable.Designer.cs">
+      <DependentUpon>201808040016147_AddCreationDateTimeIntoOrderTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808041313060_AddDescriptionColumnIntoStatusTable.cs" />
+    <Compile Include="Migrations\201808041313060_AddDescriptionColumnIntoStatusTable.Designer.cs">
+      <DependentUpon>201808041313060_AddDescriptionColumnIntoStatusTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808042221130_AddTariffsTable.cs" />
+    <Compile Include="Migrations\201808042221130_AddTariffsTable.Designer.cs">
+      <DependentUpon>201808042221130_AddTariffsTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808042318010_AddAmountAndQuantityColumnIntoTarriffsTable.cs" />
+    <Compile Include="Migrations\201808042318010_AddAmountAndQuantityColumnIntoTarriffsTable.Designer.cs">
+      <DependentUpon>201808042318010_AddAmountAndQuantityColumnIntoTarriffsTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808052006276_ChangeRelationInBikeTable.cs" />
+    <Compile Include="Migrations\201808052006276_ChangeRelationInBikeTable.Designer.cs">
+      <DependentUpon>201808052006276_ChangeRelationInBikeTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808061046571_AddColumnTarriffIntoOrderTable.cs" />
+    <Compile Include="Migrations\201808061046571_AddColumnTarriffIntoOrderTable.Designer.cs">
+      <DependentUpon>201808061046571_AddColumnTarriffIntoOrderTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808091943313_ChangeMaxLengthForPhone.cs" />
+    <Compile Include="Migrations\201808091943313_ChangeMaxLengthForPhone.Designer.cs">
+      <DependentUpon>201808091943313_ChangeMaxLengthForPhone.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -73,6 +107,30 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808021937381_AddUserInfoForUser.resx">
       <DependentUpon>201808021937381_AddUserInfoForUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808040007258_ChangeRelationsInOrderTable.resx">
+      <DependentUpon>201808040007258_ChangeRelationsInOrderTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808040016147_AddCreationDateTimeIntoOrderTable.resx">
+      <DependentUpon>201808040016147_AddCreationDateTimeIntoOrderTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808041313060_AddDescriptionColumnIntoStatusTable.resx">
+      <DependentUpon>201808041313060_AddDescriptionColumnIntoStatusTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808042221130_AddTariffsTable.resx">
+      <DependentUpon>201808042221130_AddTariffsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808042318010_AddAmountAndQuantityColumnIntoTarriffsTable.resx">
+      <DependentUpon>201808042318010_AddAmountAndQuantityColumnIntoTarriffsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808052006276_ChangeRelationInBikeTable.resx">
+      <DependentUpon>201808052006276_ChangeRelationInBikeTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808061046571_AddColumnTarriffIntoOrderTable.resx">
+      <DependentUpon>201808061046571_AddColumnTarriffIntoOrderTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808091943313_ChangeMaxLengthForPhone.resx">
+      <DependentUpon>201808091943313_ChangeMaxLengthForPhone.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

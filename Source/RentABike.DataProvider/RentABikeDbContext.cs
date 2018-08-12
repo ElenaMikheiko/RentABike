@@ -10,6 +10,7 @@ namespace RentABike.DataProvider
         public RentABikeDbContext() : base("RentABike")
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<RentABikeDbContext, Configuration>());
+            
         }
 
         public DbSet<BikeType> BikeTypes { get; set; }
@@ -23,6 +24,10 @@ namespace RentABike.DataProvider
         public DbSet<Order> Orders { get; set; }
 
         public DbSet<UserInfo> UserInfos { get; set; }
+
+        public DbSet<KindOfRent> KindOfRents { get; set; }
+
+        public DbSet<Tarriff> Tarriffs { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

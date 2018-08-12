@@ -1,18 +1,35 @@
-﻿@model RentABike.Models.Bike
+﻿@using Roles = RentABike.Models.Constants.Roles
+@model RentABike.Models.Bike
+
 
 <li class="product-wrapper">
-    <a href="" class="product">
+    <a href="#" class="product">
         <div class="product-main">
             <div class="product-photo">
+                @Html.HiddenFor(m=>m.Id)
                 @if (Model.Image == null)
                 {
                     <img src="~/Content/Images/image.png" alt="">
                 }
                 else
                 {
-                    <img src = "data:image/jpeg;base64,@(Convert.ToBase64String(Model.Image))">
+                    <img src="data:image/jpeg;base64,@(Convert.ToBase64String(Model.Image))">
                 }
-                <div class="product-preview"><span class="button">More details...</span></div>
+                @if (User.IsInRole(Roles.Admin))
+                {
+                    <div style="text-align: right; vertical-align: top">
+                        <span class="glyphicon glyphicon-remove" style="color: red"></span>
+                    </div>
+                }
+
+                <div class="product-preview">
+                    <span class="button" onclick='window.location = "@Url.Action("Details", "Bike", new {id = Model.Id})";'>More details</span>
+                    <br/>
+                    @if (User.Identity.IsAuthenticated && User.IsInRole(Roles.Admin))
+                    {
+                        <span class="button btn-warning" style="margin-top: 3px" onclick='window.location = "@Url.Action("Edit", "Bike", new {id = Model.Id})";'>Edit bike</span>
+                    }
+                </div>
             </div>
             <div class="product-text">
                 <h2>@Model.Model</h2>

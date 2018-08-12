@@ -7,7 +7,7 @@
     <i class="fa fa-user"></i> @User.Identity.Name
     <span class="caret"></span>
     @{
-        var userAvatar = Model.ImageData != null ? "data : image / jpeg; base64,@(Convert.ToBase64String(Model.Image))" : "/Content/Images/no_avatar.png";
+        var userAvatar = Model.ImageData != null ? "data:image/jpeg; base64,"+Convert.ToBase64String(Model.ImageData) : "/Content/Images/no_avatar.png";
     }
 </a>
 <ul class="dropdown-menu" style="min-width: 250px; text-align: center; padding-bottom: 10px">

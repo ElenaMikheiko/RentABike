@@ -4,9 +4,9 @@
 
 @{
     ViewBag.Title = "All rent points";
+    Layout = null;
 }
 
-<div>
     <div class="btn-group">
         @Html.ActionLink("Add new rent point", "", "", null, new {@class = "btn btn-primary"})
     </div>
@@ -33,13 +33,13 @@
 
                     <td>
                         <div class="dropdown">
-                            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+                            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" id="droplist">
                                 <span class="glyphicon glyphicon-edit"></span>
                                 Actions
                                 <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                                <li>@Html.ActionLink("Show all sellers", "", "", null, null)</li>
+                                <li>@Html.ActionLink("Show all sellers", "ShowAllSellersInRentPoint", "User", new{rentPointId=rentPoint.Id}, null)</li>
                                 <li>@Html.ActionLink("Show all bike in this point", "", "", null, null)</li>
                                 <li>@Html.ActionLink("Edit", "", "", null, null)</li>
                                 <li>@Html.ActionLink("Delete", "", "", null, null)</li>
@@ -50,4 +50,4 @@
             }
         }
     </table>
-</div>
+
