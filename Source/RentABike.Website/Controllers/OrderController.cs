@@ -5,6 +5,7 @@ using System.Text;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using PagedList;
+using RentABike.Common.Interfaces;
 using RentABike.Logic;
 using RentABike.Logic.Interfaces;
 using RentABike.Models.Constants;
@@ -65,36 +66,49 @@ namespace RentABike.Website.Controllers
         public ActionResult CreateOrder(CreationOrderViewModel viewModelOrder)
         {
             viewModelOrder.UserId = UserId;
+            var startDateTime = new DateTime(viewModelOrder.StartDate.Year, viewModelOrder.StartDate.Month,
+                viewModelOrder.StartDate.Day,
+                viewModelOrder.StartTime.Hour, viewModelOrder.StartTime.Minute, 0);
             if (ModelState.IsValid)
             {
-                var previewViewModel = new PreviewNewOrderViewModel
+                var opportunity = _orderService.Check(viewModelOrder.BikeId, viewModelOrder.RentPointId, startDateTime);
+                if (opportunity)
                 {
-                    BikeId = viewModelOrder.BikeId,
-                    BikeModel = _bikeService.GetBikeById(viewModelOrder.BikeId).Model,
-                    RentPointId = viewModelOrder.RentPointId,
-                    RentPoint = _rentPointService.GetRentPointById(viewModelOrder.RentPointId),
-                    StartDateTime = new DateTime(viewModelOrder.StartDate.Year, viewModelOrder.StartDate.Month, viewModelOrder.StartDate.Day,
-                                                              viewModelOrder.StartTime.Hour, viewModelOrder.StartTime.Minute, 0),
+                    ModelState.AddModelError("Rental start date", "Another user has already booked this bicycle for this time. Please choose another time or bike");
+                }
+                else
+                {
 
-                    ReturnPointId = viewModelOrder.ReturnPointId,
-                    ReturnPoint = _rentPointService.GetRentPointById(viewModelOrder.ReturnPointId),
+                    var previewViewModel = new PreviewNewOrderViewModel
+                    {
+                        BikeId = viewModelOrder.BikeId,
+                        BikeModel = _bikeService.GetBikeById(viewModelOrder.BikeId).Model,
+                        RentPointId = viewModelOrder.RentPointId,
+                        RentPoint = _rentPointService.GetRentPointById(viewModelOrder.RentPointId),
+                        StartDateTime = startDateTime,
 
-                    TarriffId = viewModelOrder.TarriffId
-                };
+                        ReturnPointId = viewModelOrder.ReturnPointId,
+                        ReturnPoint = _rentPointService.GetRentPointById(viewModelOrder.ReturnPointId),
 
-                var tarriff = _tarriffService.GetTarriffByIdWithKindRent(viewModelOrder.TarriffId);
-                previewViewModel.Tarriff = tarriff;
+                        TarriffId = viewModelOrder.TarriffId
+                    };
 
-                previewViewModel.Amount = tarriff.Amount;
-                previewViewModel.EndDateTime =
-                    _orderService.CalculateEndDateOfRent(previewViewModel.StartDateTime, tarriff.Id);
+                    var tarriff = _tarriffService.GetTarriffByIdWithKindRent(viewModelOrder.TarriffId);
+                    previewViewModel.Tarriff = tarriff;
 
-                return View("ConfirmationOrder", previewViewModel);
+                    previewViewModel.Amount = tarriff.Amount;
+                    previewViewModel.EndDateTime =
+                        _orderService.CalculateEndDateOfRent(previewViewModel.StartDateTime, tarriff.Id);
+
+                    return View("ConfirmationOrder", previewViewModel);
+
+                }
 
             }
             viewModelOrder.RentPoints = viewModelOrder.ReturnPoints = _rentPointService.AllRentPoint();
+            viewModelOrder.Tarriffs = _bikeTypeService.GetBikeTypeById(viewModelOrder.BikeTypeId).Tarriffs;
 
-            return View();
+            return View(viewModelOrder);
        }
 
         [HttpPost]
@@ -114,7 +128,7 @@ namespace RentABike.Website.Controllers
         [HttpGet]
         public ActionResult AllOrders()
         {
-            var orders = _orderService.GetOrdersByUserId(UserId);
+            var orders = _orderService.GetOrdersByUserId(UserId).OrderByDescending(o=>o.DateTimeCreationOrder);
             return PartialView(orders);
         }
 
@@ -254,7 +268,7 @@ namespace RentABike.Website.Controllers
             {
                 //ViewBag.NOrder
                 TimeSpan span = DateTime.UtcNow - order.StartDateTimeRent.ToUniversalTime();
-                if (span.Minutes < 10)
+                if (span.Minutes > -10)
                 {
                     ViewBag.NOrder = orderId;
                     ViewBag.ErrorCancelingMessage = true;

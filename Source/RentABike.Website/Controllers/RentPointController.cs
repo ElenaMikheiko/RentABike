@@ -1,8 +1,8 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Text;
 using System.Web.Mvc;
-using RentABike.Logic.Interfaces;
+using RentABike.Common.Interfaces;
+using RentABike.Models;
 using RentABike.ViewModels;
 
 namespace RentABike.Website.Controllers
@@ -59,6 +59,55 @@ namespace RentABike.Website.Controllers
         {
             var rentPoints = _rentPointService.AllRentPoint();
             return View(rentPoints);
+        }
+
+        [HttpGet]
+        public ActionResult EditRentPoint(int rentPointId)
+        {
+            var rentPoint = _rentPointService.GetRentPointById(rentPointId);
+
+            return PartialView("EditRentPoint",rentPoint);
+        }
+
+        [HttpPost]
+        public ActionResult EditRentPoint(RentPoint model)
+        {
+            var existingRentPoint = _rentPointService.GetRentPointById(model.Id);
+            if (existingRentPoint != null)
+            {
+                existingRentPoint.Address = model.Address;
+                existingRentPoint.Name = model.Name;
+                existingRentPoint.Phone = model.Phone;
+            }
+
+            _rentPointService.UpdateRentPoint(existingRentPoint);
+
+            return RedirectToAction("PersonalAccount","Account");
+        }
+
+        [HttpGet]
+        public ActionResult DeleteRentPoint(int rentPointId)
+        {
+            var rentPoint = _rentPointService.GetRentPointById(rentPointId);
+
+            return PartialView("_DeleteRentPoint", rentPoint);
+        }
+
+        [HttpPost]
+        public ActionResult ConfirmDelete(int rentPointId)
+        {
+            bool result = false;
+            var rentPoint = _rentPointService.GetRentPointById(rentPointId);
+            if (rentPoint != null)
+            {
+                rentPoint.Bikes.Clear();
+                rentPoint.Sellers.Clear();
+                _rentPointService.DeleteRentPoint(rentPoint);
+                result = true;
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+
         }
 
     }

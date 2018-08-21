@@ -9,8 +9,8 @@
         <h3>Your personal information</h3>
         <hr />
 
-        @using (Html.BeginForm("ChangePersonalInfo", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-        {        
+        @using (Html.BeginForm("ChangePersonalInfo", "Account", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
+        {
             @Html.AntiForgeryToken()
 
             <div class="validation-summary-errors">
@@ -25,60 +25,60 @@
 
                     @if (Model.Base64Image != null)
                     {
-                        <img class="content__main_image" src="data:image/jpeg;base64, @Model.Base64Image" />
+                        <img class="content__main_image" src="data:image/jpeg;base64, @Model.Base64Image"/>
                     }
                     else
                     {
                         <img class="content__main_image" src="~/Content/Images/no_avatar.png">
                     }
-                    <input hidden name="Base64Image" id="Base64Image" />
+                    <input hidden name="Base64Image" id="Base64Image"/>
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(m => m.Surname, new { @class = "col-md-3 control-label" })
+                @Html.LabelFor(m => m.Surname, new {@class = "col-md-3 control-label"})
                 <div class="col-md-4">
-                    @Html.TextBoxFor(m => m.Surname, new { @class = "form-control input-md", placeholder = "Enter your Surname" })
+                    @Html.TextBoxFor(m => m.Surname, new {@class = "form-control input-md", placeholder = "Enter your Surname"})
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(m => m.Name, new { @class = "col-md-3 control-label" })
+                @Html.LabelFor(m => m.Name, new {@class = "col-md-3 control-label"})
                 <div class="col-md-4">
-                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control input-md", placeholder = "Enter your Name" })
+                    @Html.TextBoxFor(m => m.Name, new {@class = "form-control input-md", placeholder = "Enter your Name"})
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(m => m.Patronymic, new { @class = "col-md-3 control-label" })
+                @Html.LabelFor(m => m.Patronymic, new {@class = "col-md-3 control-label"})
                 <div class="col-md-4">
-                    @Html.TextBoxFor(m => m.Patronymic, new { @class = "form-control input-md", placeholder = "Enter your Patronymic" })
+                    @Html.TextBoxFor(m => m.Patronymic, new {@class = "form-control input-md", placeholder = "Enter your Patronymic"})
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(m => m.Email, new { @class = "col-md-3 control-label" })
+                @Html.LabelFor(m => m.Email, new {@class = "col-md-3 control-label"})
                 <div class="col-md-4">
-                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control input-md", placeholder = "Enter your Email adress" })
+                    @Html.TextBoxFor(m => m.Email, new {@class = "form-control input-md", placeholder = "Enter your Email adress"})
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(m => m.Phone, new { @class = "col-md-3 control-label" })
+                @Html.LabelFor(m => m.Phone, new {@class = "col-md-3 control-label"})
                 <div class="col-md-4">
-                    @Html.TextBoxFor(m => m.Phone, new { @class = "form-control input-md", placeholder = "Enter your Phone", id = "phone" })
+                    @Html.TextBoxFor(m => m.Phone, new {@class = "form-control input-md", placeholder = "Enter your Phone", id = "phone"})
                 </div>
             </div>
 
             if (Request.IsAuthenticated && User.IsInRole(Roles.Seller))
-                {
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.RentPointId, new { @class = "col-md-3 control-label" })
-                        <div class="col-md-4">
-                            @Html.DropDownListFor(m => m.RentPointId, Model.RentPoints.Select(c => new SelectListItem { Text = c.Name +", "+c.Address, Value = c.Id.ToString()}),"-- Select rent point --", new { @class = "form-control input-md col-sm-4" })
-                        </div>
+            {
+                <div class="form-group">
+                    @Html.LabelFor(m => m.RentPointId, new {@class = "col-md-3 control-label"})
+                    <div class="col-md-4">
+                        @Html.DropDownListFor(m => m.RentPointId, Model.RentPoints.Select(c => new SelectListItem {Text = c.Name + ", " + c.Address, Value = c.Id.ToString()}), "-- Select rent point --", new {@class = "form-control input-md col-sm-4"})
                     </div>
-                }
+                </div>
+            }
 
             <hr>
 
@@ -86,11 +86,11 @@
             <div class="form-group">
                 <label class="col-md-2 control-label"></label>
                 <div class="col-md-5">
-                    <input type="submit" value="Save" class="btn btn-success" style="width: 45%" />
-                    @Html.ActionLink("Back to Personal Account", "PersonalAccount", "Account", null, new { @class = "btn btn-default", @style = "margin: 10px" })
+                    <input type="submit" value="Save" class="btn btn-success" style="width: 45%"/>
+                    @Html.ActionLink("Back to Personal Account", "PersonalAccount", "Account", null, new {@class = "btn btn-default", @style = "margin: 10px"})
                 </div>
             </div>
-
+        }
             <div id="overlay"></div>
             <div class="content__pop-up">
                 <div class="content__pop-up_main">
@@ -117,6 +117,6 @@
                 </div>
             </div>
 
-        }
+        
     </div>
     <script src="~/Scripts/fadeIn.js"></script>

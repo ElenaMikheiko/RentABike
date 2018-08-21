@@ -13,14 +13,17 @@
 
 
 <h2>Your orders</h2>
-@foreach (var item in Model)
-    {
-        Html.RenderPartial("_OrderForUser", item);
+<hr/>
+@if (Model.Count() != 0)
+{
+    foreach (var item in Model)
+     {
+         Html.RenderPartial("_OrderForUser", item);
+
+     }
 
 }
-<script>
-        $('.spoiler-explore').click(function () {
-            $(this).parent().children('div.spoiler-content').toggle('fast');
-            return false;
-        });
-</script>
+else
+{
+    <div>You don't have any orders yet.</div>
+}

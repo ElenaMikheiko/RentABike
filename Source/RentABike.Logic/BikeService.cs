@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using RentABike.DataProvider.Interfaces;
-using RentABike.Logic.Interfaces;
+using RentABike.Common.Interfaces;
 using RentABike.Models;
 using RentABike.ViewModels;
 
@@ -56,7 +55,7 @@ namespace RentABike.Logic
             var imgBytes = Convert.FromBase64String(base64);
 
             bike.Image = imgBytes;
-            bike.BikeType = _unitOfWork.BikeTypeRepository.FindById(vm.BikeTypeId);
+            bike.BikeType = _unitOfWork.BikeTypeRepository.FindById(vm.BikeTypeId.Value);
             bike.RentPoints.Add(_unitOfWork.RentPointRepository.FindById(vm.RentPointId));
             _unitOfWork.BikeRepository.Update(bike);
             _unitOfWork.Save();
@@ -64,7 +63,20 @@ namespace RentABike.Logic
 
         public IEnumerable<Bike> GetBikesByBikeTypeId(int bikeTypeId)
         {
-            return _unitOfWork.BikeRepository.GetAllWhere(b => b.BikeType.Id == bikeTypeId);
+            return _unitOfWork.BikeRepository.GetAllWhere(b => b.BikeTypeId == bikeTypeId);
+        }
+
+        public void DeleteBike(Bike bike)
+        {
+            var orders = _unitOfWork.OrderRepository.GetAllWhere(k => k.BikeId == bike.Id);
+            foreach (var order in orders)
+            {
+                _unitOfWork.OrderRepository.Remove(order);
+            }
+
+            _unitOfWork.BikeRepository.Remove(bike);
+
+            _unitOfWork.Save();
         }
     }
 }

@@ -1,9 +1,9 @@
-﻿using System;
+﻿using RentABike.DataProvider.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
-using RentABike.DataProvider.Interfaces;
 
 namespace RentABike.DataProvider.Repositories
 {
@@ -18,36 +18,35 @@ namespace RentABike.DataProvider.Repositories
             _dbSet = context.Set<TEntity>();
         }
 
-        public IEnumerable<TEntity> GetAll()
+        public virtual IEnumerable<TEntity> GetAll()
         {
-            return _dbSet./*AsNoTracking().*/ToList();
+            return _dbSet.ToList();
         }
 
-        public IEnumerable<TEntity> GetWithInclude(params Expression<Func<TEntity, object>>[] includeProperties)
+        public virtual IEnumerable<TEntity> GetWithInclude(params Expression<Func<TEntity, object>>[] includeProperties)
         {
             return Include(includeProperties).ToList();
         }
 
-        public IEnumerable<TEntity> GetWithInclude(Func<TEntity, bool> predicate,
+        public virtual IEnumerable<TEntity> GetWithInclude(Func<TEntity, bool> predicate,
             params Expression<Func<TEntity, object>>[] includeProperties)
         {
             var query = Include(includeProperties);
             return query.Where(predicate).ToList();
         }
 
-        public TEntity FindById(int id)
+        public virtual TEntity FindById(int id)
         {
             return _dbSet.Find(id);
         }
 
-        public void Create(TEntity item)
+        public virtual void Create(TEntity item)
         {
             _dbSet.Add(item);
         }
 
-        public void Update(TEntity item)
+        public virtual void Update(TEntity item)
         {
-            //_dbSet.Attach(item);
             _context.Entry(item).State = EntityState.Modified;
         }
 
@@ -58,12 +57,12 @@ namespace RentABike.DataProvider.Repositories
 
         public IEnumerable<TEntity> GetAllWhere(Func<TEntity, bool> predicate)
         {
-            return _dbSet./*AsNoTracking().*/Where(predicate).ToList();
+            return _dbSet.Where(predicate).ToList();
         }
 
         private IQueryable<TEntity> Include(params Expression<Func<TEntity, object>>[] includeProperties)
         {
-            IQueryable<TEntity> query = _dbSet/*.AsNoTracking()*/;
+            IQueryable<TEntity> query = _dbSet;
             return includeProperties
                 .Aggregate(query, (current, includeProperty) => current.Include(includeProperty));
         }

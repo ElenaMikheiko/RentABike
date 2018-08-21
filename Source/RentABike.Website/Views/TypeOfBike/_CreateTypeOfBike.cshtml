@@ -12,8 +12,11 @@
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             <h4 class="modal-title">Create new Type of Bike</h4>
         </div>
-        
         <div class="modal-body">
+            <div class="alert-warning">
+                Don't forget to specify the tariff for a new type of bike  <a href="/Tarriff/Index">on the tariff page!</a>
+            </div>
+            <br/>
             <div class="form-horizontal">
                 @Html.ValidationSummary(true, "", new {@class = "text-danger"})
                 <div class="form-group">

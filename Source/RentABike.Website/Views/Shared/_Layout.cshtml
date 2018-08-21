@@ -13,7 +13,9 @@
 
     @Scripts.Render("~/bundles/custom")
     @Scripts.Render("~/bundles/unobtrusive-ajax")
+
     @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery.validate.date.js" type="text/javascript"></script>
     @Scripts.Render("~/bundles/cropper")
     @Scripts.Render("~/bundles/datetimepicker")
     <link href="@Url.Content("~/Content/PagedList.css")" rel="stylesheet" type="text/css" />
@@ -34,8 +36,6 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav nav-green navbar-nav">
                     <li>@Html.ActionLink("Tarriffs", "Index", "Tarriff")</li>
-                    @*<li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">

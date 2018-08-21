@@ -1,8 +1,17 @@
 ﻿@using PagedList.Mvc
 @model PagedList.IPagedList<RentABike.Models.Bike>
+@using Roles = RentABike.Models.Constants.Roles
+
+
+@if (User.Identity.IsAuthenticated && User.IsInRole(Roles.Admin))
+{
+    <p>
+        <button class="btn btn-lg btn-warning" onclick='window.location = "@Url.Action("CreateNewBike", "Bike") ";'>Add new bike</button>
+    </p>
+}
 
 <div align="center">
-    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    <span>Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</span>
 
     @{
         if (ViewBag.RentPointFilter != null)

@@ -2,7 +2,7 @@
 using RentABike.Models;
 using RentABike.ViewModels;
 
-namespace RentABike.Logic.Interfaces
+namespace RentABike.Common.Interfaces
 {
     public interface IUserInfoService
     {
@@ -13,5 +13,7 @@ namespace RentABike.Logic.Interfaces
         void UpdateUserInfo(EditPersonalUserInfoViewModel vm);
 
         IEnumerable<UserInfo> AllUserInfos();
+
+        void DeleteUserInfo(string userId);
     }
 }

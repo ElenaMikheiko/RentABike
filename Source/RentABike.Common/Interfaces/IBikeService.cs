@@ -2,7 +2,7 @@
 using RentABike.Models;
 using RentABike.ViewModels;
 
-namespace RentABike.Logic.Interfaces
+namespace RentABike.Common.Interfaces
 {
     public interface IBikeService
     {
@@ -17,5 +17,7 @@ namespace RentABike.Logic.Interfaces
         void UpdateBike(EditBikeViewModel vm);
 
         IEnumerable<Bike> GetBikesByBikeTypeId(int bikeTypeId);
+
+        void DeleteBike(Bike bike);
     }
 }

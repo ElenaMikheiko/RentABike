@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using RentABike.Models;
 
-namespace RentABike.Logic.Interfaces
+namespace RentABike.Common.Interfaces
 {
     public interface IBikeTypeService
     {
@@ -10,5 +10,7 @@ namespace RentABike.Logic.Interfaces
         void SaveBikeType(BikeType bikeType);
 
         BikeType GetBikeTypeById(int id);
+
+        void DeleteBikeType(int id);
     }
 }

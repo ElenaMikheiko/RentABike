@@ -56,6 +56,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IBikeRentPointService.cs" />
+    <Compile Include="Interfaces\IBikeService.cs" />
+    <Compile Include="Interfaces\IBikeTypeService.cs" />
+    <Compile Include="Interfaces\IBikeTypeTarriffService.cs" />
+    <Compile Include="Interfaces\IKindOfRentService.cs" />
+    <Compile Include="Interfaces\IOrderService.cs" />
+    <Compile Include="Interfaces\IRentPointService.cs" />
+    <Compile Include="Interfaces\IRepository.cs" />
+    <Compile Include="Interfaces\IStatusService.cs" />
+    <Compile Include="Interfaces\ITarriffService.cs" />
+    <Compile Include="Interfaces\IUnitOfWork.cs" />
+    <Compile Include="Interfaces\IUserInfoAndRentPointService.cs" />
+    <Compile Include="Interfaces\IUserInfoService.cs" />
     <Compile Include="PagingExtensions.cs" />
     <Compile Include="PagingHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -63,6 +76,16 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RentABike.Models\RentABike.Models.csproj">
+      <Project>{04B6F4A7-E50B-438F-BABE-DE885CF1D467}</Project>
+      <Name>RentABike.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RentABike.ViewModels\RentABike.ViewModels.csproj">
+      <Project>{BC42DD23-3657-4F9B-A94E-3FEEB33C819F}</Project>
+      <Name>RentABike.ViewModels</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

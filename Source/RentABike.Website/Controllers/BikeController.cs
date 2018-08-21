@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using PagedList;
-using RentABike.Logic.Interfaces;
-using RentABike.Models;
+using RentABike.Common.Interfaces;
 using RentABike.ViewModels;
 
 namespace RentABike.Website.Controllers
@@ -48,15 +45,17 @@ namespace RentABike.Website.Controllers
         {
             var bike = _bikeService.GetBikeById(id);
 
-            var vm = new DetailsBikeViewModel();
+            var vm = new DetailsBikeViewModel
+            {
+                Model = bike.Model,
+                BikeId = id,
+                BikeTypeId = bike.BikeTypeId,
+                BikeType = bike.BikeType,
+                Description = bike.Description,
+                Image = bike.Image,
+                RentPoints = bike.RentPoints
+            };
 
-            vm.Model = bike.Model;
-            vm.BikeId = id;
-            vm.BikeTypeId = bike.BikeTypeId;
-            vm.BikeType = bike.BikeType;
-            vm.Description = bike.Description;
-            vm.Image = bike.Image;
-            vm.RentPoints = bike.RentPoints;
             var tarriffsForBikeType = _tarriffService.GetAllTarriffsByBikeTypeId(bike.BikeTypeId).ToList();
             var tarriffForOneHour = tarriffsForBikeType
                 .FirstOrDefault(t => t.KindOfRent.Kind == "hour(s)" && t.Quantity == 1);
@@ -145,26 +144,25 @@ namespace RentABike.Website.Controllers
             return View(vm);
         }
 
-        // GET: Bike/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var bike = _bikeService.GetBikeById(id);
+
+            return PartialView("Delete",bike);
         }
 
-        // POST: Bike/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult ConfirmDelete(int id)
         {
-            try
+            bool result = false;
+            var bike = _bikeService.GetBikeById(id);
+            if (bike != null)
             {
-                // TODO: Add delete logic here
+                _bikeService.DeleteBike(bike);
+                result = true;
+            }
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }

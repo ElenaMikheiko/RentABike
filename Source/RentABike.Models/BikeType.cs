@@ -11,9 +11,12 @@ namespace RentABike.Models
 
         public virtual IList<Tarriff> Tarriffs { get; set; }
 
+        public virtual IList<Bike> Bikes { get; set; }
+
         public BikeType()
         {
             Tarriffs = new List<Tarriff>();
+            Bikes = new List<Bike>();
         }
 
     }

@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using RentABike.DataProvider.Interfaces;
+﻿using System.Linq;
+using RentABike.Common.Interfaces;
 using RentABike.Logic.Interfaces;
 using RentABike.Models;
-using RentABike.Models.Constants;
 
 namespace RentABike.Logic
 {

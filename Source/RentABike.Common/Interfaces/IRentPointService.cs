@@ -2,7 +2,7 @@
 using RentABike.Models;
 using RentABike.ViewModels;
 
-namespace RentABike.Logic.Interfaces
+namespace RentABike.Common.Interfaces
 {
     public interface IRentPointService
     {
@@ -13,5 +13,7 @@ namespace RentABike.Logic.Interfaces
         RentPoint GetRentPointById(int id);
 
         void UpdateRentPoint(RentPoint rentPoint);
+
+        void DeleteRentPoint(RentPoint rentPoint);
     }
 }

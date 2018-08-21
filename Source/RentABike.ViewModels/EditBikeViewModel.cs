@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 using RentABike.Models;
 
 namespace RentABike.ViewModels
@@ -11,10 +12,12 @@ namespace RentABike.ViewModels
         [Required]
         [MaxLength(100)]
         [Display(Name = "Model of Bike")]
+        [AllowHtml]
         public string BikeModel { get; set; }
 
         [Required]
         [MaxLength(1000)]
+        [AllowHtml]
         public string Description { get; set; }
 
         public int RentPointId { get; set; }
@@ -26,7 +29,7 @@ namespace RentABike.ViewModels
         public IEnumerable<RentPoint> RentPointsWhereBikeIsExist { get; set; }
 
         [Display(Name = "Bike types")]
-        public int BikeTypeId { get; set; }
+        public int? BikeTypeId { get; set; }
 
         public IEnumerable<BikeType> BikeTypes { get; set; }
 

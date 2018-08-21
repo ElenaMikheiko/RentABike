@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using Microsoft.AspNet.Identity.EntityFramework;
 using RentABike.DataProvider.Migrations;
 using RentABike.Models;
@@ -10,7 +11,6 @@ namespace RentABike.DataProvider
         public RentABikeDbContext() : base("RentABike")
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<RentABikeDbContext, Configuration>());
-            
         }
 
         public DbSet<BikeType> BikeTypes { get; set; }
@@ -51,7 +51,6 @@ namespace RentABike.DataProvider
                 .ToTable("UserLogins");
 
             #endregion
-
         }
     }
 }

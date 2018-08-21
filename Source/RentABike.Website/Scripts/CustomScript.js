@@ -9,10 +9,12 @@ $('document').ready(function () {
     });
 });
 $('document').ready(function () {
+    $.ajaxSetup({ cache: false });
+
     $('#datetimepicker').datetimepicker(
         {
-            format: 'DD.MM.YYYY',
-            locale: 'en',
+            format: 'DD/MM/YYYY',
+            locale: 'en-GB',
             minDate: moment(),
             defaultDate : moment(),
             maxDate : moment().add(7, 'days')
@@ -21,8 +23,6 @@ $('document').ready(function () {
         {
             format: 'HH:mm',
             locale: 'en',
-            minDate: moment(),
-            defaultDate: moment(),
         });
 
     /////////////Phone Mask
@@ -32,7 +32,6 @@ $('document').ready(function () {
         $(this).parent().children('div.spoiler-content').toggle('fast');
         return false;
     });
-
 });
 
 

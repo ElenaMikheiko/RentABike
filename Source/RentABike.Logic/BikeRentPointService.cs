@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using RentABike.DataProvider.Interfaces;
-using RentABike.Logic.Interfaces;
+using RentABike.Common.Interfaces;
 using RentABike.Models;
 using RentABike.ViewModels;
 
@@ -11,17 +10,9 @@ namespace RentABike.Logic
     {
 
         private readonly IUnitOfWork _uof;
-        private readonly IBikeService _bikeService;
 
-        private readonly IRentPointService _rentPointService;
-
-        private readonly IBikeTypeService _bikeTypeService;
-
-        public BikeRentPointService(IBikeService bikeService, IRentPointService rentPointService, IBikeTypeService bikeTypeService, IUnitOfWork unitOfWork)
+        public BikeRentPointService(IUnitOfWork unitOfWork)
         {
-            _bikeService = bikeService;
-            _rentPointService = rentPointService;
-            _bikeTypeService = bikeTypeService;
             _uof = unitOfWork;
         }
 
@@ -29,26 +20,20 @@ namespace RentABike.Logic
         {
             string base64 = vm.Base64Image.Split(',')[1].Trim();
             var bytes = Convert.FromBase64String(base64);
-            var rp = _rentPointService.GetRentPointById(vm.RentPointId);
-            var bt = _bikeTypeService.GetBikeTypeById(vm.BikeTypeId);
+            var rp = _uof.RentPointRepository.FindById(vm.RentPointId);
+            var bt = _uof.BikeTypeRepository.FindById(vm.BikeTypeId);
             var bike = new Bike()
             {
-                //BikeTypeId = vm.BikeTypeId,
                 BikeType = bt,
                 Image = bytes,
                 Description = vm.Description,
                 Model = vm.BikeModel,
                 
             };
-            
-            bike.RentPoints = new List<RentPoint>();
-            bike.RentPoints.Add(rp);
 
-            //var existingRentPoint = _rentPointService.GetRentPointById(vm.RentPointId);
-            //existingRentPoint.Bikes = new List<Bike>(){bike};
+            bike.RentPoints = new List<RentPoint> {rp};
 
-            //_rentPointService.UpdateRentPoint(existingRentPoint);
-            _bikeService.AddNewBike(bike);
+            _uof.BikeRepository.Create(bike);
             _uof.Save();
         }
     }

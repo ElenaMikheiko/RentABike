@@ -43,10 +43,7 @@
                             <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                            @*<li>@Html.ActionLink("Details", "Details", "Bike", new { id = user.Id }, null)</li>
-                            <li>@Html.ActionLink("Edit", "Edit", "Bike", new { id = user.Id }, null)</li>
-                            <li>@Html.ActionLink("Delete", "", "", null, null)</li>
-                            <li>@Html.ActionLink("Show rent points", "", "", null, null)</li>*@
+                            <li>@Html.ActionLink("Delete", "Delete", "User", new {email = @user.UserEmail }, null)</li>
                         </ul>
                     </div>
                 </td>

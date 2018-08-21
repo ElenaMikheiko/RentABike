@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using RentABike.DataProvider.Interfaces;
-using RentABike.Logic.Interfaces;
+using RentABike.Common.Interfaces;
 using RentABike.Models;
 using RentABike.ViewModels;
 
@@ -53,6 +51,13 @@ namespace RentABike.Logic
         public IEnumerable<UserInfo> AllUserInfos()
         {
             return _unitOfWork.UserInfoRepository.GetAll();
+        }
+
+        public void DeleteUserInfo(string userId)
+        {
+            var user = GetUserInfoByUserId(userId);
+            _unitOfWork.UserInfoRepository.Remove(user);
+            _unitOfWork.Save();
         }
     }
 }

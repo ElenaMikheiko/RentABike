@@ -73,15 +73,7 @@
     <Compile Include="BikeService.cs" />
     <Compile Include="BikeTypeService.cs" />
     <Compile Include="EmailService.cs" />
-    <Compile Include="Interfaces\IBikeRentPointService.cs" />
-    <Compile Include="Interfaces\IBikeService.cs" />
-    <Compile Include="Interfaces\IBikeTypeService.cs" />
-    <Compile Include="Interfaces\IOrderService.cs" />
-    <Compile Include="Interfaces\IRentPointService.cs" />
-    <Compile Include="Interfaces\IStatusService.cs" />
-    <Compile Include="Interfaces\ITarriffService.cs" />
-    <Compile Include="Interfaces\IUserInfoAndRentPointService.cs" />
-    <Compile Include="Interfaces\IUserInfoService.cs" />
+    <Compile Include="KindOfRentService.cs" />
     <Compile Include="OrderService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RentPointService.cs" />
@@ -91,6 +83,10 @@
     <Compile Include="UserInfoService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\RentABike.Common\RentABike.Common.csproj">
+      <Project>{6CDE08E7-9250-4151-BF21-6DFFFD7A1A80}</Project>
+      <Name>RentABike.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RentABike.DataProvider\RentABike.DataProvider.csproj">
       <Project>{E663FC42-ADD7-43CB-B155-73B2C543AF5D}</Project>
       <Name>RentABike.DataProvider</Name>

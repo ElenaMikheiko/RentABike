@@ -7,47 +7,84 @@
     Layout = null;
 }
 
-    <div class="btn-group">
-        @Html.ActionLink("Add new rent point", "", "", null, new {@class = "btn btn-primary"})
-    </div>
-    <table class="table table-striped">
-        <tr>
-            <th>Name</th>
-            <th>Phone</th>
-            <th>Address</th>
-            <th>@Html.Label("Actions")</th>
-        </tr>
-        @{
-            foreach (var rentPoint in Model)
-            {
-                <tr>
-                    <td>
-                        @rentPoint.Name
-                    </td>
-                    <td>
-                        @rentPoint.Phone
-                    </td>
-                    <td>
-                        @rentPoint.Address
-                    </td>
+<div class="btn-group">
+    @Html.ActionLink("Add new rent point", "CreateNewRentPoint", "RentPoint", null, new { @class = "btn btn-primary createRentPoint" })
+</div>
+<table class="table table-striped">
+    <tr>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Address</th>
+        <th>@Html.Label("Actions")</th>
+    </tr>
+    @{
+        foreach (var rentPoint in Model)
+        {
+            <tr id="row_@rentPoint.Id">
+                <td>
+                    @rentPoint.Name
+                </td>
+                <td>
+                    @rentPoint.Phone
+                </td>
+                <td>
+                    @rentPoint.Address
+                </td>
 
-                    <td>
-                        <div class="dropdown">
-                            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" id="droplist">
-                                <span class="glyphicon glyphicon-edit"></span>
-                                Actions
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                                <li>@Html.ActionLink("Show all sellers", "ShowAllSellersInRentPoint", "User", new{rentPointId=rentPoint.Id}, null)</li>
-                                <li>@Html.ActionLink("Show all bike in this point", "", "", null, null)</li>
-                                <li>@Html.ActionLink("Edit", "", "", null, null)</li>
-                                <li>@Html.ActionLink("Delete", "", "", null, null)</li>
-                            </ul>
-                        </div>
-                    </td>
-                </tr>
-            }
+                <td>
+                    <div class="dropdown">
+                        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" id="droplist">
+                            <span class="glyphicon glyphicon-edit"></span>
+                            Actions
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <li>@Html.ActionLink("Show all sellers", "ShowAllSellersInRentPoint", "User", new { rentPointId = rentPoint.Id }, null)</li>
+                            <li>@Html.ActionLink("Show all bike in this point", "", "", null, null)</li>
+                            <li>@Html.ActionLink("Edit", "EditRentPoint", "RentPoint", new { rentPointId = rentPoint.Id }, new { @class = "createRentPoint" })</li>
+                            <li>@Html.ActionLink("Delete", "DeleteRentPoint", "RentPoint", new { rentPointId = rentPoint.Id }, new {@class="deleteItem" })</li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
         }
-    </table>
+    }
+</table>
 
+@*Modal dialog for creation Rent Point*@
+<div id="createRentPointFormModal" class="modal fade">
+    <div class="modal-dialog" id="modDialog1">
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+    $(".createRentPoint").click(function (e) {
+
+        e.preventDefault();
+        $.get(this.href, function (data) {
+            $('#modDialog1').html(data);
+            $('#createRentPointFormModal').modal('show');
+            $.validator.unobtrusive.parse("#createRentPointFormModal");
+        });
+    });
+
+    $(document).ready(function () {
+
+        $.ajaxSetup({ cache: false });
+    });
+
+    $(".deleteItem").click(function (e) {
+
+        e.preventDefault();
+        $.get(this.href, function (data) {
+            $('#modDialog1').html(data);
+            $('#createRentPointFormModal').modal('show');
+            $.validator.unobtrusive.parse("#createRentPointFormModal");
+        });
+    });
+
+
+
+</script>

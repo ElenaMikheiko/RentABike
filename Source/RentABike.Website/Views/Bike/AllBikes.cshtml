@@ -1,4 +1,5 @@
-﻿@model IEnumerable<RentABike.Models.Bike>
+﻿@using Microsoft.Owin.Security.DataHandler.Encoder
+@model IEnumerable<RentABike.Models.Bike>
 
 @{
     ViewBag.Title = "All bikes";
@@ -18,18 +19,26 @@
     @{
         foreach (var bike in Model)
         {
-            <tr>
+            <tr id="row_@bike.Id">
                 <td>
                     @{
                         var image = bike.Image != null ? "data:image/jpeg; base64," + (Convert.ToBase64String(bike.Image)) : "/Content/Images/image.png";
                     }
-                    <img class="img" src="@image" alt="" width="150" style="padding-top: 10px" /><br />
+                    <img class="img" src="@image" alt="" width="150" style="padding-top: 10px"/><br/>
                 </td>
                 <td>
                     @bike.Model
                 </td>
                 <td>
-                    @bike.BikeType.Type
+                    @if (bike.BikeType != null)
+                    {
+                        @bike.BikeType.Type
+                    }
+                    else
+                    {
+
+                    <span>Not set type of bike</span>
+                    }
                 </td>
 
                 <td>
@@ -40,10 +49,10 @@
                             <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                            <li>@Html.ActionLink("Details", "Details", "Bike", new { id = bike.Id }, null)</li>
-                            <li>@Html.ActionLink("Edit", "Edit", "Bike", new { id = bike.Id }, null)</li>
-                            <li>@Html.ActionLink("Delete", "", "", null, null)</li>
-                            <li>@Html.ActionLink("Show rent points", "", "", null, null)</li>
+                            <li>@Html.ActionLink("Details", "Details", "Bike", new {id = bike.Id}, null)</li>
+                            <li>@Html.ActionLink("Edit", "Edit", "Bike", new {id = bike.Id}, null)</li>
+                            <li>@Html.ActionLink("Delete", "Delete", "Bike", new { id = bike.Id }, new { @class="deleteMod"})</li>
+                            @*<li>@Html.ActionLink("Show rent points", "", "", null, null)</li>*@
                         </ul>
                     </div>
                 </td>
@@ -53,4 +62,38 @@
 </table>
 
 
+<input type="hidden" id="hiddenDiv" />
 
+<div class="modal fade" id="myModalDelete">
+    <div class="modal-dialog" id="myModalBodyDiv">
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $.ajaxSetup({ cache: false });
+    });
+
+        $(".deleteMod").click(function (e) {
+ 
+        e.preventDefault();
+        $.get(this.href, function (data) {
+            $('#myModalBodyDiv').html(data);
+            $('#myModalDelete').modal('show');
+        });
+    });
+
+    var DeleteBike = function (bikeId) {
+        $("#loaderDiv").show();
+        $.ajax({
+            type: "POST",
+            url: "/Bike/ConfirmDelete/"+bikeId,
+            data: { id:bikeId },
+            success: function(result) {
+                $("#loaderDiv").hide();
+                $("#myModalDelete").modal("hide");
+                $("#row_" + bikeId).remove();
+            }
+        });
+    }
+</script>

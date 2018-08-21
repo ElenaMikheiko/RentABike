@@ -1,6 +1,7 @@
 ﻿using RentABike.Models;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace RentABike.ViewModels
 {
@@ -11,6 +12,7 @@ namespace RentABike.ViewModels
         [Required]
         [Display(Name = "Model of Bike")]
         [MaxLength(100)]
+        [AllowHtml]
         public string BikeModel { get; set; }
 
         [Required(ErrorMessage = "You must upload the image.")]
@@ -19,6 +21,7 @@ namespace RentABike.ViewModels
 
         [Required]
         [MaxLength(1000)]
+        [AllowHtml]
         public string Description { get; set; }
 
         public IEnumerable<BikeType> BikeTypes { get; set; }

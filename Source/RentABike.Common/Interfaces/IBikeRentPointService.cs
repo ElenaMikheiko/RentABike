@@ -1,6 +1,6 @@
 ﻿using RentABike.ViewModels;
 
-namespace RentABike.Logic.Interfaces
+namespace RentABike.Common.Interfaces
 {
     public interface IBikeRentPointService
     {

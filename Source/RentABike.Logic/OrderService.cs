@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using RentABike.DataProvider.Interfaces;
+using System.Linq;
+using RentABike.Common.Interfaces;
 using RentABike.Logic.Interfaces;
 using RentABike.Models;
 using RentABike.Models.Constants;
@@ -115,6 +116,19 @@ namespace RentABike.Logic
             var orders = _unitOfWork.OrderRepository.GetAllWhere(o => o.UserId == userId);
             return orders;
 
+        }
+
+        public bool Check(int bikeId, int rentPointId, DateTime startDateTime)
+        {
+            var orders = _unitOfWork.OrderRepository.GetAllWhere(o => o.BikeId == bikeId &&
+                                                                      o.RentPointId == rentPointId &&
+                                                                      o.StartDateTimeRent == startDateTime);
+            if (orders.Count()!=0)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

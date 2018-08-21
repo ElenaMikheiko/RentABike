@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using RentABike.Models;
 using RentABike.ViewModels;
 
-namespace RentABike.Logic.Interfaces
+namespace RentABike.Common.Interfaces
 {
     public interface IOrderService
     {
@@ -20,5 +20,7 @@ namespace RentABike.Logic.Interfaces
         Order GetOrderById(int orderId);
 
         void UpdateOrder(Order order);
+
+        bool Check(int bikeId, int rentPointId, DateTime startDateTime);
     }
 }

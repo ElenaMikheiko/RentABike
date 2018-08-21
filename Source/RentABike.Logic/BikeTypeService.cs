@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
-using RentABike.DataProvider;
-using RentABike.DataProvider.Interfaces;
+using RentABike.Common.Interfaces;
 using RentABike.Logic.Interfaces;
 using RentABike.Models;
 
@@ -18,6 +17,16 @@ namespace RentABike.Logic
         public IEnumerable<BikeType> AllBikeTypes()
         {
             return _unitOfWork.BikeTypeRepository.GetAll();
+        }
+
+        public void DeleteBikeType(int id)
+        {
+            var type = GetBikeTypeById(id);
+
+            type.Tarriffs.Clear();
+            type.Bikes.Clear();
+            _unitOfWork.BikeTypeRepository.Remove(type);
+            _unitOfWork.Save();
         }
 
         public BikeType GetBikeTypeById(int id)

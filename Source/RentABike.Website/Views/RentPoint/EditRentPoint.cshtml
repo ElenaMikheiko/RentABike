@@ -1,0 +1,50 @@
+﻿@model RentABike.Models.RentPoint
+
+@using (Html.BeginForm("EditRentPoint", "RentPoint"))
+{
+    <div class="modal-content">
+
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h4 class="modal-title">Edit Rent Point</h4>
+        </div>
+
+        <div class="modal-body">
+            <div class="form-horizontal">
+
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(m=>m.Id)
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-3" })
+                    <div class="col-md-7">
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", id = "NewValue" } })
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Address, new { @class = "control-label col-md-3" })
+                    <div class="col-md-7">
+                        @Html.TextAreaFor(model => model.Address, new { @class = "form-control", rows = "3" })
+                        @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Phone, new { @class = "control-label col-md-3" })
+                    <div class="col-md-7">
+                        @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control", id = "phone", placeholder = "+375 (99) 999-99-99" } })
+                        @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <input type="submit" id="InsertInList" class="btn btn-default" value="Update" />
+        </div>
+
+
+    </div>
+}

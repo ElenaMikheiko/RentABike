@@ -1,11 +1,12 @@
-﻿@model IEnumerable<RentABike.ViewModels.TarriffsForBikeTypesViewModel>
+﻿@using Roles = RentABike.Models.Constants.Roles
+@model IEnumerable<RentABike.ViewModels.TarriffsForBikeTypesViewModel>
 
 <div class="container">
     <h3>Rent price by hour BYN</h3>
-    <hr/>
+    <hr />
     <table class="table table-hover table-striped">
         @{
-            bool flag = false;
+            var flag = false;
 
             foreach (var bikeTypes in Model)
             {
@@ -13,40 +14,67 @@
                 {
                     <tr>
                         <td></td>
-                        @foreach (var bikeTypeTarriff in bikeTypes.TarriffsForHours.OrderBy(b=>b.Quantity))
+                        @foreach (var bikeTypeTarriff in bikeTypes.TarriffsForHours.OrderBy(b => b.Quantity))
                         {
-
                             <th>@bikeTypeTarriff.Quantity @bikeTypeTarriff.KindOfRent.Kind</th>
                         }
                     </tr>
                     flag = true;
                     <tr>
-                        <th>@bikeTypes.BikeType.Type</th>
+                        <th>
+                            @bikeTypes.BikeType.Type
+                            @if (User.Identity.IsAuthenticated && User.IsInRole(Roles.Admin))
+                            {
+                                if (bikeTypes.TarriffsForHours.Count == 0)
+                                {
+                                    <a href="@Url.Action("CreateNewTarriff", "Tarriff", new {bikeTypeId = bikeTypes.BikeType.Id, kindOfRent = "hour(s)"})" id="item" class="btn btn-sm btn-warning">Add new tarriff</a>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("EditTarriff", "Tarriff", new {bikeTypeId = bikeTypes.BikeType.Id, kindOfRent = "hour(s)"})" id="item" class="btn btn-sm btn-warning item1">Edit tarriff</a>
+                                    <a href="@Url.Action("Delete", "Tarriff", new {bikeTypeId = bikeTypes.BikeType.Id, kindOfRent = "hour(s)"})" id="item" class="btn btn-sm glyphicon glyphicon-trash delete"></a>
+                                }
+                            }
+
+                        </th>
                         @foreach (var tarriff in bikeTypes.TarriffsForHours.OrderBy(b => b.Quantity))
                         {
                             <th>@tarriff.Amount</th>
                         }
-                    </tr>  
+                    </tr>
                 }
                 else
                 {
                     <tr>
-                        <th>@bikeTypes.BikeType.Type</th>
-                        @foreach (var tarriff in bikeTypes.TarriffsForHours.OrderBy(b=> b.Quantity))
+                        <th>
+                            @bikeTypes.BikeType.Type
+                            @if (User.Identity.IsAuthenticated && User.IsInRole(Roles.Admin))
+                            {
+                                if (bikeTypes.TarriffsForHours.Count == 0)
+                                {
+                                    <a href="@Url.Action("CreateNewTarriff", "Tarriff", new {bikeTypeId = bikeTypes.BikeType.Id, kindOfRent = "hour(s)"})" id="item" class="btn btn-sm btn-warning item1">Add new tarriff</a>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("EditTarriff", "Tarriff", new {bikeTypeId = bikeTypes.BikeType.Id, kindOfRent = "hour(s)"})" id="item" class="btn btn-sm btn-warning item1">Edit tarriff</a>
+                                    <a href="@Url.Action("Delete", "Tarriff", new {bikeTypeId = bikeTypes.BikeType.Id, kindOfRent = "hour(s)"})" id="item" class="btn btn-sm glyphicon glyphicon-trash delete"></a>
+                                }
+                            }
+                        </th>
+                        @foreach (var tarriff in bikeTypes.TarriffsForHours.OrderBy(b => b.Quantity))
                         {
                             <th>@tarriff.Amount</th>
                         }
-                    </tr>  
- 
+                    </tr>
                 }
-             }
+            }
         }
     </table>
-    <br/>
+    <br />
     <h3>Rent price by day BYN</h3>
     <table class="table table-hover table-striped">
         @{
-            bool flag1 = false;
+            var flag1 = false;
 
             foreach (var bikeTypes in Model)
             {
@@ -54,34 +82,80 @@
                 {
                     <tr>
                         <td></td>
-                        @foreach (var bikeTypeTarriff in bikeTypes.TarriffsForDays.OrderBy(b=> b.Quantity))
+                        @foreach (var bikeTypeTarriff in bikeTypes.TarriffsForDays.OrderBy(b => b.Quantity))
                         {
-
                             <th>@bikeTypeTarriff.Quantity @bikeTypeTarriff.KindOfRent.Kind</th>
                         }
                     </tr>
                     flag1 = true;
                     <tr>
-                        <th>@bikeTypes.BikeType.Type</th>
-                        @foreach (var tarriff in bikeTypes.TarriffsForDays.OrderBy(b=> b.Quantity))
-                        {
-                            <th>@tarriff.Amount</th>
-                        }
-                    </tr>  
-                }
-                else
-                {
-                    <tr>
-                        <th>@bikeTypes.BikeType.Type</th>
+                        <th>
+                            @bikeTypes.BikeType.Type
+                            @if (User.Identity.IsAuthenticated && User.IsInRole(Roles.Admin))
+                            {
+                                if (bikeTypes.TarriffsForDays.Count == 0)
+                                {
+                                    <a href="@Url.Action("CreateNewTarriff", "Tarriff", new {bikeTypeId = bikeTypes.BikeType.Id, kindOfRent = "day(s)"})" id="item" class="btn btn-sm btn-warning item1">Add new tarriff</a>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("EditTarriff", "Tarriff", new {bikeTypeId = bikeTypes.BikeType.Id, kindOfRent = "hour(s)"})" id="item" class="btn btn-sm btn-warning item1">Edit tarriff</a>
+                                    <a href="@Url.Action("Delete", "Tarriff", new {bikeTypeId = bikeTypes.BikeType.Id, kindOfRent = "day(s)"})" id="item" class="btn btn-sm glyphicon glyphicon-trash delete"></a>
+                                }
+                            }
+
+                        </th>
                         @foreach (var tarriff in bikeTypes.TarriffsForDays.OrderBy(b => b.Quantity))
                         {
                             <th>@tarriff.Amount</th>
                         }
-                    </tr>  
+                    </tr>
+                }
+                else
+                {
+                    <tr>
+                        <th>
+                            @bikeTypes.BikeType.Type
+
+                            @if (User.Identity.IsAuthenticated && User.IsInRole(Roles.Admin))
+                            {
+                                if (bikeTypes.TarriffsForDays.Count == 0)
+                                {
+                                    <a href="@Url.Action("CreateNewTarriff", "Tarriff", new {bikeTypeId = bikeTypes.BikeType.Id, kindOfRent = "day(s)"})" id="item" class="btn btn-sm btn-warning item1">Add new tarriff</a>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("EditTarriff", "Tarriff", new {bikeTypeId = bikeTypes.BikeType.Id, kindOfRent = "day(s)"})" id="item" class="btn btn-sm btn-warning item1">Edit tarriff</a>
+                                    <a href="@Url.Action("Delete", "Tarriff", new {bikeTypeId = bikeTypes.BikeType.Id, kindOfRent = "day(s)"})" id="item" class="btn btn-sm glyphicon glyphicon-trash delete"></a>
+                                }
+                            }
+
+                        </th>
+                        @foreach (var tarriff in bikeTypes.TarriffsForDays.OrderBy(b => b.Quantity))
+                        {
+                            <th>@tarriff.Amount</th>
+                        }
+                    </tr>
                 }
             }
         }
     </table>
 
 </div>
-
+@*Modal dialog for creation/editing Tarriff*@
+<div id="createTarriffFormModal" class="modal fade">
+    <div class="modal-dialog" id="modDialog">
+    </div>
+</div>
+<script type="text/javascript">
+ 
+    $(".item1").click(function (e) {
+ 
+        e.preventDefault();
+        $.get(this.href, function (data) {
+            $('#modDialog').html(data);
+            $('#createTarriffFormModal').modal('show');
+            $.validator.unobtrusive.parse("#createTarriffFormModal");
+        });
+    });
+</script>

@@ -2,8 +2,10 @@
 using System.IO;
 using System.Linq;
 using System.Web.Mvc;
+using RentABike.Common.Interfaces;
 using RentABike.Logic.Interfaces;
 using RentABike.Models;
+using RentABike.ViewModels;
 
 namespace RentABike.Website.Controllers
 {
@@ -13,10 +15,17 @@ namespace RentABike.Website.Controllers
 
         private readonly IBikeService _bikeService;
 
-        public TypeOfBikeController(IBikeTypeService bikeTypeService, IBikeService bikeService)
+        private readonly ITarriffService _tarriffService;
+
+        private readonly IKindOfRentService _kindOfRentService;
+
+        public TypeOfBikeController(IBikeTypeService bikeTypeService, IBikeService bikeService, ITarriffService tarriffService,
+        IKindOfRentService kindOfRentService)
         {
             _bikeTypeService = bikeTypeService;
             _bikeService = bikeService;
+            _tarriffService = tarriffService;
+            _kindOfRentService = kindOfRentService;
         }
 
         [HttpGet]
@@ -67,6 +76,27 @@ namespace RentABike.Website.Controllers
             var bikes = _bikeService.GetBikesByBikeTypeId(biketypeid);
 
             return View(bikes);
+        }
+
+        public ActionResult DeleteTypeOfBike(int bikeTypeId)
+        {
+            //_bikeTypeService.DeleteBikeType(bikeTypeId);
+            var bikeType = _bikeTypeService.GetBikeTypeById(bikeTypeId);
+            return PartialView("_DeleteBikeType", bikeType);
+        }
+
+        public ActionResult ConfirmDelete(int bikeTypeId)
+        {
+            bool result = false;
+            var bikeType = _bikeTypeService.GetBikeTypeById(bikeTypeId);
+            if (bikeType != null)
+            {
+                _bikeTypeService.DeleteBikeType(bikeTypeId);
+                result = true;
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+
         }
     }
 }

@@ -7,7 +7,7 @@
 
 <div>
     <div class="btn-group">
-        @Html.ActionLink("Add new type", "", "", null, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Add new type", "CreateNewTypeOfBike", "TypeOfBike", null, new { @class = "btn btn-primary itemCreate" })
     </div>
     <table class="table table-striped">
         <tr>
@@ -17,7 +17,7 @@
         @{
             foreach (var bikeType in Model)
             {
-                <tr>
+                <tr id="row_@bikeType.Id">
                     <td>
                         @bikeType.Type
                     </td>
@@ -29,10 +29,8 @@
                                 <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                                <li>@Html.ActionLink("Show bikes of this type", "ShowBikesOfType", "TypeOfBike", new {bikeTypeId = bikeType.Id}, new {@id="bikeTypeModal"})</li>
-                               
-                                <li>@Html.ActionLink("Edit", "", "", null, null)</li>
-                                <li>@Html.ActionLink("Delete", "", "", null, null)</li>
+                                <li>@Html.ActionLink("Show bikes of this type", "ShowBikesOfType", "TypeOfBike", new { bikeTypeId = bikeType.Id }, new { @id = "bikeTypeModal" })</li>
+                                <li>@Html.ActionLink("Delete", "DeleteTypeOfBike", "TypeOfBike", new { bikeTypeId = bikeType.Id }, new{@class="itemCreate"})</li>
                             </ul>
                         </div>
                     </td>
@@ -42,3 +40,20 @@
     </table>
 </div>
 
+@*Modal dialog for creation/editing Tarriff*@
+<div id="FormModal" class="modal fade">
+    <div class="modal-dialog" id="modDialog">
+    </div>
+</div>
+<script type="text/javascript">
+
+    $(".itemCreate").click(function (e) {
+
+        e.preventDefault();
+        $.get(this.href, function (data) {
+            $('#modDialog').html(data);
+            $('#FormModal').modal('show');
+            $.validator.unobtrusive.parse("#FormModal");
+        });
+    });
+</script>

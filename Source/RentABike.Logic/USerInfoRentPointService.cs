@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNet.Identity;
-using RentABike.Logic.Interfaces;
+﻿using RentABike.Common.Interfaces;
 using RentABike.ViewModels;
 
 namespace RentABike.Logic
 {
     public class UserInfoRentPointService : IUserInfoAndRentPointService
     {
-        public IRentPointService _rentPointService;
+        private IRentPointService _rentPointService;
 
-        public IUserInfoService _userInfoService;
+        private IUserInfoService _userInfoService;
 
         //private ApplicationUserManager _userManager;
 

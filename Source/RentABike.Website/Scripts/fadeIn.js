@@ -65,7 +65,7 @@ $(document).ready(function () {
                         context.drawImage(img, 0, 0);
 
                         let cropper = canvas.cropper({
-                            aspectRatio: 3 / 1.8,
+                            //aspectRatio: 3 / 1.8,
                             ready: function (e) {
                                 let $clone = $(this).clone().removeClass('cropper-hidden');
 

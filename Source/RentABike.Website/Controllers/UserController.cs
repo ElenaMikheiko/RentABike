@@ -3,8 +3,8 @@ using System.Linq;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using RentABike.Common.Interfaces;
 using RentABike.Logic;
-using RentABike.Logic.Interfaces;
 using RentABike.ViewModels;
 
 namespace RentABike.Website.Controllers
@@ -70,5 +70,13 @@ namespace RentABike.Website.Controllers
             return PartialView("AllUsers", userInfos);
         }
 
+        public ActionResult Delete(string email)
+        {
+            var user = _userManager.Users.FirstOrDefault(u => u.Email == email);
+            _userInfoService.DeleteUserInfo(user.Id);
+            _userManager.Delete(user);
+
+            return RedirectToAction("PersonalAccount", "Account");
+        }
     }
 }

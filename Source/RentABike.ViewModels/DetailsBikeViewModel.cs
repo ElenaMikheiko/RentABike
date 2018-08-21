@@ -16,7 +16,7 @@ namespace RentABike.ViewModels
 
         public byte[] Image { get; set; }
 
-        public int BikeTypeId { get; set; }
+        public int? BikeTypeId { get; set; }
 
         public virtual BikeType BikeType { get; set; }
 

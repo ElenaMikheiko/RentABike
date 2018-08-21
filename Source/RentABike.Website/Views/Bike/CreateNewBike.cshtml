@@ -6,9 +6,7 @@
 
 <div class="content">
     <h2>Create New Bike</h2>
-    @{Html.EnableClientValidation();}
-    @{Html.EnableUnobtrusiveJavaScript();}
-@using (Html.BeginForm("CreateNewBike", "Bike", FormMethod.Post, new {enctype = "multipart/form-data"}))
+@using (Html.BeginForm("CreateNewBike", "Bike", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
@@ -24,17 +22,22 @@
                 <img class="content__main_image" alt="bikePhoto" src="~/Content/Images/image.png"/>
                 @Html.HiddenFor(m => m.Base64Image)
             </div>
-                @Html.ValidationMessageFor(model => model.Base64Image, "", new {@class = "text-danger"})
+            @Html.ValidationMessageFor(model => model.Base64Image, "", new {@class = "text-danger"})
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.BikeTypeId, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.BikeTypeId, new {@class = "control-label col-md-2"})
             <div class="col-sm-4">
-                @Html.DropDownListFor(m => m.BikeTypeId, Model.BikeTypes.Select(c => new SelectListItem { Text = c.Type, Value = c.Id.ToString() }), new { @class = "form-control input-md col-sm-4" })
+                @Html.DropDownListFor(m => m.BikeTypeId, Model.BikeTypes.Select(c => new SelectListItem {Text = c.Type, Value = c.Id.ToString()}), new {@class = "form-control input-md col-sm-4"})
                 <a href="@Url.Action("CreateNewTypeOfBike", "TypeOfBike")" id="typeItem" title="Add new Bike Type" class="col-sm-1">
                     <i class="fa fa-plus-square fa-2x" style="color: #8ae2a2;"></i>
                 </a>
             </div>
+            <div class="col-sm-1">
+
+
+            </div>
+
         </div>
 
         <div class="form-group">
@@ -69,7 +72,7 @@
             </div>
         </div>
     </div>
-
+}
     <div id="overlay"></div>
     <div class="content__pop-up">
         <div class="content__pop-up_main">
@@ -95,7 +98,6 @@
             </div>
         </div>
     </div>
-}
 
 @*Modal dialog for creation Type of Bike*@
 <div id="createTypeOfBikeFormModal" class="modal fade">

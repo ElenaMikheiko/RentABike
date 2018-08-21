@@ -39,8 +39,6 @@
     <Compile Include="Initializers\KindOfRentInitializer.cs" />
     <Compile Include="Initializers\StatusInitializer.cs" />
     <Compile Include="Initializers\TarriffInitializer.cs" />
-    <Compile Include="Interfaces\IRepository.cs" />
-    <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="Migrations\201807142155450_Initial.cs" />
     <Compile Include="Migrations\201807142155450_Initial.Designer.cs">
       <DependentUpon>201807142155450_Initial.cs</DependentUpon>
@@ -89,6 +87,10 @@
     <Compile Include="Migrations\201808091943313_ChangeMaxLengthForPhone.Designer.cs">
       <DependentUpon>201808091943313_ChangeMaxLengthForPhone.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808151514355_123.cs" />
+    <Compile Include="Migrations\201808151514355_123.Designer.cs">
+      <DependentUpon>201808151514355_123.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RentABikeDbContext.cs" />
@@ -132,9 +134,16 @@
     <EmbeddedResource Include="Migrations\201808091943313_ChangeMaxLengthForPhone.resx">
       <DependentUpon>201808091943313_ChangeMaxLengthForPhone.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808151514355_123.resx">
+      <DependentUpon>201808151514355_123.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\RentABike.Common\RentABike.Common.csproj">
+      <Project>{6CDE08E7-9250-4151-BF21-6DFFFD7A1A80}</Project>
+      <Name>RentABike.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RentABike.Models\RentABike.Models.csproj">
       <Project>{04B6F4A7-E50B-438F-BABE-DE885CF1D467}</Project>
       <Name>RentABike.Models</Name>

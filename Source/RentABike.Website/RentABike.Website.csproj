@@ -258,6 +258,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\RentABike - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
@@ -270,6 +272,7 @@
     <Content Include="Scripts\imgAreaSelect\jquery.imgareaselect.js" />
     <Content Include="Scripts\imgAreaSelect\jquery.imgareaselect.min.js" />
     <Content Include="Scripts\imgAreaSelect\jquery.imgareaselect.pack.js" />
+    <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\inputmask\bindings\inputmask.binding.js" />
     <Content Include="Scripts\inputmask\bindings\inputmask.binding.min.js" />
     <Content Include="Scripts\inputmask\dependencyLibs\inputmask.dependencyLib.jqlite.js" />
@@ -310,15 +313,15 @@
     <Content Include="Scripts\inputmask\phone-codes\phone-ru.min.js" />
     <Content Include="Scripts\inputmask\phone-codes\phone.js" />
     <Content Include="Scripts\inputmask\phone-codes\phone.min.js" />
-    <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
-    <Content Include="Scripts\jquery.inputmask.bundle.js" />
-    <Content Include="Scripts\jquery.inputmask.bundle.min.js" />
     <Content Include="Scripts\jquery-1.9.1.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.inputmask.bundle.js" />
+    <Content Include="Scripts\jquery.inputmask.bundle.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.date.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.bootstrap.js" />
@@ -331,6 +334,7 @@
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\npm.js" />
+    <Content Include="Scripts\phone.js" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -391,6 +395,11 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.bootstrap.min.js.map" />
     <Content Include="Views\Order\_OrdersReceipt.cshtml" />
     <Content Include="Views\TypeOfBike\ShowBikesOfType.cshtml" />
+    <Content Include="Views\Bike\Delete.cshtml" />
+    <Content Include="Views\Tarriff\_Tarriff.cshtml" />
+    <Content Include="Views\RentPoint\EditRentPoint.cshtml" />
+    <Content Include="Views\RentPoint\_DeleteRentPoint.cshtml" />
+    <Content Include="Views\TypeOfBike\_DeleteBikeType.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -400,6 +409,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\RentABike.Common\RentABike.Common.csproj">
+      <Project>{6CDE08E7-9250-4151-BF21-6DFFFD7A1A80}</Project>
+      <Name>RentABike.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RentABike.IoC\RentABike.IoC.csproj">
       <Project>{37440DE9-71FF-4E66-A891-21486B5A5811}</Project>
       <Name>RentABike.IoC</Name>

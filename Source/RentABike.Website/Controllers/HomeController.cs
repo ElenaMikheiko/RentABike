@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using NLog;
 using RentABike.Logic.Interfaces;
 using PagedList;
+using RentABike.Common.Interfaces;
 
 namespace RentABike.Website.Controllers
 {

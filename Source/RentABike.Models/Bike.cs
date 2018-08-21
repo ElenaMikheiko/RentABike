@@ -16,7 +16,7 @@ namespace RentABike.Models
         public byte[] Image { get; set; }
 
         [ForeignKey("BikeType")]
-        public int BikeTypeId { get; set; }
+        public int? BikeTypeId { get; set; }
 
         public virtual BikeType BikeType { get; set; }
 

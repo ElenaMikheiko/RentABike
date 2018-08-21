@@ -33,7 +33,7 @@
     <div class="form-group">
         @Html.LabelFor(m => m.StartDate, new { @class = "col-md-2 control-label" })
         <div class="input-group date col-md-3" id="datetimepicker" style="padding-left: 15px">
-            @Html.TextBoxFor(m => m.StartDate, DateTime.UtcNow.Date.ToString("dd.MM.yyyy"), new { @class = "form-control input-sm" })
+            @Html.TextBoxFor(m => m.StartDate, @*DateTime.UtcNow.Date,*@ new { @class = "form-control input-sm", type="datetime" })
             <span class="input-group-addon">
                 <span class="glyphicon glyphicon-calendar"></span>
             </span>

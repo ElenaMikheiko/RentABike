@@ -49,6 +49,10 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\RentABike.Common\RentABike.Common.csproj">
+      <Project>{6CDE08E7-9250-4151-BF21-6DFFFD7A1A80}</Project>
+      <Name>RentABike.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RentABike.DataProvider\RentABike.DataProvider.csproj">
       <Project>{E663FC42-ADD7-43CB-B155-73B2C543AF5D}</Project>
       <Name>RentABike.DataProvider</Name>

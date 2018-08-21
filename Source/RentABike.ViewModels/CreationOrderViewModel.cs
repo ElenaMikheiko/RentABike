@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 using RentABike.Models;
 
 namespace RentABike.ViewModels
@@ -17,6 +18,7 @@ namespace RentABike.ViewModels
         public int BikeId { get; set; }
 
         [Display(Name = "Bike model")]
+        [AllowHtml]
         public string BikeModel { get; set; }
 
         public int BikeTypeId { get; set; }
@@ -26,11 +28,13 @@ namespace RentABike.ViewModels
         [Display(Name = "Return Point")]
         public IEnumerable<RentPoint> ReturnPoints { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0: DD/MM/YYYY}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "dd.MM.yyyy", ApplyFormatInEditMode = true)]
+        [Required]
         [Display(Name = "Rental start date")]
         public DateTime StartDate { get; set; }
 
+        [Required]
         [DataType(DataType.Time)]
         [DisplayFormat(DataFormatString = "HH:mm", ApplyFormatInEditMode = true)]
         [Display(Name = "Rental start date")]

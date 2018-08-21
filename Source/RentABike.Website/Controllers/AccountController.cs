@@ -11,8 +11,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using RentABike.Common.Interfaces;
 using RentABike.Logic;
-using RentABike.Logic.Interfaces;
 using RentABike.Models;
 using RentABike.Models.Constants;
 using RentABike.ViewModels;
@@ -99,8 +99,7 @@ namespace RentABike.Website.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            var vm = new RegisterViewModel();
-            vm.Roles = _roleManager.Roles.ToList();
+            var vm = new RegisterViewModel {Roles = _roleManager.Roles.ToList()};
             return View(vm);
         }
 
@@ -364,8 +363,7 @@ namespace RentABike.Website.Controllers
         public ActionResult ChangePersonalInfo()
         {
             var userId = User.Identity.GetUserId();
-            var viewModel = new EditPersonalUserInfoViewModel();
-            viewModel.UserId = userId;
+            var viewModel = new EditPersonalUserInfoViewModel {UserId = userId};
             var userInfo = _userInfoService.GetUserInfoByUserId(userId);
             if (userInfo != null)
             {

@@ -23,16 +23,8 @@ namespace RentABike.Website
 
         protected void Application_Error(object sender, EventArgs e)
         {
-                Exception ex = Context.Error; // получили ошибку
-            logger.Log(LogLevel.Trace, ex);
+            Exception ex = Context.Error; 
             logger.Log(LogLevel.Debug, ex);
-            logger.Log(LogLevel.Fatal, ex);
-            logger.Log(LogLevel.Error, ex);
-            logger.Log(LogLevel.Warn, ex);
-
-
-
-
         }
     }
 }

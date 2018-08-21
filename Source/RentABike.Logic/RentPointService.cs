@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-using RentABike.DataProvider;
-using RentABike.DataProvider.Interfaces;
-using RentABike.Logic.Interfaces;
+using RentABike.Common.Interfaces;
 using RentABike.Models;
 using RentABike.ViewModels;
 
@@ -42,6 +40,13 @@ namespace RentABike.Logic
         public void UpdateRentPoint(RentPoint rentPoint)
         {
             _unitOfWork.RentPointRepository.Update(rentPoint);
+            _unitOfWork.Save();
+        }
+
+        public void DeleteRentPoint(RentPoint rentPoint)
+        {
+            _unitOfWork.RentPointRepository.Remove(rentPoint);
+            _unitOfWork.Save();
         }
     }
 }

@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using Ninject;
 using Ninject.Web.Common;
+using RentABike.Common.Interfaces;
 using RentABike.DataProvider;
 using RentABike.DataProvider.Interfaces;
 using RentABike.DataProvider.Repositories;
@@ -44,10 +45,6 @@ namespace RentABike.IoC
 
             _kernel.Bind<RentABikeDbContext>().ToSelf().InRequestScope();
 
-
-
-            //_kernel.Bind<IRoleStore<IdentityRole, string>>().To<RoleStore<IdentityRole, string, IdentityUserRole>>();
-
             _kernel.Bind<IRoleStore<IdentityRole, string>>()
                 .ToMethod(x => new RoleStore<IdentityRole, string, IdentityUserRole>(x.Kernel.Get<RentABikeDbContext>()))
                 .InRequestScope();
@@ -72,7 +69,7 @@ namespace RentABike.IoC
             _kernel.Bind<IStatusService>().To<StatusService>();
             _kernel.Bind<ITarriffService>().To<TarriffService>();
             _kernel.Bind<IUserInfoAndRentPointService>().To<UserInfoRentPointService>();
-
+            _kernel.Bind<IKindOfRentService>().To<KindOfRentService>();
 
         }
     }
